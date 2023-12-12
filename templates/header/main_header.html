@@ -20,8 +20,11 @@
             <a class="nav-link {% if request.path == '/surat/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Tambah Surat</a>
           </li>
 
-        </div>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat</a>
+          </li>
 
+        </div>
         <li class="nav-item">
           <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
         </li>
