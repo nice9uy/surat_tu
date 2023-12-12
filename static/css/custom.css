@@ -1,0 +1,26 @@
+body, html {
+    height: 100%;
+  }
+  
+
+.container_login {
+    background-image: url("https://ibb.co/ySV8W6C");
+
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.test {
+    background-color : red !important;;
+}
+
+/* th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    width: 800px;
+    margin: 0 auto;
+} */
