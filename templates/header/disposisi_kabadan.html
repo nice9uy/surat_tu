@@ -1,0 +1,23 @@
+{% load static %}
+
+<div>
+  <nav class="navbar bg-body-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="">
+        <img src="{% static 'img/kemhan_logo.png' %}" alt="KEMHAN Logo" width="45" height="45" />
+        <span></span>
+      </a>
+
+      <ul class="nav nav-underline">
+        <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
+
+          <li class="nav-item">
+            <a class="nav-link   {% if request.path == '/surat/' %} active {% endif %}" href="{% url 'home' %}">Home</a>
+          </li>
+
+        </div>
+    
+      </ul>
+    </div>
+  </nav>
+</div>

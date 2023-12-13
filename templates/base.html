@@ -24,6 +24,26 @@
             <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
+
+            <script>
+
+                $(document).ready(function() {
+                    // Initialize DataTables
+                    var table = $('#tabel_index').DataTable();
+                
+                    // Add event listeners to the select elements
+                    $('#klasifikasi' ).on('change', function() {
+                        // Get the selected values from both select options
+                        var selectedValue = $('#klasifikasi').val();
+                        var selectedValue1 = $('#tgl_agenda').val();
+                
+                        // Apply the filters to the DataTable
+                        table.columns(0).search(selectedValue).draw();
+                        
+                        });
+                    });
+
+            </script>
             
 </body>
 </html>
