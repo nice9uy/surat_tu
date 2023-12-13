@@ -14,7 +14,6 @@
             <div class="col-7">
               <select class="form-select form-select-sm" title="Filter Klasifikasi" id="klasifikasi" required aria-label="Default select example" name="klasifikasi">
                 <option value="">KLASIFIKASI</option>
-                <option value="">-----------</option>
                 {% for v in klasifikasi %}
                   <option value="{{ v }}">{{ v }}</option>
                 {% endfor %}
@@ -42,6 +41,7 @@
           <th class="text-center">Surat Dari</th>
           <th class="text-center">Perihal</th>
           <th class="text-center">Files</th>
+          <th class="text-center">Disposisi</th>
         </tr>
       </thead>
       <tbody>
@@ -54,12 +54,21 @@
             <td>{{ data.no_surat }}</td>
             <td>{{ data.surat_dari }}</td>
             <td>{{ data.perihal }}</td>
-            <td class="d-flex justify-content-center">
 
+            <td class="d-flex justify-content-center">
               <div style="margin-left: -15px;">
-                <a class="fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
+                <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
               </div>
             </td>
+
+            
+            <td class="text-center px-3 gap-2"> 
+              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+              <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+              <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+
+            </td> 
+
           </tr>
         {% endfor %}
       </tbody>
@@ -69,7 +78,7 @@
   <div class="container">
     <footer class="">
       <p class="text-center text-muted">
-        &copy; 2023 - {% now 'Y' %}  Abdul Rachman - SetBaranahan
+        &copy; 2023 - {% now 'Y' %} By Abdul Rachman - SetBaranahan
       </p>
     </footer>
   </div>

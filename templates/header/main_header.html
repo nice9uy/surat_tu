@@ -3,7 +3,7 @@
 <div>
   <nav class="navbar bg-body-secondary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="">
+      <a class="navbar-brand" href="{% url 'home'%}">
         <img src="{% static 'img/kemhan_logo.png' %}" alt="KEMHAN Logo" width="45" height="45" />
         <span></span>
       </a>
@@ -22,6 +22,9 @@
 
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
           </li>
 
         </div>
