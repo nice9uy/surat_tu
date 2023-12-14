@@ -58,10 +58,19 @@ def tambah_surat(request):
 
 
 def olah_surat(request) :
-    
+    datasemuasurat = DbSurat.objects.all()
+    Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     
     context = {
-        'page_title' : 'Olah Surat'
+        'page_title' : 'Olah Surat',
+        'data_surat' : datasemuasurat,
+        'klasifikasi': Klasifikasi
     }
     
     return render (request , 'pages/olah_surat.html' , context )
+
+def edit_olah_surat(request):
+    pass
+
+
+    # return render (request , 'pages/olah_surat.html' , context )

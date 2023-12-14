@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block index %}
+
   {% include 'header/main_header.html' %}
 
   <div class="container-fluid mt-3 text-white" style="">
@@ -45,7 +46,9 @@
         </tr>
       </thead>
       <tbody>
+
         {% for data in data_surat %}
+        
           <tr>
             <td >{{ data.klasifikasi }}</td>
             <td>{{ data.tgl_agenda|date:'d M Y' }}</td>
@@ -55,7 +58,7 @@
             <td>{{ data.surat_dari }}</td>
             <td>{{ data.perihal }}</td>
 
-            <td class="d-flex justify-content-center">
+            <td class="text-center">
               <div style="margin-left: -15px;">
                 <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
               </div>
