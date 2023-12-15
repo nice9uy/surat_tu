@@ -30,6 +30,8 @@ class DbSurat(models.Model):
 
 class DisposisiKabadan(models.Model):
     no_surat = models.ForeignKey(DbSurat, on_delete = models.CASCADE)
+    tgl_agenda = models.DateField()
+    no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length=200, null=True)
     upload_file_disposisi_kabadan = models.FileField(upload_to= disposisi_kabadan, null=True, blank=False)
 
@@ -38,6 +40,8 @@ class DisposisiKabadan(models.Model):
 
 class DisposisiSes(models.Model):
     no_surat = models.ForeignKey(DbSurat, on_delete = models.CASCADE)
+    tgl_agenda = models.DateField()
+    no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length=200 , null=True)
     upload_file_disposisi_ses = models.FileField(upload_to= disposisi_ses, null=True, blank=False)
 
@@ -46,6 +50,8 @@ class DisposisiSes(models.Model):
 
 class DisposisiBagum(models.Model):
     no_surat = models.ForeignKey(DbSurat, on_delete = models.CASCADE)
+    tgl_agenda = models.DateField()
+    no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length=200 , null=True)
     upload_file_disposisi_bagum = models.FileField(upload_to= disposisi_bagum, null=True, blank=False)
 
