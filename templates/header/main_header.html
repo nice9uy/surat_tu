@@ -24,8 +24,37 @@
             <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Data Surat</a>
           </li>
 
+          <li class="nav-item dropdown">
+            <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Disposisi</a>
+            <ul class="dropdown-menu">
+
+              <li>
+                <a class="dropdown-item  {% if request.path == '/surat/kabadan/' %} active {% endif %}"  href="{% url 'kabadan' %}">KABADAN </a>
+              </li>
+              
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item "  href="">SEKRETARIAT</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item "  href="">BAG UMUM</a>
+              </li>
+          
+          
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="">Surat Duplikat</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="">Export Ke Excel</a>
           </li>
         
           <li class="nav-item">

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from . models import DbSurat , DbKlasifikasi
+from . models import DbSurat , DbKlasifikasi, DisposisiKabadan,DisposisiSes,DisposisiBagum
 from datetime import date
 
 # Create your views here.
@@ -14,11 +14,14 @@ def home(request):
 
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
+    dispoKabadan   = DisposisiKabadan.objects.all()
+
 
     context = {
-        'page_title' : 'Home',
-        'data_surat' : datasemuasurat,
-        'klasifikasi': Klasifikasi
+        'page_title'   : 'Home',
+        'data_surat'   : datasemuasurat,
+        'klasifikasi'  : Klasifikasi,
+        'dispoKabadan' : dispoKabadan,
      }
     return render (request , 'pages/index.html' , context )
     
@@ -77,7 +80,6 @@ def olah_surat(request) :
     return render (request , 'pages/olah_surat.html' , context )
 
 def edit_olah_surat(request , id_edit_olah_surat ):
-    hari_ini = date.today()
     username = request.user
     edit_olah_surat = get_object_or_404(DbSurat, pk = id_edit_olah_surat)
 
@@ -114,15 +116,23 @@ def edit_olah_surat(request , id_edit_olah_surat ):
     return render(request,'pages/olah_surat.html')
 
 def delete_olah_surat(request , id_delete_olah_surat):
-
     delete_olah_surat = get_object_or_404(DbSurat, pk = id_delete_olah_surat)
-
     if request.method == 'POST':
         delete_olah_surat.upload_file.delete()
-
         delete_olah_surat.delete()
-
         return redirect('home')
     
     return render(request,'pages/olah_surat.html')
 
+
+def kabadan(request ):
+    kabadan = DisposisiKabadan.objects.all()
+    
+
+    # dispo_kabadan = DisposisiKabadan.objects.filter()
+
+    context = {
+        'DisposisiKabadan' : kabadan
+    }
+
+    return render(request,'pages/disposisi/kabadan.html' , context )

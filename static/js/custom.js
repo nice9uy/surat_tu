@@ -23,6 +23,15 @@ function tabel_data() {
       scrollCollapse: true,
       scrollY : "500px"
   });
+
+    new DataTable('#tabel_disposisi_kabadan',{
+    // "searching": false,
+    // "dom": 'rtip'
+  });
+
+
+
+
 }
 
 // function tabel_data(){
