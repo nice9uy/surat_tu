@@ -66,7 +66,7 @@
 
             
             <td class="text-center px-3 gap-2"> 
-              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#button_dispo_kabadan{{ data.id }}"></button>
               <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
               <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
 
@@ -77,6 +77,8 @@
       </tbody>
     </table>
   </div>
+
+  {% include 'modal/disposisi/kabadan.html' %}
 
   <div class="container">
     <footer class="">

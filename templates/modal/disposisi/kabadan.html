@@ -1,0 +1,77 @@
+
+
+{% comment %} {% for data in data_surat %}
+  <div class="modal fade" id="button_dispo_kabadan{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="edit_klasifikasi">Disposisi Kabadan</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="" method="POST" class="was-validated">
+          {% csrf_token %}
+          <div class="modal-body">
+          
+            <table id="tabel_index" class="table table-striped table-bordered text-white" style="width:100%;  ">
+                <thead>
+                  <tr>
+                    <th class="text-center">No Surat</th>
+                    <th class="text-center">Tgl Agenda</th>
+                    <th class="text-center">No Agenda</th>
+                    <th class="text-center">Catatan</th>
+                    <th class="text-center">Files</th>
+                    <th class="text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for data in data_surat %}
+                    <tr>
+                      <td>{{ data.no_surat }}</td>
+                      <td>{{ data.tgl_agenda|date:'d M Y' }}</td>
+                      <td>{{ data.no_agenda }}</td>
+                      <td >{{ data.catatan }}</td>
+                      <td>{{ data.upload_file_disposisi_kabadan }}</td>
+          
+                      <td class="text-center ">
+                        <div style="margin-left: -15px;">
+                          <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
+                        </div>
+                      </td>
+          
+                      
+                      <td class="text-center gap-2"> 
+                        <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                        <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                        <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                      </td> 
+          
+                      <td class="text-center gap-2"> 
+                        <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                        <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                        <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#button_simpan_ke_arsip{{ data.id }}"></button>
+                      </td> 
+          
+                      <td class="text-center gap-2"> 
+                          <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_edit_olah_surat{{ data.id }}"></button>
+                          <button type="button" class="btn btn-danger btn-sm fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="HAPUS" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
+                      </td> 
+          
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+      
+
+
+
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Edit SURAT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %} {% endcomment %}

@@ -7,10 +7,10 @@ from datetime import date
 @login_required(login_url="/accounts/login/")
 def home(request):
 
-    hari_ini = date.today()
+    # hari_ini = date.today()
     
 
-    print(hari_ini)
+    # print(hari_ini)
 
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
@@ -76,8 +76,53 @@ def olah_surat(request) :
     
     return render (request , 'pages/olah_surat.html' , context )
 
-def edit_olah_surat(request):
-    pass
+def edit_olah_surat(request , id_edit_olah_surat ):
+    hari_ini = date.today()
+    username = request.user
+    edit_olah_surat = get_object_or_404(DbSurat, pk = id_edit_olah_surat)
 
+    if request.method == 'POST':
 
-    # return render (request , 'pages/olah_surat.html' , context )
+        get_klasifikasi = request.POST.get('klasifikasi')
+        get_tgl_agenda  = request.POST.get('tanggal_agenda')          
+        get_no_agenda = request.POST.get('no_agenda')
+        get_tanggal_surat = request.POST.get('tanggal_surat')
+        get_no_surat = request.POST.get('no_surat')
+        get_surat_dari = request.POST.get('surat_dari')
+        get_perihal = request.POST.get('perihal')
+        files_upload = edit_olah_surat.upload_file.name
+
+        edit_olah_surat = DbSurat(
+
+            id          = id_edit_olah_surat,
+            username    = str(username),
+            klasifikasi = get_klasifikasi,
+            tgl_agenda  = get_tgl_agenda,
+            # tgl_agenda  = hari_ini,
+            no_agenda   = get_no_agenda,
+            tgl_surat   = get_tanggal_surat,
+            no_surat    = get_no_surat,
+            surat_dari  = get_surat_dari,
+            perihal     = get_perihal,
+            upload_file = files_upload
+            
+            )
+
+        edit_olah_surat.save()
+        return redirect('home')
+    
+    return render(request,'pages/olah_surat.html')
+
+def delete_olah_surat(request , id_delete_olah_surat):
+
+    delete_olah_surat = get_object_or_404(DbSurat, pk = id_delete_olah_surat)
+
+    if request.method == 'POST':
+        delete_olah_surat.upload_file.delete()
+
+        delete_olah_surat.delete()
+
+        return redirect('home')
+    
+    return render(request,'pages/olah_surat.html')
+

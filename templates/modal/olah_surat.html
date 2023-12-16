@@ -1,6 +1,7 @@
+{% comment %}untuk edit olah surat{% endcomment %}
 
-{% for data in data_surat %} 
-<div class="modal fade" id="button_edit_olah_surat{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
+{% for data in data_surat %}
+  <div class="modal fade" id="button_edit_olah_surat{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,68 +9,91 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="" method="POST" class="was-validated">
+        <form action="{% url 'edit_olah_surat' data.id %}" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
+            <div class="d-flex text-center gap-4">
+              <div class="col-3">
+                <label for="inputEmail4" class="form-label">KLASIFIKASI</label>
+                <select class="form-select" aria-label="Default select example" id="klasifikasi" name="klasifikasi" required>
+                  <option value="">KLASIFIKASI</option>
+                  {% for v in klasifikasi %}
+                    <option value="{{ v }}">{{ v }}</option>
+                  {% endfor %}
+                </select>
+              </div>
 
-          <div class="d-flex text-center  ">
+              <div class="col-3">
+                <label for="inputPassword4" class="form-label">TANGGAL AGENDA</label>
+                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda" required />
+              </div> 
 
-                <div class="col-3">
-                  <label for="inputEmail4" class="form-label">KLASIFIKASI</label>
-                  <select class="form-select" aria-label="Default select example" id="klasifikasi" name="klasifikasi" required>
-                    <option value="">KLASIFIKASI</option>
-                    {% for v in klasifikasi %}
-                      <option value="{{ v }}">{{ v }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-        
-                <div class="col-3">
-                  <label for="inputPassword4" class="form-label">TANGGAL AGENDA</label>
-                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda" value="{{ data.tgl_agenda }}" required />
-                </div>
-        
-                <div class="col-3">
-                  <label for="inputAddress" class="form-label">NO AGENDA</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Agenda" name="no_agenda" value="{{ data.no_agenda }}" required />
-                </div>
+              <div class="col-5">
+                <label for="inputAddress" class="form-label">NO AGENDA</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Agenda" name="no_agenda" value="{{ data.no_agenda }}" required />
+              </div>     
 
-                <div class="col-md-3">
-                  <label for="inputPassword4" class="form-label">TANGGAL SURAT</label>
-                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat" required />
-                </div>
-
-          </div>
-      
-           <div class="d-flex mt-3  text-center">
-
-          
-            <div class="col-3">
-              <label for="inputAddress" class="form-label">NO SURAT</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat }}" required />
-            </div>
-    
-            <div class="col-4">
-              <label for="inputAddress" class="form-label">SURAT DARI</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="surat_dari" value="{{ data.surat_dari }}" required />
-            </div>
-    
-            <div class="col-5">
-              <label for="inputAddress" class="form-label">PERIHAL</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="perihal" value="{{ data.perihal }}" required />
             </div>
 
-          </div>
-    
-  
+            <div class="d-flex mt-3 gap-4 text-center">
+              <div class="col-md-3">
+                <label for="inputPassword4" class="form-label">TANGGAL SURAT</label>
+                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat" required />
+              </div>
 
+
+              <div class="col-3">
+                <label for="inputAddress" class="form-label">NO SURAT</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat }}" required />
+              </div>
+
+              <div class="col-5">
+                <label for="inputAddress" class="form-label">SURAT DARI</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="surat_dari" value="{{ data.surat_dari }}" required />
+              </div>
+            </div>
+
+            <div class="d-fle mt-3 text-center">
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">PERIHAL</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="perihal" value="{{ data.perihal }}" required />
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Edit SURAT</button>
           </div>
-          
         </form>
       </div>
     </div>
   </div>
 {% endfor %}
+
+{% comment %}untuk Delete olah surat{% endcomment %}
+
+{% for data in data_surat %}
+  <div class="modal fade" id="button_hapus_olah_surat{{ data.id }}" tabindex="-1" aria-labelledby="delete_kelompok" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete_kelompok">Hapus No Surat</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="{% url 'delete_olah_surat' data.id %}" method="POST">
+          {% csrf_token %}
+          <div class="modal-body">
+
+           <div>
+              <Span>Apakah Yakin Menghapus No Surat "{{ data.no_surat  }}" ?</Span>
+           </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Hapus</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endfor %} 
