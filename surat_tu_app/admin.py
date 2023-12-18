@@ -3,9 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import DbSurat
 from .models import DbKlasifikasi
-from .models import DisposisiKabadan
-from .models import DisposisiSes
-from .models import DisposisiBagum
+from .models import DisposisiDb
 
 class ListDbSurat(admin.ModelAdmin):
     list_display = ('id', 'username','klasifikasi', 'tgl_agenda',
@@ -16,30 +14,14 @@ class ListDbSurat(admin.ModelAdmin):
 class ListKlasifikasi(admin.ModelAdmin):
     list_display = ('id','klasifikasi')
 
-
-
-class ListDisposisiKabadan(admin.ModelAdmin):
-    list_display = ('no_surat','tgl_agenda',
+class ListDisposisiDb(admin.ModelAdmin):
+    list_display = ( 'id','disposisi', 'no_surat','tgl_agenda',
                     'no_agenda', 'catatan',
-                    'upload_file_disposisi_kabadan',
-                    )
-
-class ListDisposisiSes(admin.ModelAdmin):
-       list_display = ('no_surat','tgl_agenda',
-                    'no_agenda', 'catatan',
-                    'upload_file_disposisi_ses',
-                    )
-
-
-class ListDisposisiBagum(admin.ModelAdmin):
-     list_display = ('no_surat','tgl_agenda',
-                    'no_agenda', 'catatan',
-                    'upload_file_disposisi_bagum',
+                    'upload_file_disposisi',
                     )
 
 
 admin.site.register(DbSurat,ListDbSurat)
 admin.site.register(DbKlasifikasi, ListKlasifikasi)
-admin.site.register(DisposisiKabadan, ListDisposisiKabadan)
-admin.site.register(DisposisiSes, ListDisposisiSes)
-admin.site.register(DisposisiBagum, ListDisposisiBagum)
+admin.site.register(DisposisiDb , ListDisposisiDb)
+

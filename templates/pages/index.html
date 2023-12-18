@@ -42,6 +42,7 @@
           <th class="text-center">Surat Dari</th>
           <th class="text-center">Perihal</th>
           <th class="text-center">Files</th>
+          <th class="text-center">Print</th>
         </tr>
       </thead>
       <tbody>
@@ -63,7 +64,11 @@
               </div>
             </td>
 
-
+            <td class="text-center">
+              <div style="margin-left: -15px;">
+                <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
+              </div>
+            </td>
 
           </tr>
         {% endfor %}
@@ -80,4 +85,5 @@
       </p>
     </footer>
   </div>
-{% endblock %}
+  
+{% endblock index %}
