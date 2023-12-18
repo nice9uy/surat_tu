@@ -1,0 +1,154 @@
+
+{% for data in data_surat %}
+  <div class="modal fade" id="print_disposisi_kabadan{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="edit_klasifikasi">PRINT DISPOSISI KABADAN </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="" method="POST" class="was-validated">
+          {% csrf_token %}
+          <div class="modal-body">
+
+        
+            <div style="font-size: 20px;" class="text-center"> 
+                KEMENTERIAN PERTAHANAN RI <br>
+                BADAN SARANA PERTAHANAN
+            </div>
+            
+            <div style="font-size: 20px;" class="text-center mt-3 mb-4"> 
+                LEMBAR DISPOSISI
+            </div>
+
+            <table id="tabel_index" class="table text-white mb-5 " style="width:100%; font-size: 16px; ">
+                <thead>
+                  <tr>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                  </tr>
+                  <tr>
+                    <th >No. AGENDA</th>
+                    <th>: {{ data.no_agenda }}</th>
+                    <th colspan="11"></th>
+                    <th >Tanggal</th>
+                    <th >: {{ data.tgl_surat | date:'d-m-Y' }}</th>                    
+                  </tr>
+                  <tr>
+                    <th >SURAT DARI</th>
+                    <th>: {{ data.surat_dari }}</th>
+                    <th colspan="11"></th>
+                    <th ></th>
+                    <th ></th>                    
+                  </tr>
+                  <tr>
+                    <th >No SURAT </th>
+                    <th>: {{ data.no_surat }}</th>
+                    <th colspan="11"></th>
+                    <th >Derajat</th>
+                    <th >: </th>                    
+                  </tr>
+                  <tr>
+                    <th colspan="12"> </th>
+                    <th></th>
+                    <th >Klasifikasi</th>
+                    <th >: {{ data.klasifikasi }}</th>                    
+                  </tr>
+                  <tr>
+                    <th >Catatan TU</th>
+                    <th>: </th>
+                    <th colspan="12"></th>
+                    <th ></th>                    
+                  </tr>
+                
+
+                  {% comment %} <tr>
+                    <th style="border: 1px solid white; border-collapse: collapse; text-align: center;" >Kepada Yth</th>
+                    <th  style="border: 1px solid white; border-collapse: collapse;" colspan="15" class="text-center " >Disposisi/Catatan Kabaranahan Kemhan </th>             
+                  </tr>
+                 {% endcomment %}
+                
+                </thead>
+              </table>
+               <div class="d-flex "> 
+                <div style="margin-left: -0.4rem; margin-top: -2rem;font-size: 18px; border: 2px solid white" class="col-2">
+                    <div style="border: 2px solid white; border-collapse: collapse; text-align: center;" > 
+                        Kepada Yth
+                    </div>
+                    <ul>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="margin-left: -0.4rem; margin-top: -2rem;font-size: 18px; border: 2px solid white" class="col-10" >
+                    <div style="border: 2px solid white; border-collapse: collapse; text-align: center;" > 
+                        Kepada Yth
+                    </div>
+                    <ul>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                        <li>
+                            fdgggsg
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Edit SURAT</button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+{% endfor %}
