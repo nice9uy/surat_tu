@@ -42,7 +42,8 @@
           <th class="text-center">Surat Dari</th>
           <th class="text-center">Perihal</th>
           <th class="text-center">Files</th>
-          <th class="text-center">Tambah Disposisi</th>
+          <th class="text-center">Print</th>
+          <th class="text-center">Upload Disposisi</th>
           <th class="text-center">Aksi</th>
         </tr>
       </thead>
@@ -62,6 +63,12 @@
                 <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
               </div>
             </td>
+
+            <td class="text-center gap-2"> 
+              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#tambah_disposisi_kabadanx{{ data.id }}"></button>
+              <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#tambah_disposisi_sekretariatx{{ data.id }}"></button>
+              <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#tambah_disposisi_bagumx{{ data.id }}"></button>
+            </td> 
 
             
             <td class="text-center gap-2"> 

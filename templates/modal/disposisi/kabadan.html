@@ -18,25 +18,24 @@
                 <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat }}" required />
               </div>
 
-              <div class="col-3">
+              {% comment %} <div class="col-3">
                 <label for="inputAddress" class="form-label">TANGGAL AGENDA</label>
                 <input type="date" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="tgl_agenda" required />
-              </div>
-
-              <div class="col-4">
+              </div> {% endcomment %}
+              <div class="col-7">
                 <label for="inputAddress" class="form-label">NO AGENDA</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda" required />
+                <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda"  value="{{ data.no_agenda }}" required />
               </div>
             </div>
 
-            <div style="margin-left: 3rem;" class="text-center col-11 mt-3">
+            {% comment %} <div style="margin-left: 3rem;" class="text-center col-11 mt-3">
               <label for="inputAddress" class="form-label">CATATAN</label>
               <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="catatan" required />
-            </div>
+            </div> {% endcomment %}
 
             <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
               <label for="formFile" class="form-label">UPLOAD DISPOSISI</label>
-              <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_disposisi" />
+              <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_disposisi" required />
             </div>
           </div>
           <div class="modal-footer">
@@ -68,20 +67,10 @@
                 <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat }}" required />
               </div>
 
-              <div class="col-3">
-                <label for="inputAddress" class="form-label">TANGGAL AGENDA</label>
-                <input type="date" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="tgl_agenda" required />
-              </div>
-
               <div class="col-4">
                 <label for="inputAddress" class="form-label">NO AGENDA</label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda" value="{{ data.no_agenda }}" required />
               </div>
-            </div>
-
-            <div style="margin-left: 3rem;" class="text-center col-11 mt-3">
-              <label for="inputAddress" class="form-label">CATATAN</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="catatan" value="{{ data.catatan }}" required />
             </div>
 
             <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
