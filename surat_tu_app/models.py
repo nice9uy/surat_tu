@@ -22,9 +22,7 @@ class DisposisiDb(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     disposisi =  models.CharField(max_length = 30)
     no_surat = models.CharField(max_length = 30)
-    tgl_agenda = models.DateField()
     no_agenda = models.CharField(max_length = 30, null=True)
-    catatan = models.CharField(max_length=200, null=True)
     upload_file_disposisi = models.FileField(upload_to="Disposisi", null=False, blank=False)
 
     class Meta:

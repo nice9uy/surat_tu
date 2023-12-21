@@ -2,6 +2,21 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import DbSurat , DbKlasifikasi, DisposisiDb
 from datetime import date
+from django.http import HttpResponse
+from django.template.loader import get_template
+from weasyprint import HTML
+
+
+def generate_pdf(request):
+    people = DisposisiDb.objects.all()
+    template = get_template('your_template.html')
+    html_content = template.render({'people': people})
+
+    pdf_file = HTML(string=html_content).write_pdf()
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="people_report.pdf"'
+    return response
+
 
 # Create your views here.
 @login_required(login_url="/accounts/login/")
@@ -178,17 +193,13 @@ def disposisi_kabadan(request):
     if request.method == 'POST':
 
         get_no_surat = request.POST.get('no_surat')
-        get_tgl_agenda = request.POST.get('tgl_agenda')
         get_no_agenda = request.POST.get('no_agenda')
-        get_catatan = request.POST.get('catatan')
         files_upload_disposisi = request.FILES.get('file_disposisi')
 
         disposisi_kabadan  = DisposisiDb (
             disposisi               = disposisi,
             no_surat                = get_no_surat,
-            tgl_agenda              = get_tgl_agenda,
             no_agenda               = get_no_agenda,
-            catatan                 = get_catatan,
             upload_file_disposisi   = files_upload_disposisi,
         
             )
