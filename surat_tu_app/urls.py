@@ -1,8 +1,6 @@
 from django.urls import path
 from . import views
-# from . views import pdf_view
-# from .views import generate_pdf
-#  
+
 urlpatterns = [
     path('', views.home, name='home' ),
     path("tambah_surat/", views.tambah_surat, name="tambah_surat"),
@@ -14,8 +12,9 @@ urlpatterns = [
     path('disposisi/', views.disposisi, name='disposisi'),
 
     path('olah_disposisi/', views.olah_disposisi, name='olah_disposisi'),
-    path('generate-pdf/', views.generate_pdf, name='generate_pdf'),
+    path('kabaranahan/<int:getIDdisosisi_kabaranahan>', views.kabaranahan, name='kabaranahan'),
+    path('sekretariat/<int:getIDdisosisi_sekretariat>', views.sekretariat, name='sekretariat'),
+    path('bagum/<int:getIDdisosisi_bagum>', views.bagum, name='bagum'),
 
-    path('disposisi_kabadan/', views.disposisi_kabadan, name='disposisi_kabadan'),
-    # path('edit_disposisi_kabadan/<int:id_edit_disposisi_kabadan>', views.edit_disposisi_kabadan, name='edit_disposisi_kabadan'),
+    path('disposisi_kabadan/<int:pk>', views.disposisi_kabadan, name='disposisi_kabadan'),
 ]

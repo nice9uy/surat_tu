@@ -65,11 +65,10 @@
             </td>
 
             <td class="text-center gap-2"> 
-              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#tambah_disposisi_kabadanx{{ data.id }}"></button>
-              <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#tambah_disposisi_sekretariatx{{ data.id }}"></button>
-              <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#tambah_disposisi_bagumx{{ data.id }}"></button>
+              <a class="btn btn-danger btn-sm fa-solid fa-k" aria-current="page" title="KABADAN" target="_blank" href="{% url 'kabaranahan' data.id %}"></a>
+              <a class="btn btn-secondary btn-sm fa-solid fa-s" aria-current="page" title="SEKRETARIAT" target="_blank" href="{% url 'sekretariat' data.id %}"></a>
+              <a class="btn btn-info btn-sm fa-solid fa-b" aria-current="page" title="BAG UMUM" target="_blank" href="{% url 'bagum' data.id %}"></a>
             </td> 
-
             
             <td class="text-center gap-2"> 
               <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#tambah_disposisi_kabadan{{ data.id }}"></button>

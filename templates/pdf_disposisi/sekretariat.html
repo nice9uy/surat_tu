@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sekretariat - Disposisi</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        .main_header {
+          text-align: center;
+          margin-top: -20px;
+          font-weight: 600;
+        }
+        .text_disposisi {
+          text-align: center;
+          margin-top: 12px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+
+        .tabel_header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+            padding-top: 2px ;
+            padding-bottom: 2px;
+            margin-top: 20px;
+        }
+        .tabel_header_sub {
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 2px solid black;
+          padding-top: 2px ;
+          padding-bottom: 2px;
+      }
+
+    </style>
+</head>
+<body>
+
+  <div class="main_header">
+      KEMENTERIAN PERTAHANAN RI <br>
+      SEKRETARIAT
+  </div>
+  <div class="text_disposisi">
+      LEMBAR DISPOSISI
+  </div>
+        
+     
+  <table style="width:100%; justify-content: space-between; margin-top: 20px;  border-collapse: collapse; font-size: 14px;">
+
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
+      <td>No. Agenda</td>
+      <td colspan="8">: {{ no_agenda }}</td>
+      <td>Tanggal</td>
+      <td>: {{ tgl_agenda }} </td>
+    </tr>
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
+      <td>Surat Dari </td>
+      <td>: {{ surat_dari  }}</td>
+    </tr>
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
+      <td>No. Surat </td>
+      <td colspan="8">: {{ no_surat }}</td>
+      <td>Derajat</td>
+      <td>:</td>
+    </tr>
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
+      <td>Tanggal Surat</td>
+      <td colspan="8">:{{ tgl_surat }} </td>
+      <td>Klasifikasi</td>
+      <td>: {{ klasifikasi }} </td>
+    </tr>
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
+      <td>Catatan TU</td>
+      <td colspan="8">: </td>
+    </tr>
+    <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px; ">
+      <td colspan = "1" style="border-right: 1px solid black; text-align: center;">Kepada Yth</td>
+      <td colspan ="9" style="text-align: center;">Disposisi / Catatan Kabaranahan Kemhan</td>
+    </tr>
+  </table>
+
+  <div style="display: flex; font-size: 14px; "> 
+      <div>
+          <h5> 1. Kapusalpalhan</h5>
+          <h5> 2. Kapuskon</h5>
+          <h5> 3. Kapuskod</h5>
+          <h5> 4. Kapus BMN</h5>
+          <h5> 5. Kabag Proglap</h5>
+          <h5> 6. Kabag Datin</h5>
+          <h5> 7. Kabag Malur</h5>
+          <h5> 8. Kabag Um</h5>
+          <h5> 9. APN</h5>
+          <h5>10. Spri</h5>
+      </div>
+      <div style="margin-left: 4rem;">
+            <h5>1. Pelajari / Koordinasi dengan  </h5>
+            <h5 style="margin-top: -10px; margin-left: 13px;"> Instansi Terkait  </h5>    
+           
+            <h5>2. Bahan Masukan</h5>
+            <h5>3. Konsep Jawaban/Tanggapan</h5>
+            <h5 style="margin-top: -10px; margin-left: 13px;"> Saran Kepada .............  </h5> 
+
+            <h5>4. Tindak Lanjuti</h5>
+            <h5>5. Untuk diketahui</h5>
+            <h5>6. Pedomani</h5>
+            <h5>7. Wakili Sesbaranahan</h5>
+      </div>
+
+      <div style="margin-left: 4rem;">
+        <h5>8. Monitor Perkembangannya  </h5>       
+        <h5>9. Umumkan saat Binsat</h5>
+        <h5>10. Atensi disposisi Kabadan</h5>
+
+        <h5>11. Evaluasi</h5>
+        <h5>12. Cari Calon Siswa</h5>
+        <h5>13. Laporkan Hasilnya</h5>
+        <h5>14. Siapkan Bahan</h5>
+        <h5>15. Sesuaikan Ketentuan</h5>
+        <h5>16. Simpan/file</h5>
+        
+  </div>
+
+
+
+  </div>
+  
+</body>
+</html> 
+
+

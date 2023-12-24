@@ -1,4 +1,6 @@
 from django.db import models
+
+
 class DbSurat(models.Model):
   
     id = models.AutoField(primary_key=True, unique=True)
@@ -19,11 +21,16 @@ class DbSurat(models.Model):
 
 class DisposisiDb(models.Model):
     # DbSurat = models.ForeignKey( DbSurat ,on_delete = models.CASCADE )
-    id = models.AutoField(primary_key=True, unique=True)
+    # id = models.AutoField(primary_key=True, unique=True)
     disposisi =  models.CharField(max_length = 30)
-    no_surat = models.CharField(max_length = 30)
+    no_surat =  models.ForeignKey(DbSurat, on_delete = models.CASCADE)
     no_agenda = models.CharField(max_length = 30, null=True)
+    # catatan = models.CharField(max_length = 200)
     upload_file_disposisi = models.FileField(upload_to="Disposisi", null=False, blank=False)
+
+
+    def __str__(self):
+        return self.no_surat
 
     class Meta:
         db_table = "DisposisiDb"

@@ -9,34 +9,36 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{% url 'disposisi_kabadan' %}" enctype="multipart/form-data" method="POST" class="was-validated">
+        <form action="{% url 'disposisi_kabadan'  %}" enctype="multipart/form-data" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
             <div style="margin-left: 3rem;" class="d-flex gap-3 text-center">
+
+  
+              <div class="col-2">
+                  <label for="inputAddress" class="form-label">DISPOSISI</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="Kabadan" required />
+              </div>
+
               <div class="col-4">
                 <label for="inputAddress" class="form-label">NO SURAT</label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat }}" required />
               </div>
 
-              {% comment %} <div class="col-3">
-                <label for="inputAddress" class="form-label">TANGGAL AGENDA</label>
-                <input type="date" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="tgl_agenda" required />
-              </div> {% endcomment %}
-              <div class="col-7">
-                <label for="inputAddress" class="form-label">NO AGENDA</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda"  value="{{ data.no_agenda }}" required />
+     
+              <div class="col-5">
+                  <label for="inputAddress" class="form-label">NO AGENDA</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda"  value="{{ data.no_agenda }}" required />
+                </div>
               </div>
-            </div>
 
-            {% comment %} <div style="margin-left: 3rem;" class="text-center col-11 mt-3">
-              <label for="inputAddress" class="form-label">CATATAN</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="catatan" required />
-            </div> {% endcomment %}
 
             <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
               <label for="formFile" class="form-label">UPLOAD DISPOSISI</label>
-              <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_disposisi" required />
+              <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_disposisi"  required />
             </div>
+
+
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Edit SURAT</button>
@@ -49,7 +51,7 @@
 
 {% comment %}edit disposisi kabadan{% endcomment %}
 
-{% for data in disposisi %}
+{% comment %} {% for data in disposisi %}
   <div class="modal fade" id="button_edit_olah_disposisi{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -85,4 +87,4 @@
       </div>
     </div>
   </div>
-{% endfor %}
+{% endfor %} {% endcomment %}
