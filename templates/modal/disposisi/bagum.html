@@ -8,34 +8,26 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="" method="POST" class="was-validated">
+        <form action="{% url 'disposisi_bagum'   %}" method="POST" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
 
             <div style="margin-left: 3rem;" class="d-flex gap-3 text-center">
-           
+
                 <div class="col-4">
                   <label for="inputAddress" class="form-label">NO SURAT</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat}}" required />
                 </div>
-        
-                {% comment %} <div class="col-3">
-                  <label for="inputAddress" class="form-label">TANGGAL AGENDA</label>
-                  <input type="date" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="surat_dari" required />
-                </div> {% endcomment %}
-        
                 <div class="col-7">
                   <label for="inputAddress" class="form-label">NO AGENDA </label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="perihal" value="{{ data.no_agenda}}" required />
+                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda" value="{{ data.no_agenda}}" required />
                 </div>
-
-          </div>
+            </div>
           
-          {% comment %} <div style="margin-left: 3rem;" class="text-center  col-11 mt-3">
+           <div style="margin-left: 3rem;" class="text-center  col-11 mt-3">
               <label for="inputAddress" class="form-label">CATATAN </label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="perihal" required />
-          </div> {% endcomment %}
-
+              <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="catatan" required />
+          </div>
 
           <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
             <label for="formFile" class="form-label">UPLOAD DISPOSISI</label>

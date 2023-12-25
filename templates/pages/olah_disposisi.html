@@ -15,7 +15,6 @@
         <tr>
           <th class="text-center">Disposisi</th>
           <th class="text-center">No Surat</th>
-          <th class="text-center">Tgl Surat</th>
           <th class="text-center">No Agenda</th>
           <th class="text-center">Catatan</th>
           <th class="text-center">Files</th>
@@ -30,7 +29,6 @@
           <tr>
             <td>{{ data.disposisi }}</td>
             <td>{{ data.no_surat }}</td>
-            <td>{{ data.tgl_agenda|date:'d M Y' }}</td>
             <td>{{ data.no_agenda }}</td>
             <td>{{ data.catatan }}</td>
 
@@ -46,8 +44,7 @@
             </td> 
 
             <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-info btn-sm fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_edit_olah_surat{{ data.id }}"></button>
-                 
+                <button type="button" class="btn btn-info btn-sm fa-solid fa-print"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_edit_olah_surat{{ data.id }}"></button>  
             </td> 
 
           </tr>

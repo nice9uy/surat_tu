@@ -24,7 +24,7 @@ function tabel_data() {
       scrollY : "500px"
   });
 
-    new DataTable('#tabel_disposisi_kabadan',{
+    new DataTable('#tabel_disposisi',{
     // "searching": false,
     // "dom": 'rtip'
   });

@@ -64,11 +64,19 @@
               </div>
             </td>
 
-            <td class="text-center gap-2"> 
-              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#print_disposisi_kabadan{{ data.id }}"></button>
-              <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#tambah_disposisi_sekretariat{{ data.id }}"></button>
-              <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#tambah_disposisi_bagum{{ data.id }}"></button>
-            </td> 
+            {% comment %} <td class="text-center gap-2"> 
+              <button type="button" class="btn btn-info btn-sm fas fa-info"  data-bs-toggle="modal"  title="Status Disposisi" data-bs-target="#xxxxx{{ data.id }}"></button>  
+           </td> 
+    {% endcomment %}
+
+           <form method="POST" action="{% url 'filter_no_surat_disposisi' %}">
+          
+
+              {% csrf_token %}
+                <td class="text-center">
+                    <button type="submit" class="btn btn-info btn-sm fas fa-info"  data-bs-toggle="modal"  title="Status Disposisi"  name="filter_no_surat"  value ="{{ data.no_surat}}" ></button>  
+                </td>
+           </form>
 
           </tr>
         {% endfor %}
@@ -76,9 +84,11 @@
     </table>
   </div>
 
-  {% include 'modal/index.html' %}
 
-  {% include 'modal/print/kabadan.html' %}
+{% comment %} 
+  {% include 'modal/index.html' %} {% endcomment %}
+
+ {% include 'modal/status_disposisi/status.html' %}
 
   <div class="container">
     <footer class="">

@@ -10,8 +10,29 @@
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/kemhan_logo.png' %}">
 
     <title>{{ page_title }}</title>
+    <style>
+        #loader {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db; /* Change the color as needed */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+            display: none;
+        }
+    
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+          
+    </style>
+
+
 </head>
 <body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 14px;" class="text-light">
+
 
             {% block index %}{% endblock index %} 
             {% block login %}{% endblock login %}  
@@ -21,8 +42,9 @@
             {% block olah_disposisi %}{% endblock olah_disposisi %}
             {% block tespdf %}{% endblock tespdf %}
             {% block test %}{% endblock test %}
+            {% block filter_disposisi %}{% endblock filter_disposisi %}
 
-
+   
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/font_awsome.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery-3.7.1.slim.min.js' %}"></script>
@@ -50,6 +72,21 @@
                     });
 
             </script>
+
+            <script>
+                // Display the loader
+                document.getElementById('loader').style.display = 'inline-block';
+            
+                // Simulate an asynchronous action (e.g., fetching data)
+                setTimeout(function() {
+                  // Hide the loader when the action is complete
+                  document.getElementById('loader').style.display = 'none';
+                  // You can update the content or perform other actions here
+                //  document.getElementById('content').innerHTML += '<p>Async action complete!</p>';
+                }, 3000); // Simulating a 3-second delay
+            </script>
+
+         
             
 </body>
 </html>

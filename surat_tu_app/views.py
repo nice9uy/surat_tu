@@ -5,11 +5,8 @@ from datetime import date
 from django.http import HttpResponse
 from django.template.loader import get_template
 from weasyprint import HTML
-from .library.forms import DisposisiForm
-
 
 def kabaranahan(request, getIDdisosisi_kabaranahan ):
-    # dbDisposisi = DisposisiDb.objects.filter(id).values()
     getIDdisposisi = get_object_or_404(DbSurat, pk = getIDdisosisi_kabaranahan)
     template = get_template('pdf_disposisi/kabaranahan.html')
 
@@ -89,36 +86,47 @@ def bagum(request , getIDdisosisi_bagum):
 # Create your views here.
 @login_required(login_url="/accounts/login/")
 def home(request):
-
-    # hari_ini = date.today()
-    
-
-    # print(hari_ini)
-
+ 
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
-    dispoKabadan   = DisposisiDb.objects.all()
+    # disposisi   = DisposisiDb.objects.all()
 
+    data_disposisi = DisposisiDb.objects.filter(no_surat=request.GET.get('no_surat'))
 
     context = {
         'page_title'   : 'Home',
         'data_surat'   : datasemuasurat,
         'klasifikasi'  : Klasifikasi,
-        'dispoKabadan' : dispoKabadan,
+        'disposisi' : data_disposisi,
      }
     return render (request , 'pages/index.html' , context )
     
 
+def filter_no_surat_disposisi(request):
+    if request.method == 'POST':
+        get_no_surat = request.POST.get('filter_no_surat')
+
+        filtered =  get_object_or_404(DbSurat, no_surat = get_no_surat)
+        filtered_final = DisposisiDb.objects.filter(no_surat = filtered).values()
+
+        context = {
+            'filtered_data': filtered_final,
+        }
+
+        return render(request, 'pages/filter_no_surat.html',  context)
+
+    return render(request, 'pages/filter_no_surat.html')
+
 def tambah_surat(request):
 
-    # hari_ini = date.today()
+    hari_ini = date.today()
     username = request.user
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
 
     if request.method == 'POST':
 
         get_klasifikasi = request.POST.get('klasifikasi')
-        get_tanggal_agenda = request.POST.get('tanggal_agenda')
+        # get_tanggal_agenda = request.POST.get('tanggal_agenda')
         get_no_agenda = request.POST.get('no_agenda')
         get_tanggal_surat = request.POST.get('tanggal_surat')
         get_no_surat = request.POST.get('no_surat')
@@ -129,7 +137,7 @@ def tambah_surat(request):
         tambah_data_surat = DbSurat(
             username    = username,
             klasifikasi = get_klasifikasi,
-            tgl_agenda  = get_tanggal_agenda,
+            tgl_agenda  = hari_ini,
             no_agenda   = get_no_agenda,
             tgl_surat   = get_tanggal_surat,
             no_surat    = get_no_surat,
@@ -255,122 +263,83 @@ def olah_disposisi(request):
 
     return render(request,'pages/olah_disposisi.html' , context )
 
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     return render(request, 'myapp/post_detail.html', {'post': post})
+def disposisi_kabadan(request ):
 
-
-def disposisi_kabadan(request):
-        
+    dispo = "KABARANAHAN"
     if request.method == 'POST':
-        no_surat_id = request.POST.get('no_surat')
-        no_surat = get_object_or_404(DbSurat, pk=no_surat_id)
-
-        print(no_surat)
+        get_no_surat = request.POST.get('no_surat')
+        no_surat = DbSurat.objects.get( no_surat = get_no_surat)
 
         no_agenda = request.POST.get('no_agenda')
         catatan  =  request.POST.get('catatan')
-        files_upload_disposisi = request.FILES.get('file_disposisi')
+        files_upload_disposisi = request.FILES.get('file_name')
 
-        DisposisiDb.objects.create(
-            no_surat = no_surat,
-            no_agenda = no_agenda,
-            catatan = catatan,
+        dispo_kabadan = DisposisiDb(
+            no_surat              = no_surat,
+            disposisi             = dispo,
+            no_agenda             = no_agenda,
+            catatan               = catatan,
             upload_file_disposisi = files_upload_disposisi
+
         )
-        # dispo_kabadan.save()
-        # return redirect(disposisi , pk= dispo_kabadan.pk)
+
+        dispo_kabadan.save()
+        return redirect('home')
+
+
+def disposisi_ses(request ):
+
+    dispo = "SEKRETARIAT"
+    if request.method == 'POST':
+        get_no_surat = request.POST.get('no_surat')
+        no_surat = DbSurat.objects.get( no_surat = get_no_surat)
+
+        no_agenda = request.POST.get('no_agenda')
+        catatan  =  request.POST.get('catatan')
+        files_upload_disposisi = request.FILES.get('file_name')
+
+        dispo_ses = DisposisiDb(
+            no_surat              = no_surat,
+            disposisi             = dispo,
+            no_agenda             = no_agenda,
+            catatan               = catatan,
+            upload_file_disposisi = files_upload_disposisi
+
+        )
+
+        dispo_ses.save()
+        return redirect('home')
+    
+
+    
+
+def disposisi_bagum(request ):
+
+    dispo = "BAGIAN UMUM"
+    if request.method == 'POST':
+        get_no_surat = request.POST.get('no_surat')
+        no_surat = DbSurat.objects.get( no_surat = get_no_surat)
+
+        no_agenda = request.POST.get('no_agenda')
+        catatan  =  request.POST.get('catatan')
+        files_upload_disposisi = request.FILES.get('file_name')
+
+        dispo_bagum = DisposisiDb(
+            no_surat              = no_surat,
+            disposisi             = dispo,
+            no_agenda             = no_agenda,
+            catatan               = catatan,
+            upload_file_disposisi = files_upload_disposisi
+
+        )
+
+        dispo_bagum.save()
+        return redirect('home')
 
 
 
 
 
-
-    #     form = DisposisiForm(request.POST)
-
-    #     print(form)
-    #     if form.is_valid:
-    #         disposisi_kabadan = form.save()
-
-    #         print(disposisi_kabadan)
-    #         return redirect('olah_disposisi', pk = disposisi_kabadan.pk )
-
-
-    # else:
-    #     print("hkdagfkagfaf")
-    #     form = DisposisiForm()
-    # return render(request, 'pages/olah_disposisi.html', {'form': form})
-
-
-
-
-
-        # no_surat_id = request.POST.get('no_surat')
-        # no_surat = DbSurat.objects.get(id)
-
-        # get_no_agenda = request.POST.get('no_agenda')
-        # get_catatan  =  request.POST.get('catatan')
-        # files_upload_disposisi = request.FILES.get('file_disposisi')
-
-        # DisposisiDb.objects.create(
-        #     # disposisi               = disposisi,
-        #     no_surat                = no_surat_id,
-        #     no_agenda               = get_no_agenda,
-        #     catatan                 = get_catatan,
-        #     upload_file_disposisi   = files_upload_disposisi
-        # )
-    # else:
-    #     return render
-
-        # form  = DisposisiForm(request.POST , request.FILES)
-
-        # if form.is_valid():
-        #     x = form.save(commit =False)
-        #     x.save()
-        #     return redirect('olah_disposisi', pk= x.pk)
         
-    # else:
-    #     print("Gagal")
-    #     form = DisposisiForm()
-
-        # disposisi = "KABADAN"
-        # get_no_surat = request.POST.get('no_surat')
-        # get_no_agenda = request.POST.get('no_agenda')
-        # get_catatan  =  request.POST.get('catatan')
-        # files_upload_disposisi = request.FILES.get('file_disposisi')
-
-        # no_surat = get_object_or_404(DbSurat, pk = id)
-        # no_surat = DbSurat.objects.get(pk=get_no_surat)
-
-
-        # print(no_surat)
-
-
-        # disposisi_kabadan = DisposisiDb.objects.create(
-        #     disposisi               = str(disposisi),
-        #     no_surat                = str(no_surat),
-        #     no_agenda               = get_no_agenda,
-        #     catatan                 = get_catatan,
-        #     upload_file_disposisi   = files_upload_disposisi
-
-        # )
-
-        # disposisi_kabadan  = DisposisiDb (
-        #     disposisi               = disposisi,
-        #     # no_surat                = Dbsurat_id,
-        #     no_agenda               = get_no_agenda,
-        #     catatan                 = get_catatan,
-        #     upload_file_disposisi   = files_upload_disposisi,
-        
-        #     )
-        
-        # disposisi_kabadan.save()
-
-    #     return redirect('olah_disposisi')
-
-    # context = {
-    #     'disposisi' : disposisi
-    # }
-
-    # return render(request,'pages/olah_disposisi.html' , context )
+  
 

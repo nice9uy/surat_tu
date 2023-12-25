@@ -7,7 +7,7 @@ from .models import DisposisiDb
 
 class ListDbSurat(admin.ModelAdmin):
     list_display = ('id', 'username','klasifikasi', 'tgl_agenda',
-                    'no_agenda','tgl_surat','surat_dari','perihal',
+                    'no_agenda','tgl_surat','no_surat','surat_dari','perihal',
                     'upload_file'
                     )
     
@@ -15,7 +15,7 @@ class ListKlasifikasi(admin.ModelAdmin):
     list_display = ('id','klasifikasi')
 
 class ListDisposisiDb(admin.ModelAdmin):
-    list_display = ( 'no_surat','no_agenda','upload_file_disposisi',
+    list_display = ( 'no_surat', 'id' ,'disposisi','no_agenda', 'catatan','upload_file_disposisi',
                     )
 
 
