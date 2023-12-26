@@ -15,7 +15,7 @@ class ListKlasifikasi(admin.ModelAdmin):
     list_display = ('id','klasifikasi')
 
 class ListDisposisiDb(admin.ModelAdmin):
-    list_display = ( 'no_surat', 'id' ,'disposisi','no_agenda', 'catatan','upload_file_disposisi',
+    list_display = ( 'no_surat', 'no_surat_id', 'id' , 'username','disposisi','no_agenda', 'catatan','upload_file_disposisi',
                     )
 
 

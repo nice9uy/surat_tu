@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block filter_disposisi %}
+{% block tes %}
 
-{% include 'header/main_header.html' %}
+{% include 'header/disposisi.html' %}
 
 <div class="container-fluid mt-3 text-white" style="">
     <h5 class="text-center">DISPOSISI</h5>
@@ -17,12 +17,13 @@
             <th class="text-center">No Agenda</th>
             <th class="text-center">Catatan</th>
             <th class="text-center">Files</th>
+            <th class="text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
          
-            {% if filtered_data %}
-                    {% for data in filtered_data %}
+            {% if disposisi %}
+                    {% for data in disposisi %}
                     <tr>
                         <td class="text-center">{{ forloop.counter }}</td>
                         <td>{{ data.disposisi }}</td>
@@ -30,10 +31,14 @@
                         <td>{{ data.catatan }}</td>
 
                         <td class="text-center">
-                        <div style="margin-left: -15px;">
-                            <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file_disposisi }}"></a>
-                        </div>
+                            <div style="margin-left: -15px;">
+                                <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file_disposisi.id }}"></a>
+                            </div>
                         </td>
+                        <td class="text-center gap-2"> 
+                          <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_edit_olah_surat{{ data.id }}"></button>
+                          <button type="button" class="btn btn-danger btn-sm fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="HAPUS" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
+                        </td> 
 
                     </tr>
                     {% endfor %}
@@ -55,4 +60,10 @@
   </div>
 
 
-{% endblock filter_disposisi %}
+
+{% endblock tes %}
+
+
+
+
+

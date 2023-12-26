@@ -16,10 +16,6 @@
             <a class="nav-link   {% if request.path == '/surat/' %} active {% endif %}" href="{% url 'home' %}">Home</a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == '/surat/disposisi/' %} active {% endif %}" href="{% url 'disposisi' %}">Disposisi</a>
-          </li>
-
           <li class="nav-item dropdown">
             <a id="surat" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Olah Data Surat</a>
             <ul class="dropdown-menu">
@@ -32,13 +28,7 @@
               <li>
                 <a class="dropdown-item {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Data Surat</a>
               </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item {% if request.path == '/surat/olah_disposisi/' %} active {% endif %}" href="{% url 'olah_disposisi' %}">Disposisi</a>
-              </li>
-
+          
           
             </ul>
           </li>

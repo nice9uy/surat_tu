@@ -6,7 +6,7 @@
   {% include 'header/main_header.html' %}
 
   <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">SEMUA SURAT</h5>
+    <h5 class="text-center">SEMUA SURAT MASUK</h5>
     <div style="margin-top: -2.5rem;">
       <div class="d-flex justify-content-end">
         <div style="margin-right: 1rem;">
@@ -69,7 +69,7 @@
            </td> 
     {% endcomment %}
 
-           <form method="POST" action="{% url 'filter_no_surat_disposisi' %}">
+           <form method="POST" action="{% url 'disposisi' %}">
           
 
               {% csrf_token %}

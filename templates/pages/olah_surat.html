@@ -45,6 +45,7 @@
           <th class="text-center">Print</th>
           <th class="text-center">Upload Disposisi</th>
           <th class="text-center">Aksi</th>
+          <th class="text-center">Olah Disposisi</th>
         </tr>
       </thead>
       <tbody>
@@ -71,9 +72,7 @@
             </td> 
             
             <td class="text-center gap-2"> 
-              <button type="button" class="btn btn-danger btn-sm fa-solid fa-k"  data-bs-toggle="modal" data-placement="bottom" title="KABADAN" data-bs-target="#tambah_disposisi_kabadan{{ data.id }}"></button>
-              <button type="button" class="btn btn-secondary btn-sm fa-solid fa-s"  data-bs-toggle="modal" data-placement="bottom" title="SEKRETARIAT" data-bs-target="#tambah_disposisi_sekretariat{{ data.id }}"></button>
-              <button type="button" class="btn btn-info btn-sm fa-solid fa-b"  data-bs-toggle="modal" data-placement="bottom" title="BAG UMUM" data-bs-target="#tambah_disposisi_bagum{{ data.id }}"></button>
+              <button type="button" class="btn btn-danger btn-sm fa fa-paper-plane"  data-bs-toggle="modal" data-placement="bottom" title="Upload Disposisi" data-bs-target="#upload_disposisi{{ data.id }}"></button>
             </td> 
 
             <td class="text-center gap-2"> 
@@ -81,15 +80,22 @@
                 <button type="button" class="btn btn-danger btn-sm fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="HAPUS" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
             </td> 
 
+            <form method="POST" action="{% url 'olah_disposisi' %}">
+              {% csrf_token %}
+
+                <td class="text-center gap-2"> 
+                  <button type="submit" class="btn btn-info btn-sm fas fa-info"  data-bs-toggle="modal"  title="Status Disposisi"  name="filter_no_surat"  value ="{{ data.no_surat}}" ></button>  
+                </td> 
+            </form>
+
           </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 
-  {% include 'modal/disposisi/kabadan.html' %}
-  {% include 'modal/disposisi/sekretariat.html' %}
-  {% include 'modal/disposisi/bagum.html' %}
+  {% include 'modal/disposisi/upload_disposisi.html' %}
+
   {% include 'modal/olah_surat.html' %}
 
 

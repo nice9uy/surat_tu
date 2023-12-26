@@ -12,14 +12,23 @@ urlpatterns = [
     path('disposisi/', views.disposisi, name='disposisi'),
 
     path('olah_disposisi/', views.olah_disposisi, name='olah_disposisi'),
+    path('olah_disposisi_edit/<int:id_edit_disposisi>', views.olah_disposisi_edit, name='olah_disposisi_edit'),
+    
     path('kabaranahan/<int:getIDdisosisi_kabaranahan>', views.kabaranahan, name='kabaranahan'),
     path('sekretariat/<int:getIDdisosisi_sekretariat>', views.sekretariat, name='sekretariat'),
     path('bagum/<int:getIDdisosisi_bagum>', views.bagum, name='bagum'),
 
-    path('disposisi_kabadan/', views.disposisi_kabadan, name='disposisi_kabadan'),
-    path('disposisi_ses/', views.disposisi_ses, name='disposisi_ses'),
-    path('disposisi_bagum/', views.disposisi_bagum, name='disposisi_bagum'),
+    # path('disposisi_kabadan/', views.disposisi_kabadan, name='disposisi_kabadan'),
+    # path('disposisi_ses/', views.disposisi_ses, name='disposisi_ses'),
+    # path('disposisi_bagum/', views.disposisi_bagum, name='disposisi_bagum'),
 
-    path('filter_no_surat_disposisi/', views.filter_no_surat_disposisi, name='filter_no_surat_disposisi'),
+    path('upload_disposisi/', views.upload_disposisi, name='upload_disposisi'),
+
+
+    # path('tes/', views.tes, name='tes'),
+
+    # path('filter_no_surat_disposisi/', views.filter_no_surat_disposisi, name='filter_no_surat_disposisi'),
 
 ]
+
+
