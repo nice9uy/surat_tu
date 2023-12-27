@@ -1,3 +1,4 @@
+
 {% for data in data_surat %}
   <div class="modal fade" id="upload_disposisi{{ data.id }}" tabindex="-1" aria-labelledby="edit_klasifikasi" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -26,7 +27,7 @@
                 <div class="col-3">
                   <label for="inputAddress" class="form-label">NO SURAT</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat}}" readonly required />
-                </div>
+                </div> 
 
                 <div class="col-5">
                   <label for="inputAddress" class="form-label">NO AGENDA </label>

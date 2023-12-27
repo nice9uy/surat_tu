@@ -247,73 +247,49 @@ def olah_disposisi(request):
 
     return render(request, 'pages/olah_disposisi.html')  
 
+@login_required(login_url="/accounts/login/")
 def olah_disposisi_edit(request , id_edit_disposisi):
 
     username = request.user
-    # edit_olah_surat = get_object_or_404(DisposisiDb, pk = id_edit_disposisi)
-    # dbsurat = DbSurat.objects.all()
+    edit_olah_surat = get_object_or_404(DisposisiDb, pk = id_edit_disposisi)
 
-
-    no_surat_data = request.POST.get('no_surat')
-
-    edit_olah_surat = DisposisiDb.objects.filter(no_surat = no_surat_data)
-
-    print(edit_olah_surat)
-    # edit_olah_surat = DisposisiDb.objects.get_or_create( pk = id_edit_disposisi )
+    edit_surat_convert_id = edit_olah_surat.id
+    edit_surat_convert_nomor_surat_id = edit_olah_surat.no_surat_id
 
     if request.method == 'POST':
-        edit_olah_surat.username = username
-        edit_olah_surat.disposisi = request.POST.get('disposisi')
-        edit_olah_surat.no_surat_id = request.POST.get('no_surat')
-        edit_olah_surat.no_agenda = request.POST.get('no_agenda')
-        edit_olah_surat.catatan = request.POST.get('catatan')
-        edit_olah_surat.save()
 
-        return redirect('home')
-    
-    return render(request,'pages/olah_surat.html')
+        get_disposisi = request.POST.get('disposisi')
+        no_agenda = request.POST.get('no_agenda')
+        catatan  =  request.POST.get('catatan')
+        files_upload_disposisi = edit_olah_surat.upload_file_disposisi
 
-    #     # get_disposisi = request.POST.get('disposisi')
-    #     # # no_surat_data = request.POST.get('no_surat')
-    #     # no_agenda = request.POST.get('no_agenda')
-    #     # catatan  =  request.POST.get('catatan')
-    #     # files_upload_disposisi = edit_olah_surat.upload_file_disposisi
+        edit_olah_disposisi = DisposisiDb(
 
-    #     edit_olah_surat = DisposisiDb(
-
-    #         id                      = id_edit_disposisi,
-    #         username                = str(username),
-    #         disposisi               = get_disposisi,
-    #         no_agenda               = no_agenda,
-    #         catatan                 = catatan,
-    #         upload_file_disposisi   = files_upload_disposisi,
+            id                      = edit_surat_convert_id,
+            no_surat_id             = edit_surat_convert_nomor_surat_id,
+            username                = str(username),
+            disposisi               = get_disposisi,
+            no_agenda               = no_agenda,
+            catatan                 = catatan,
+            upload_file_disposisi   = files_upload_disposisi,
             
-    #         )
+            )
 
-    #     edit_olah_surat.save()
-    #     return redirect('home')
+        edit_olah_disposisi.save()
+        return redirect('olah_surat')
+
+    return render(request,'pages/olah_disposisi.html')
+
+@login_required(login_url="/accounts/login/")
+def olah_disposisi_delete(request , id_delete_disposisi) :
+    delete_disposisi_surat = get_object_or_404(DisposisiDb, pk = id_delete_disposisi)
+
+    if request.method == 'POST':
+        delete_disposisi_surat.upload_file_disposisi.delete()
+        delete_disposisi_surat.delete()
+        return redirect('olah_surat')
     
-    # return render(request,'pages/olah_surat.html')
-
-
-
-
-
-
-
-    # if request.method == 'POST':
-    #     get_no_surat = request.POST.get('filter_no_surat')
-
-    #     filtered =  get_object_or_404(DbSurat, no_surat = get_no_surat)
-    #     disposisi = DisposisiDb.objects.filter(no_surat = filtered).values()
-
-    #     context = {
-    #         'disposisi': disposisi,
-    #     }
-
-    #     return render(request, 'pages/olah_disposisi.html',  context)
-
-    # return render(request, 'pages/olah_disposisi.html')  
+    return render(request,'pages/olah_disposisi.html')
  
 
 @login_required(login_url="/accounts/login/")
@@ -326,9 +302,7 @@ def upload_disposisi(request):
 
             no_surat_data = request.POST.get('no_surat')
             no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data )
-            x = str(no_surat_instance)
-            print(x)
-
+   
             get_disposisi = request.POST.get('disposisi')
             no_agenda = request.POST.get('no_agenda')
             catatan  =  request.POST.get('catatan')
@@ -347,7 +321,7 @@ def upload_disposisi(request):
 
             disposisi_instance.save()
     except Exception as e:
-        print(e)
+       pass
 
     return redirect('olah_surat')
  
