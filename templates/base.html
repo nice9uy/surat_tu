@@ -43,6 +43,8 @@
             {% block tespdf %}{% endblock tespdf %}
             {% block tes %}{% endblock tes %}
             {% block filter_disposisi %}{% endblock filter_disposisi %}
+            {% block duplikat_surat %}{% endblock duplikat_surat %}
+            {% block error_upload_surat %}{% endblock error_upload_surat %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -66,7 +68,7 @@
                         var selectedValue1 = $('#tgl_agenda').val();
                 
                         // Apply the filters to the DataTable
-                        table.columns(0).search(selectedValue).draw();
+                        table.columns(1).search(selectedValue).draw();
                         
                         });
                     });

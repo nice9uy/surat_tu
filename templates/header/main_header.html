@@ -34,7 +34,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="">Surat Duplikat</a>
+            <a class="nav-link {% if request.path == '/surat/duplikasi_surat/' %} active {% endif %}" href="{% url 'duplikasi_surat' %}">Surat Duplikat</a>
           </li>
 
           <li class="nav-item">

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block index %}
+{% block duplikat_surat %}
 
   {% include 'header/main_header.html' %}
 
   <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">SEMUA SURAT MASUK</h5>
+    <h5 class="text-center">DUPLIKASI SURAT</h5>
     <div style="margin-top: -2.5rem;">
       <div class="d-flex justify-content-end">
         <div style="margin-right: 1rem;">
@@ -48,7 +48,7 @@
       </thead>
       <tbody>
 
-        {% for data in data_surat %}
+        {% for data in duplicates %}
         
           <tr>
             <td class="text-center" >{{ forloop.counter }}</td>
@@ -68,7 +68,6 @@
 
 
            <form method="POST" action="{% url 'disposisi' %}">
-          
 
               {% csrf_token %}
                 <td class="text-center">
@@ -83,9 +82,6 @@
   </div>
 
 
-{% comment %} 
-  {% include 'modal/index.html' %} {% endcomment %}
-
  {% include 'modal/status_disposisi/status.html' %}
 
   <div class="container">
@@ -96,4 +92,4 @@
     </footer>
   </div>
   
-{% endblock index %}
+{% endblock duplikat_surat %}

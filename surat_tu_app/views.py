@@ -110,41 +110,42 @@ def tambah_surat(request):
     username       = request.user
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
 
-    if request.method == 'POST':
+    try:
+        if request.method == 'POST':
 
-        get_klasifikasi = request.POST.get('klasifikasi')
-        get_no_agenda = request.POST.get('no_agenda')
-        get_tanggal_surat = request.POST.get('tanggal_surat')
-        get_no_surat = request.POST.get('no_surat')
-        get_surat_dari = request.POST.get('surat_dari')
-        get_perihal = request.POST.get('perihal')
-        files_upload = request.FILES.get('file_name')
+            get_klasifikasi = request.POST.get('klasifikasi')
+            get_no_agenda = request.POST.get('no_agenda')
+            get_tanggal_surat = request.POST.get('tanggal_surat')
+            get_no_surat = request.POST.get('no_surat')
+            get_surat_dari = request.POST.get('surat_dari')
+            get_perihal = request.POST.get('perihal')
+            files_upload = request.FILES.get('file_name')
 
+            tambah_data_surat = DbSurat(
 
-        print(get_tanggal_surat)
-
-        tambah_data_surat = DbSurat(
-            username    = username,
-            klasifikasi = get_klasifikasi,
-            tgl_agenda  = hari_ini,
-            no_agenda   = get_no_agenda,
-            tgl_surat   = get_tanggal_surat,
-            no_surat    = get_no_surat,
-            surat_dari  = get_surat_dari,
-            perihal     = get_perihal,
-            upload_file = files_upload
+                username    = username,
+                klasifikasi = get_klasifikasi,
+                tgl_agenda  = hari_ini,
+                no_agenda   = get_no_agenda,
+                tgl_surat   = get_tanggal_surat,
+                no_surat    = get_no_surat,
+                surat_dari  = get_surat_dari,
+                perihal     = get_perihal,
+                upload_file = files_upload
+                
+                )
             
-            )
-        
-        tambah_data_surat.save()
+            tambah_data_surat.save()
 
-        return redirect('home')
-    
-    context = {
-        'page_title' : 'Tambah Surat',
-        'klasifikasi': klasifikasi
-    }
-    return render (request , 'pages/tambah_surat.html' , context )
+            return redirect('home')
+        
+        context = {
+            'page_title' : 'Tambah Surat',
+            'klasifikasi': klasifikasi
+        }
+        return render (request , 'pages/tambah_surat.html' , context )
+    except:
+        return render (request , 'pages/error_upload_surat.html' )
 
 @login_required(login_url="/accounts/login/")
 def olah_surat(request) :
@@ -164,36 +165,40 @@ def edit_olah_surat(request , id_edit_olah_surat ):
     username = request.user
     edit_olah_surat = get_object_or_404(DbSurat, pk = id_edit_olah_surat)
 
-    if request.method == 'POST':
+    try:
 
-        get_klasifikasi = request.POST.get('klasifikasi')
-        get_tgl_agenda  = request.POST.get('tanggal_agenda')          
-        get_no_agenda = request.POST.get('no_agenda')
-        get_tanggal_surat = request.POST.get('tanggal_surat')
-        get_no_surat = request.POST.get('no_surat')
-        get_surat_dari = request.POST.get('surat_dari')
-        get_perihal = request.POST.get('perihal')
-        files_upload = edit_olah_surat.upload_file.name
+        if request.method == 'POST':
 
-        edit_olah_surat = DbSurat(
+            get_klasifikasi = request.POST.get('klasifikasi')
+            get_tgl_agenda  = request.POST.get('tanggal_agenda')          
+            get_no_agenda = request.POST.get('no_agenda')
+            get_tanggal_surat = request.POST.get('tanggal_surat')
+            get_no_surat = request.POST.get('no_surat')
+            get_surat_dari = request.POST.get('surat_dari')
+            get_perihal = request.POST.get('perihal')
+            files_upload = edit_olah_surat.upload_file.name
 
-            id          = id_edit_olah_surat,
-            username    = str(username),
-            klasifikasi = get_klasifikasi,
-            tgl_agenda  = get_tgl_agenda,
-            no_agenda   = get_no_agenda,
-            tgl_surat   = get_tanggal_surat,
-            no_surat    = get_no_surat,
-            surat_dari  = get_surat_dari,
-            perihal     = get_perihal,
-            upload_file = files_upload
-            
-            )
+            edit_olah_surat = DbSurat(
 
-        edit_olah_surat.save()
-        return redirect('home')
-    
-    return render(request,'pages/olah_surat.html')
+                id          = id_edit_olah_surat,
+                username    = str(username),
+                klasifikasi = get_klasifikasi,
+                tgl_agenda  = get_tgl_agenda,
+                no_agenda   = get_no_agenda,
+                tgl_surat   = get_tanggal_surat,
+                no_surat    = get_no_surat,
+                surat_dari  = get_surat_dari,
+                perihal     = get_perihal,
+                upload_file = files_upload
+                
+                )
+
+            edit_olah_surat.save()
+            return redirect('home')
+        
+        return render(request,'pages/olah_surat.html')
+    except:
+        return render (request , 'pages/error_edit_surat.html' )
 
 @login_required(login_url="/accounts/login/")
 def delete_olah_surat(request , id_delete_olah_surat):
@@ -231,15 +236,8 @@ def olah_disposisi(request):
         filtered =  get_object_or_404(DbSurat, no_surat = get_no_surat)
         disposisi = DisposisiDb.objects.filter(no_surat = filtered).values()
 
-        # print(disposisi)
-
-
-
-            # x = disposisi.no_surat
-
-        # print(x)                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-
         context = {
+            'page_title' : 'Olah Disposisi',
             'disposisi': disposisi,
         }
 
@@ -329,20 +327,26 @@ def upload_disposisi(request):
 @login_required(login_url="/accounts/login/")
 def duplikasi_surat(request):
     try:
-        duplicate_records = DbSurat.objects.values('klasifikasi','no_agenda','tgl_surat','no_surat','surat_dari','perihal').annotate(count=Count('id')).filter(count__gt=1)
+        duplicate_records = DbSurat.objects.values('no_agenda','no_surat','perihal').annotate(count=Count('id')).filter(count__gt=1)
         for record in duplicate_records:
             # Fetch all records with the duplicate combination of fields
-            duplicates = DbSurat.objects.filter( klasifikasi=record['klasifikasi'], no_agenda=record['no_agenda'], kelompok=record['kelompok'],  tgl=record['tgl'], no_surat=record['no_surat'] ,  kepada=record['kepada'] , perihal=record['perihal'])
+            duplicates = DbSurat.objects.filter( 
+
+                no_agenda    = record['no_agenda'], 
+                no_surat     = record['no_surat'], 
+                perihal       = record['perihal'],
+                
+            )
 
         context = { 
              'page_title' : 'Cari Duplikat',
-             'datasemuasurat' : duplicates,
+             'duplicates' : duplicates,
             }   
-        return render(request,'pages/cari_duplicate.html', context)
+        return render(request,'pages/cari_duplikat.html', context)
              
     except:
         pass
 
-    return render(request,'pages/cari_duplicate.html')
+    return render(request,'pages/cari_duplikat.html')
 
         

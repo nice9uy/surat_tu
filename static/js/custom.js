@@ -25,6 +25,10 @@ function tabel_data() {
   });
 
     new DataTable('#tabel_disposisi',{
+      scrollX: true,
+      autoWidth: true,
+      scrollCollapse: true,
+      scrollY : "500px"
     // "searching": false,
     // "dom": 'rtip'
   });
