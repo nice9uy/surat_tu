@@ -10,44 +10,63 @@
       <form action="{% url 'tambah_surat' %}" method="POST" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
 
+       
+        <div class="col-3">
+            <label for="inputEmail4" class="form-label">JENIS SURAT</label>
+            <div class="input-group">
+              <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  name="jenis_surat">
+                <option value=""></option>
+                {% for v in jenis_surat %}
+                <option value="{{ v }}">{{ v }}</option>
+              {% endfor %}
+              </select>
+              <button class="btn btn-outline-secondary" type="button">OK</button>
+            </div>
+        </div>
+
+
         <div class="col-3">
           <label for="inputEmail4" class="form-label">KLASIFIKASI</label>
-          <select class="form-select" aria-label="Default select example" id="klasifikasi" name="klasifikasi" required>
-            <option value="">KLASIFIKASI</option>
+          <select class="form-select" aria-label="Default select example" id="klasifikasi" name="klasifikasi" >
+            <option value=""></option>
             {% for v in klasifikasi %}
               <option value="{{ v }}">{{ v }}</option>
             {% endfor %}
           </select>
         </div>
 
-        {% comment %} <div class="col-3">
+        <div class="col-3">
           <label for="inputPassword4" class="form-label">TANGGAL AGENDA</label>
-          <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda" required />
-        </div>  {% endcomment %}
-
+          <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda"  />
+        </div>  
         <div class="col-3">
           <label for="inputAddress" class="form-label">NO AGENDA</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Agenda" name="no_agenda" required />
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_agenda" required />
         </div>
 
         <div class="col-md-3">
           <label for="inputPassword4" class="form-label">TANGGAL SURAT</label>
-          <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat" required />
-        </div>
-
-        <div class="col-3">
-          <label for="inputAddress" class="form-label">NO SURAT</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" required />
+          <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat"  />
         </div>
 
         <div class="col-4">
-          <label for="inputAddress" class="form-label">SURAT DARI</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Input Surat Dari" name="surat_dari" required />
+          <label for="inputAddress" class="form-label">NO SURAT</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_surat" required />
         </div>
 
-        <div class="col-8">
+        <div class="col-5">
+          <label for="inputAddress" class="form-label">SURAT DARI</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="surat_dari" required />
+        </div>
+
+        <div class="col-3">
+          <label for="inputAddress" class="form-label">DERAJAT SURAT</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="derajat_surat"  />
+        </div>
+
+        <div class="col-9">
           <label for="inputAddress" class="form-label">PERIHAL</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="perihal" required />
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="perihal" required />
         </div>
 
         <div class="mb-3">

@@ -1,7 +1,7 @@
 import uuid
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from . models import DbSurat , DbKlasifikasi, DisposisiDb
+from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat
 from datetime import date
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -94,11 +94,14 @@ def home(request):
    
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
+    jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+
 
     context = {
         'page_title'   : 'Home',
         'data_surat'   : datasemuasurat,
         'klasifikasi'  : Klasifikasi,
+        'jenis_surat'  : jenis_surat
      }
     return render (request , 'pages/index.html' , context )
 
@@ -106,32 +109,40 @@ def home(request):
 @login_required(login_url="/accounts/login/")
 def tambah_surat(request):
     
-    hari_ini       = date.today()
+    # hari_ini       = date.today()
     username       = request.user
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
+    jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
 
     try:
         if request.method == 'POST':
 
+            get_jenis_surat = request.POST.get('jenis_surat')
             get_klasifikasi = request.POST.get('klasifikasi')
+            get_tanggal_agenda = request.POST.get('tanggal_agenda')
             get_no_agenda = request.POST.get('no_agenda')
             get_tanggal_surat = request.POST.get('tanggal_surat')
+
             get_no_surat = request.POST.get('no_surat')
             get_surat_dari = request.POST.get('surat_dari')
+            get_derajat_surat = request.POST.get('derajat_surat')
             get_perihal = request.POST.get('perihal')
             files_upload = request.FILES.get('file_name')
 
             tambah_data_surat = DbSurat(
 
-                username    = username,
-                klasifikasi = get_klasifikasi,
-                tgl_agenda  = hari_ini,
-                no_agenda   = get_no_agenda,
-                tgl_surat   = get_tanggal_surat,
-                no_surat    = get_no_surat,
-                surat_dari  = get_surat_dari,
-                perihal     = get_perihal,
-                upload_file = files_upload
+                username      = username,
+                jenis_surat   = get_jenis_surat,
+                klasifikasi   = get_klasifikasi,
+                tgl_agenda    = get_tanggal_agenda,
+                no_agenda     = get_no_agenda,
+                tgl_surat     = get_tanggal_surat,
+
+                no_surat      = get_no_surat,
+                surat_dari    = get_surat_dari,
+                derajat_surat = get_derajat_surat,
+                perihal       = get_perihal,
+                upload_file   = files_upload
                 
                 )
             
@@ -141,7 +152,8 @@ def tambah_surat(request):
         
         context = {
             'page_title' : 'Tambah Surat',
-            'klasifikasi': klasifikasi
+            'klasifikasi': klasifikasi,
+            'jenis_surat' : jenis_surat
         }
         return render (request , 'pages/tambah_surat.html' , context )
     except:
@@ -151,11 +163,13 @@ def tambah_surat(request):
 def olah_surat(request) :
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
+    jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
     
     context = {
         'page_title' : 'Olah Surat',
         'data_surat' : datasemuasurat,
-        'klasifikasi': Klasifikasi
+        'klasifikasi': Klasifikasi,
+        'jenis_surat' : jenis_surat
     }
     
     return render (request , 'pages/olah_surat.html' , context )
@@ -168,13 +182,14 @@ def edit_olah_surat(request , id_edit_olah_surat ):
     try:
 
         if request.method == 'POST':
-
+            get_jenis_surat = request.POST.get('jenis_surat')
             get_klasifikasi = request.POST.get('klasifikasi')
             get_tgl_agenda  = request.POST.get('tanggal_agenda')          
             get_no_agenda = request.POST.get('no_agenda')
             get_tanggal_surat = request.POST.get('tanggal_surat')
             get_no_surat = request.POST.get('no_surat')
             get_surat_dari = request.POST.get('surat_dari')
+            get_derajat_surat = request.POST.get('derajat_surat')
             get_perihal = request.POST.get('perihal')
             files_upload = edit_olah_surat.upload_file.name
 
@@ -182,12 +197,14 @@ def edit_olah_surat(request , id_edit_olah_surat ):
 
                 id          = id_edit_olah_surat,
                 username    = str(username),
+                jenis_surat = get_jenis_surat,
                 klasifikasi = get_klasifikasi,
                 tgl_agenda  = get_tgl_agenda,
                 no_agenda   = get_no_agenda,
                 tgl_surat   = get_tanggal_surat,
                 no_surat    = get_no_surat,
                 surat_dari  = get_surat_dari,
+                derajat_surat = get_derajat_surat,
                 perihal     = get_perihal,
                 upload_file = files_upload
                 

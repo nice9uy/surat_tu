@@ -36,12 +36,14 @@
         <tr>
           <th class="text-center">No</th>
           <th class="text-center">Klasifikasi</th>
+          <th class="text-center">Jenis Surat</th>
           <th class="text-center">Tgl Agenda</th>
           <th class="text-center">No Agenda</th>
           <th class="text-center">Tgl Surat</th>
           <th class="text-center">No Surat</th>
           <th class="text-center">Surat Dari</th>
           <th class="text-center">Perihal</th>
+          <th class="text-center">Derajat</th>
           <th class="text-center">Files</th>
           <th class="text-center">Status Disposisi</th>
         </tr>
@@ -52,12 +54,14 @@
         
           <tr>
             <td class="text-center" >{{ forloop.counter }}</td>
+            <td >{{ data.jenis_surat }}</td>
             <td >{{ data.klasifikasi }}</td>
             <td>{{ data.tgl_agenda|date:'d M Y' }}</td>
             <td>{{ data.no_agenda }}</td>
             <td>{{ data.tgl_surat|date:'d M Y' }}</td>
             <td>{{ data.no_surat }}</td>
             <td>{{ data.surat_dari }}</td>
+            <td>{{ data.derajat_surat }}</td>
             <td>{{ data.perihal }}</td>
 
             <td class="text-center">
