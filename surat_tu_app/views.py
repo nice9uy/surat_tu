@@ -121,6 +121,7 @@ def tambah_surat(request):
             get_klasifikasi = request.POST.get('klasifikasi')
             get_tanggal_agenda = request.POST.get('tanggal_agenda')
             get_no_agenda = request.POST.get('no_agenda')
+
             get_tanggal_surat = request.POST.get('tanggal_surat')
 
             get_no_surat = request.POST.get('no_surat')
@@ -136,7 +137,8 @@ def tambah_surat(request):
                 klasifikasi   = get_klasifikasi,
                 tgl_agenda    = get_tanggal_agenda,
                 no_agenda     = get_no_agenda,
-                tgl_surat     = get_tanggal_surat,
+
+                tgl_surat     = get_tanggal_surat if get_tanggal_surat else None ,
 
                 no_surat      = get_no_surat,
                 surat_dari    = get_surat_dari,
@@ -186,7 +188,9 @@ def edit_olah_surat(request , id_edit_olah_surat ):
             get_klasifikasi = request.POST.get('klasifikasi')
             get_tgl_agenda  = request.POST.get('tanggal_agenda')          
             get_no_agenda = request.POST.get('no_agenda')
+
             get_tanggal_surat = request.POST.get('tanggal_surat')
+
             get_no_surat = request.POST.get('no_surat')
             get_surat_dari = request.POST.get('surat_dari')
             get_derajat_surat = request.POST.get('derajat_surat')
@@ -201,7 +205,9 @@ def edit_olah_surat(request , id_edit_olah_surat ):
                 klasifikasi = get_klasifikasi,
                 tgl_agenda  = get_tgl_agenda,
                 no_agenda   = get_no_agenda,
-                tgl_surat   = get_tanggal_surat,
+                
+                tgl_surat     = get_tanggal_surat if get_tanggal_surat else None ,
+
                 no_surat    = get_no_surat,
                 surat_dari  = get_surat_dari,
                 derajat_surat = get_derajat_surat,
@@ -273,6 +279,7 @@ def olah_disposisi_edit(request , id_edit_disposisi):
 
     if request.method == 'POST':
 
+        get_tgl_disposisi = request.POST.get('tgl_disposisi')
         get_disposisi = request.POST.get('disposisi')
         no_agenda = request.POST.get('no_agenda')
         catatan  =  request.POST.get('catatan')
@@ -283,6 +290,7 @@ def olah_disposisi_edit(request , id_edit_disposisi):
             id                      = edit_surat_convert_id,
             no_surat_id             = edit_surat_convert_nomor_surat_id,
             username                = str(username),
+            tgl_disposisi           = get_tgl_disposisi,
             disposisi               = get_disposisi,
             no_agenda               = no_agenda,
             catatan                 = catatan,
@@ -318,6 +326,7 @@ def upload_disposisi(request):
             no_surat_data = request.POST.get('no_surat')
             no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data )
    
+            get_tgl_disposisi = request.POST.get('tgl_disposisi')
             get_disposisi = request.POST.get('disposisi')
             no_agenda = request.POST.get('no_agenda')
             catatan  =  request.POST.get('catatan')
@@ -327,6 +336,7 @@ def upload_disposisi(request):
 
                 no_surat              = no_surat_instance,
                 username              = username,
+                tgl_disposisi         = get_tgl_disposisi,
                 disposisi             = get_disposisi,
                 no_agenda             = no_agenda,
                 catatan               = catatan,

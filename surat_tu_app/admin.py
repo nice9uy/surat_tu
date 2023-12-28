@@ -20,7 +20,7 @@ class ListDbJenisSurat(admin.ModelAdmin):
     list_display = ('id','jenis_surat','inisial_nama')
 
 class ListDisposisiDb(admin.ModelAdmin):
-    list_display = ( 'no_surat', 'no_surat_id', 'id' , 'username','disposisi','no_agenda', 'catatan','upload_file_disposisi',
+    list_display = ( 'no_surat', 'no_surat_id', 'id' , 'username','disposisi','tgl_disposisi', 'no_agenda', 'catatan','upload_file_disposisi',
                     )
 
 

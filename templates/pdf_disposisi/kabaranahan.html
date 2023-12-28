@@ -79,7 +79,7 @@
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>Tanggal Surat</td>
-      <td colspan="8">:{{ tgl_surat }} </td>
+      <td colspan="8">:{{ tgl_surat | default_if_none:"" }} </td>
       <td>Klasifikasi</td>
       <td>: {{ klasifikasi }} </td>
     </tr>

@@ -17,7 +17,7 @@
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">PILIH DISPOSISI</label>
                     <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi" required>
-                        <option value="">Disposisi</option>
+                        <option value=""></option>
                         <option value="KABARANAHAN">KABARANAHAN</option>
                         <option value="SEKRETARIAT">SEKRETARIAT</option>
                         <option value="BAGIAN UMUM">BAGIAN UMUM</option>
@@ -26,19 +26,27 @@
 
                 <div class="col-3">
                   <label for="inputAddress" class="form-label">NO SURAT</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Nomor Surat" name="no_surat" value="{{ data.no_surat}}" readonly required />
+                  <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_surat" value="{{ data.no_surat}}" readonly required />
                 </div> 
 
                 <div class="col-5">
                   <label for="inputAddress" class="form-label">NO AGENDA </label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda" value="{{ data.no_agenda}}" readonly required />
+                  <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_agenda" value="{{ data.no_agenda}}" readonly required />
                 </div>
             </div>
           
-           <div style="margin-left: 3rem;" class="text-center  col-11 mt-3">
-              <label for="inputAddress" class="form-label">CATATAN </label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Catatan" name="catatan" required />
-          </div>
+            <div style="margin-left: 3rem;" class=" d-flex  text-center mt-3 gap-4  " >
+                <div class="col-3" > 
+                  <label for="inputPassword4" class="form-label">TANGGAL DISPOSISI</label>
+                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tgl_disposisi" required />
+                 </div>
+
+                 <div class="col-8" >
+                  <label for="inputAddress" class="form-label">CATATAN </label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="" name="catatan" required />
+                </div>
+                
+            </div>
 
           <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
             <label for="formFile" class="form-label">UPLOAD DISPOSISI</label>
@@ -47,7 +55,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Edit SURAT</button>
+            <button type="submit" class="btn btn-primary">TAMBAH</button>
           </div>
         </form>
       </div>

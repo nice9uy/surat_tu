@@ -36,7 +36,7 @@
 
               <div class="col-5">
                 <label for="inputPassword4" class="form-label">TANGGAL AGENDA</label>
-                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda"  />
+                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_agenda" value="{{ data.tgl_agenda | date:"Y-m-d" }}"  />
               </div> 
 
                  
@@ -53,7 +53,7 @@
 
               <div class="col-md-3">
                 <label for="inputPassword4" class="form-label">TANGGAL SURAT</label>
-                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat"   />
+                <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tanggal_surat" value="{{ data.tgl_surat | date:"Y-m-d" }}" />
               </div>
 
 
@@ -73,7 +73,7 @@
 
               <div class="col-5">
                 <label for="inputAddress" class="form-label">DERAJAT SURAT</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="" name="surat_dari" value="{{ data.surat_dari }}" required />
+                <input type="text" class="form-control" id="inputAddress" placeholder="" name="surat_dari" value="{{ data.derajat_surat }}"  />
               </div>
 
               

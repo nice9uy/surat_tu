@@ -51,7 +51,7 @@
 <body>
 
   <div class="main_header">
-      SEKRETARIAT BADAN SARANA PERTAHANAN <br>
+      BADAN SARANA PERTAHANAN KEMHAN<br>
       SEKRETARIAT
   </div>
   <div class="text_disposisi">
@@ -79,7 +79,7 @@
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>Tanggal Surat</td>
-      <td colspan="8">:{{ tgl_surat }} </td>
+      <td colspan="8">:{{ tgl_surat | default_if_none:""  }} </td>
       <td>Klasifikasi</td>
       <td>: {{ klasifikasi }} </td>
     </tr>
@@ -110,28 +110,28 @@
           </div>
           <div style="display: flex; margin-top: -1.1rem;">
               <h5> 4. </h5>
-              <h5  style="margin-left: 0.5rem">  Kapus BMN</h5>
+              <h5  style="margin-left: 0.3rem">  Kapus BMN</h5>
           </div>
           <div style="display: flex; margin-top: -1.1rem;">
               <h5> 5. </h5>
               <h5  style="margin-left: 0.5rem;">Kabag </h5>
-              <h5 style="margin-left: 1rem;"> Proglap</h5>
+              <h5 style="margin-left: 0.7rem;"> Proglap</h5>
            </div>
            <div style="display: flex; margin-top: -1.1rem;">
               <h5> 6. </h5>
               <h5  style="margin-left: 0.5rem">Kabag </h5>
-              <h5 style="margin-left: 1rem"> Datin</h5>
+              <h5 style="margin-left: 0.3rem"> Datin</h5>
            </div>
            <div style="display: flex; margin-top: -1.1rem;">
                 <h5> 7. </h5>
                 <h5  style="margin-left: 0.5rem">Kabag </h5>
-                <h5 style="margin-left: 1rem"> Malur</h5>
+                <h5 style="margin-left: 0.3rem"> Malur</h5>
             </div>
 
             <div style="display: flex; margin-top: -1.1rem;">
               <h5> 8. </h5>
               <h5  style="margin-left: 0.5rem">Kabag </h5>
-              <h5 style="margin-left: 0.7rem">Um</h5>
+              <h5 style="margin-left: 0.2rem">Um</h5>
             </div>
             <div style="display: flex; margin-top: -1.1rem;">
               <h5> 9. </h5>
