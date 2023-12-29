@@ -15,7 +15,7 @@
 
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">PILIH DISPOSISI</label>
-                    <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi"  required>
+                    <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi"  value="{{ data.disposisi }}"   required>
                         <option value="">Pilih Disposisi</option>
                         <option value="KABARANAHAN">KABARANAHAN</option>
                         <option value="SEKRETARIAT">SEKRETARIAT</option>
@@ -26,7 +26,7 @@
 
                 <div class="col-3">
                   <label for="inputPassword4" class="form-label">TANGGAL DISPOSISI</label>
-                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tgl_disposisi" required />
+                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tgl_disposisi"  value="{{ data.tgl_disposisi | date:"Y-m-d" }}"  required />
                 </div>
 
                 <div class="col-5">

@@ -19,7 +19,7 @@ urlpatterns = [
     path('sekretariat/<int:getIDdisosisi_sekretariat>', views.sekretariat, name='sekretariat'),
     path('bagum/<int:getIDdisosisi_bagum>', views.bagum, name='bagum'),
 
-    path('duplikasi_surat/', views.duplikasi_surat, name='duplikasi_surat'),
+    # path('duplikasi_surat/', views.duplikasi_surat, name='duplikasi_surat'),
 
     # path('disposisi_ses/', views.disposisi_ses, name='disposisi_ses'),
     # path('disposisi_bagum/', views.disposisi_bagum, name='disposisi_bagum'),
@@ -27,7 +27,9 @@ urlpatterns = [
     path('upload_disposisi/', views.upload_disposisi, name='upload_disposisi'),
 
 
-    # path('tes/', views.tes, name='tes'),
+    path('filter_tanggal/', views.filter_tanggal, name='filter_tanggal'),
+    path('filter_tanggal_olah_surat/', views.filter_tanggal_olah_surat, name='filter_tanggal_olah_surat'),
+
 
     # path('filter_no_surat_disposisi/', views.filter_no_surat_disposisi, name='filter_no_surat_disposisi'),
 

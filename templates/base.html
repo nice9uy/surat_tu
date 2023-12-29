@@ -45,6 +45,7 @@
             {% block filter_disposisi %}{% endblock filter_disposisi %}
             {% block duplikat_surat %}{% endblock duplikat_surat %}
             {% block error_upload_surat %}{% endblock error_upload_surat %}
+            {% block error404 %}{% endblock error404 %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -54,7 +55,7 @@
             <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
 
-            
+{% comment %}             
             <script>
 
                 $(document).ready(function() {
@@ -73,7 +74,7 @@
                         });
                     });
 
-            </script>
+            </script> {% endcomment %}
 
             <script>
                 // Display the loader

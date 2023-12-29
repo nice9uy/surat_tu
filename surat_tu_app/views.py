@@ -150,7 +150,7 @@ def tambah_surat(request):
             
             tambah_data_surat.save()
 
-            return redirect('home')
+            return redirect('olah_surat')
         
         context = {
             'page_title' : 'Tambah Surat',
@@ -351,29 +351,54 @@ def upload_disposisi(request):
     return redirect('olah_surat')
  
 
-@login_required(login_url="/accounts/login/")
-def duplikasi_surat(request):
+def filter_tanggal(request):
+
+    data_x = DbSurat.objects.all()
+
     try:
-        duplicate_records = DbSurat.objects.values('no_agenda','no_surat','perihal').annotate(count=Count('id')).filter(count__gt=1)
-        for record in duplicate_records:
-            # Fetch all records with the duplicate combination of fields
-            duplicates = DbSurat.objects.filter( 
-
-                no_agenda    = record['no_agenda'], 
-                no_surat     = record['no_surat'], 
-                perihal       = record['perihal'],
-                
-            )
-
-        context = { 
-             'page_title' : 'Cari Duplikat',
-             'duplicates' : duplicates,
-            }   
-        return render(request,'pages/cari_duplikat.html', context)
-             
-    except:
-        pass
-
-    return render(request,'pages/cari_duplikat.html')
-
+        if request.method == 'POST':
+            get_tgl_agenda = request.POST.get('tgl_agenda')
+            datasemuasurat = DbSurat.objects.filter( tgl_agenda = get_tgl_agenda)
         
+        context = {
+            'page_title'   : 'Home',
+            'data_surat'   : datasemuasurat,
+        }
+        return render (request , 'pages/index.html' , context )
+    
+    except:
+
+        datasurat = data_x
+
+        context = {
+            'page_title'   : 'Home',
+            'data_surat'   : datasurat,
+        }
+
+        return render (request , 'pages/index.html' , context )
+    
+def filter_tanggal_olah_surat(request):
+
+    data_x = DbSurat.objects.all()
+
+    try:
+        if request.method == 'POST':
+            get_tgl_agenda = request.POST.get('tgl_agenda')
+            datasemuasurat = DbSurat.objects.filter( tgl_agenda = get_tgl_agenda)
+        
+        context = {
+            'page_title'   : 'Olah Surat',
+            'data_surat'   : datasemuasurat,
+        }
+        return render (request , 'pages/olah_surat.html' , context )
+    
+    except:
+
+        datasurat = data_x
+
+        context = {
+            'page_title'   : 'Olah Surat',
+            'data_surat'   : datasurat,
+        }
+
+        return render (request , 'pages/olah_surat.html' , context )
