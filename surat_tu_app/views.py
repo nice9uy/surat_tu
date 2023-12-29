@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from weasyprint import HTML
 from django.db.models import Count
+from django.contrib.admin.views.decorators import staff_member_required
 # from django.shortcuts import create_object
 
 @login_required(login_url="/accounts/login/")
@@ -160,7 +161,8 @@ def tambah_surat(request):
         return render (request , 'pages/tambah_surat.html' , context )
     except:
         return render (request , 'pages/error_upload_surat.html' )
-
+    
+@staff_member_required(login_url="/surat/")
 @login_required(login_url="/accounts/login/")
 def olah_surat(request) :
     datasemuasurat = DbSurat.objects.all()

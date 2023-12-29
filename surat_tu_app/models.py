@@ -60,3 +60,10 @@ class DbJenisSurat(models.Model):
 
     class Meta:
         db_table = "JenisSurat"
+
+class DbDerajatSurat(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    dejarat_surat = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "DbDerajatSurat"

@@ -10,27 +10,11 @@
 
       <ul class="nav nav-underline">
 
-
         <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
           <span class="mt-2 text-warning">Selamat Datang , {{ user|capfirst }}</span>
           
           <li class="nav-item">
             <a class="nav-link   {% if request.path == '/surat/' %} active {% endif %}" href="{% url 'home' %}">Home</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link  {% if request.path == '/surat/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Tambah Surat </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="">Export Ke Excel</a>
-          </li>
-        
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
           </li>
 
         </div>
