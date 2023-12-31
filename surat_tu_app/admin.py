@@ -10,7 +10,7 @@ from .models import DbDerajatSurat
 
 class ListDbSurat(admin.ModelAdmin):
     list_display = ('id', 'username','klasifikasi', 'tgl_agenda',
-                    'no_agenda','tgl_surat','no_surat','surat_dari','perihal',
+                    'no_agenda','tgl_surat','no_surat','surat_dari','perihal','derajat_surat',
                     'upload_file'
                     )
     

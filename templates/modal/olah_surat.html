@@ -9,7 +9,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form action="{% url 'edit_olah_surat' data.id %}" method="POST" class="was-validated">
+        <form action="{% url 'edit_olah_surat' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated">
           {% csrf_token %}
           <div class="modal-body">
             <div class="d-flex text-center gap-4">
@@ -17,7 +17,8 @@
               <div class="col-3">
                 <label for="inputEmail4" class="form-label">JENIS SURAT</label>
                 <select class="form-select" aria-label="Default select example" id="klasifikasi" name="jenis_surat" >
-                  <option value=""></option>
+                  <option value="{{ data.jenis_surat }}">{{ data.jenis_surat }}</option>
+                  <option value="">================</option>
                   {% for v in jenis_surat %}
                     <option value="{{ v }}">{{ v }}</option>
                   {% endfor %}
@@ -27,7 +28,8 @@
               <div class="col-3">
                 <label for="inputEmail4" class="form-label">KLASIFIKASI</label>
                 <select class="form-select" aria-label="Default select example" id="klasifikasi" name="klasifikasi" >
-                  <option value=""></option>
+                  <option value="{{ data.klasifikasi }}">{{ data.klasifikasi }}</option>
+                  <option value="">================</option>
                   {% for v in klasifikasi %}
                     <option value="{{ v }}">{{ v }}</option>
                   {% endfor %}
@@ -40,7 +42,6 @@
               </div> 
 
                  
-
             </div>
 
             <div class="d-flex mt-3 gap-4 text-center">
@@ -73,10 +74,9 @@
 
               <div class="col-5">
                 <label for="inputAddress" class="form-label">DERAJAT SURAT</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="" name="surat_dari" value="{{ data.derajat_surat }}"  />
+                <input type="text" class="form-control" id="inputAddress" placeholder="" name="derajat_surat" value="{{ data.derajat_surat }}"  />
               </div>
 
-              
             </div>
 
             <div class="mt-3 text-center">
@@ -86,6 +86,10 @@
                 <input type="text" class="form-control" id="inputAddress" placeholder="" name="perihal" value="{{ data.perihal }}" required />
               </div>
 
+              <div class="mb-3 mt-3">
+                <label for="formFile" class="form-label">UPLOAD FILES</label>
+                <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name"  value="{{ data.file_name.select }}" />
+              </div>
 
             </div>
 

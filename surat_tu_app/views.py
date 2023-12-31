@@ -182,44 +182,52 @@ def olah_surat(request) :
 def edit_olah_surat(request , id_edit_olah_surat ):
     username = request.user
     edit_olah_surat = get_object_or_404(DbSurat, pk = id_edit_olah_surat)
-
+    
     try:
-
         if request.method == 'POST':
-            get_jenis_surat = request.POST.get('jenis_surat')
-            get_klasifikasi = request.POST.get('klasifikasi')
-            get_tgl_agenda  = request.POST.get('tanggal_agenda')          
-            get_no_agenda = request.POST.get('no_agenda')
+            get_jenis_surat           = request.POST.get('jenis_surat')
+            get_klasifikasi           = request.POST.get('klasifikasi')
+            get_tgl_agenda            = request.POST.get('tanggal_agenda')          
+            get_no_agenda             = request.POST.get('no_agenda')
 
-            get_tanggal_surat = request.POST.get('tanggal_surat')
+            get_tanggal_surat         = request.POST.get('tanggal_surat')
 
-            get_no_surat = request.POST.get('no_surat')
-            get_surat_dari = request.POST.get('surat_dari')
-            get_derajat_surat = request.POST.get('derajat_surat')
-            get_perihal = request.POST.get('perihal')
-            files_upload = edit_olah_surat.upload_file.name
+            get_no_surat              = request.POST.get('no_surat')
+            get_surat_dari            = request.POST.get('surat_dari')
+            get_derajat_surat         = request.POST.get('derajat_surat')
+            get_perihal               = request.POST.get('perihal')
+            files_upload_data         = request.FILES.get('file_name')
+
+            data_surat =  edit_olah_surat.upload_file.name
+
+            if  files_upload_data == None:
+                files_upload  = data_surat
+
+            else:
+                files_upload = files_upload_data
+                edit_olah_surat.upload_file.delete()
 
             edit_olah_surat = DbSurat(
 
-                id          = id_edit_olah_surat,
-                username    = str(username),
-                jenis_surat = get_jenis_surat,
-                klasifikasi = get_klasifikasi,
-                tgl_agenda  = get_tgl_agenda,
-                no_agenda   = get_no_agenda,
+                id             = id_edit_olah_surat,
+                username       = str(username),
+                jenis_surat    = get_jenis_surat,
+                klasifikasi    = get_klasifikasi,
+                tgl_agenda     = get_tgl_agenda,
+                no_agenda      = get_no_agenda,
                 
-                tgl_surat     = get_tanggal_surat if get_tanggal_surat else None ,
+                tgl_surat      = get_tanggal_surat if get_tanggal_surat else None ,
 
-                no_surat    = get_no_surat,
-                surat_dari  = get_surat_dari,
-                derajat_surat = get_derajat_surat,
-                perihal     = get_perihal,
-                upload_file = files_upload
+                no_surat       = get_no_surat,
+                surat_dari     = get_surat_dari,
+                derajat_surat  = get_derajat_surat,
+                perihal        = get_perihal,
+                upload_file    = files_upload
                 
                 )
-
+            
             edit_olah_surat.save()
-            return redirect('home')
+            return redirect('olah_surat')
         
         return render(request,'pages/olah_surat.html')
     except:
