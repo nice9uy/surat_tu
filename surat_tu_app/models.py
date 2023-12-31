@@ -38,7 +38,7 @@ class DisposisiDb(models.Model):
     no_surat =  models.ForeignKey(DbSurat, on_delete = models.CASCADE )
     no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length = 200)
-    upload_file_disposisi = models.FileField(upload_to=save_file_disposisi, null=False, blank=False)
+    upload_file_disposisi = models.FileField(upload_to=save_file_disposisi, null = True, blank=True)
 
 
     # def __str__(self):

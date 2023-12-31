@@ -12,11 +12,13 @@
         <table id="tabel_disposisi" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
             <tr>
-            <th class="text-center">No</th>
-            <th class="text-center">Disposisi</th>
-            <th class="text-center">No Agenda</th>
-            <th class="text-center">Catatan</th>
-            <th class="text-center">Files</th>
+              <th class="text-center">No</th>
+              <th class="text-center">Dibuat</th>
+              <th class="text-center">Kembali</th>
+              <th class="text-center">Disposisi</th>
+              <th class="text-center">No Agenda</th>
+              <th class="text-center">Catatan</th>
+              <th class="text-center">Files</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +26,12 @@
             {% if disposisi %}
                     {% for data in disposisi %}
                     <tr>
-                        <td class="text-center">{{ forloop.counter }}</td>
-                        <td>{{ data.disposisi }}</td>
-                        <td>{{ data.no_agenda }}</td>
-                        <td>{{ data.catatan }}</td>
-
+                      <td class="text-center">{{ forloop.counter }}</td>
+                      <td>{{ data.tgl_disposisi }}</td>
+                      <td>{{ data.tgl_disposisi_kembali | default_if_none:""}}</td>
+                      <td>{{ data.disposisi }}</td>
+                      <td>{{ data.no_agenda }}</td>
+                      <td>{{ data.catatan }}</td>
                         <td class="text-center">
                         <div style="margin-left: -15px;">
                             <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file_disposisi }}"></a>
