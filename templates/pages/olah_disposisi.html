@@ -13,7 +13,8 @@
         <thead>
             <tr>
             <th class="text-center">No</th>
-            <th class="text-center">Tanggal Disposisi</th>
+            <th class="text-center">Dibuat</th>
+            <th class="text-center">Kembali</th>
             <th class="text-center">Disposisi</th>
             <th class="text-center">No Agenda</th>
             <th class="text-center">Catatan</th>
@@ -28,6 +29,7 @@
                     <tr>
                         <td class="text-center">{{ forloop.counter }}</td>
                         <td>{{ data.tgl_disposisi }}</td>
+                        <td>{{ data.tgl_disposisi_kembali | default_if_none:""}}</td>
                         <td>{{ data.disposisi }}</td>
                         <td>{{ data.no_agenda }}</td>
                         <td>{{ data.catatan }}</td>

@@ -34,6 +34,7 @@ class DisposisiDb(models.Model):
     username = models.CharField(max_length=30)
     disposisi =  models.CharField(max_length = 30)
     tgl_disposisi =  models.DateField()
+    tgl_disposisi_kembali =  models.DateField(null = True, blank=True)
     no_surat =  models.ForeignKey(DbSurat, on_delete = models.CASCADE )
     no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length = 200)

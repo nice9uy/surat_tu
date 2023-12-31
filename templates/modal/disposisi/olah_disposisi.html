@@ -15,8 +15,9 @@
 
                 <div class="col-3">
                     <label for="inputAddress" class="form-label">PILIH DISPOSISI</label>
-                    <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi"  value="{{ data.disposisi }}"   required>
-                        <option value="">Pilih Disposisi</option>
+                    <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi"    required>
+                        <option value="{{ data.disposisi }} ">{{ data.disposisi }}</option>
+                        <option value="">====================</option>
                         <option value="KABARANAHAN">KABARANAHAN</option>
                         <option value="SEKRETARIAT">SEKRETARIAT</option>
                         <option value="BAGIAN UMUM">BAGIAN UMUM</option>
@@ -24,22 +25,41 @@
                 </div>
 
 
-                <div class="col-3">
-                  <label for="inputPassword4" class="form-label">TANGGAL DISPOSISI</label>
+                <div class="col-4">
+                  <label for="inputPassword4" class="form-label">TANGGAL DISPOSISI DIBUAT</label>
                   <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tgl_disposisi"  value="{{ data.tgl_disposisi | date:"Y-m-d" }}"  required />
                 </div>
+
+                <div class="col-4">
+                  <label for="inputPassword4" class="form-label">TANGGAL DISPOSISI KEMBALI</label>
+                  <input type="date" class="form-select" placeholder="First name" aria-label="First name" name="tgl_disposisi_kembali"  value="{{ data.tgl_disposisi_kembali | date:"Y-m-d" }}"  required />
+                </div>
+               
+
+            </div>
+
+            <div style="margin-left: 3rem;" class="d-flex gap-5 text-center mt-3">
+
 
                 <div class="col-5">
                   <label for="inputAddress" class="form-label">NO AGENDA </label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="Input Perihal" name="no_agenda" value="{{ data.no_agenda}}" readonly required />
                 </div>
 
+                <div  class="text-center  col-6 ">
+                  <label for="inputAddress" class="form-label">CATATAN </label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="Input Catatan" name="catatan" value="{{ data.catatan}}" required />
+                </div>
+
             </div>
+
+            <div style="margin-left: 3rem;" class="mb-3 mt-3 text-center col-11">
+              <label for="formFile" class="form-label">UPLOAD DISPOSISI</label>
+              <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name"  />
+            </div>
+  
           
-           <div style="margin-left: 3rem;" class="text-center  col-11 mt-3">
-              <label for="inputAddress" class="form-label">CATATAN </label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="Input Catatan" name="catatan" value="{{ data.catatan}}" required />
-          </div>
+          
 
           </div>
           <div class="modal-footer">

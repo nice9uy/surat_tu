@@ -60,8 +60,17 @@
         </div>
 
         <div class="col-3">
-          <label for="xx" class="form-label">DERAJAT SURAT</label>
-          <input type="text" class="form-control" id="xx" placeholder="" name="derajat_surat"  />
+          <label for="inputEmail4" class="form-label">DERAJAT SURAT</label>
+          <div class="input-group">
+            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  name="derajat_surat">
+      
+              <option value=""></option>
+              {% for v in derajat_surat %}
+              <option value="{{ v }}">{{ v }}</option>
+            {% endfor %}
+            </select>
+          </div>
+
         </div>
 
         <div class="col-9">

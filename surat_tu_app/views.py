@@ -1,7 +1,7 @@
 import uuid
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat
+from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat,DbDerajatSurat
 from datetime import date
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -114,6 +114,7 @@ def tambah_surat(request):
     username       = request.user
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+    derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
 
     try:
         if request.method == 'POST':
@@ -156,7 +157,8 @@ def tambah_surat(request):
         context = {
             'page_title' : 'Tambah Surat',
             'klasifikasi': klasifikasi,
-            'jenis_surat' : jenis_surat
+            'jenis_surat' : jenis_surat,
+            'derajat_surat' : derajat_surat
         }
         return render (request , 'pages/tambah_surat.html' , context )
     except:
@@ -289,11 +291,22 @@ def olah_disposisi_edit(request , id_edit_disposisi):
 
     if request.method == 'POST':
 
-        get_tgl_disposisi = request.POST.get('tgl_disposisi')
-        get_disposisi = request.POST.get('disposisi')
-        no_agenda = request.POST.get('no_agenda')
-        catatan  =  request.POST.get('catatan')
-        files_upload_disposisi = edit_olah_surat.upload_file_disposisi
+        get_tgl_disposisi              = request.POST.get('tgl_disposisi')
+        get_tgl_disposisi_kembali      = request.POST.get('tgl_disposisi_kembali')
+        get_disposisi                  = request.POST.get('disposisi')
+        no_agenda                      = request.POST.get('no_agenda')
+        catatan                        = request.POST.get('catatan')
+        files_upload_disposisi         = request.FILES.get('file_name')
+
+
+        data_surat =  edit_olah_surat.upload_file_disposisi.name
+
+        if  files_upload_disposisi == None:
+            files_upload_disposisi_surat = data_surat
+
+        else:
+            files_upload_disposisi_surat = files_upload_disposisi
+            edit_olah_surat.upload_file_disposisi.delete()
 
         edit_olah_disposisi = DisposisiDb(
 
@@ -301,10 +314,11 @@ def olah_disposisi_edit(request , id_edit_disposisi):
             no_surat_id             = edit_surat_convert_nomor_surat_id,
             username                = str(username),
             tgl_disposisi           = get_tgl_disposisi,
+            tgl_disposisi_kembali   =  get_tgl_disposisi_kembali,
             disposisi               = get_disposisi,
             no_agenda               = no_agenda,
             catatan                 = catatan,
-            upload_file_disposisi   = files_upload_disposisi,
+            upload_file_disposisi   = files_upload_disposisi_surat,
             
             )
 
@@ -327,19 +341,19 @@ def olah_disposisi_delete(request , id_delete_disposisi) :
 
 @login_required(login_url="/accounts/login/")
 def upload_disposisi(request):
-    username = request.user
+    hari_ini       = date.today()
+    username       = request.user
 
     try:
-
         if request.method == 'POST':
 
             no_surat_data = request.POST.get('no_surat')
             no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data )
-   
-            get_tgl_disposisi = request.POST.get('tgl_disposisi')
-            get_disposisi = request.POST.get('disposisi')
-            no_agenda = request.POST.get('no_agenda')
-            catatan  =  request.POST.get('catatan')
+
+            get_tgl_disposisi      = hari_ini
+            get_disposisi          = request.POST.get('disposisi')
+            no_agenda              = request.POST.get('no_agenda')
+            catatan                = request.POST.get('catatan')
             files_upload_disposisi = request.FILES.get('file_name')
 
             disposisi_instance = DisposisiDb(   
