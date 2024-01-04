@@ -426,3 +426,7 @@ def filter_tanggal_olah_surat(request):
         }
 
         return render (request , 'pages/olah_surat.html' , context )
+    
+def generate_no_agenda(request):
+    
+    pass

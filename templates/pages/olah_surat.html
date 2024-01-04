@@ -8,18 +8,30 @@
 <div class="container-fluid mt-3 text-white" style="">
     <h5 class="text-center">OLAH DATA SURAT</h5>
    
-    <form method="POST" action="{% url 'filter_tanggal_olah_surat' %}">
-      {% csrf_token %}
-
-          <div style="margin-top: -2.5rem;">
-            <div class="d-flex col-2 mb-2 ">
+    
+      <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
+        <form method="POST" action="{% url 'filter_tanggal_olah_surat' %}">
+          <div class="d-flex mb-2 ">   
+              {% csrf_token %}
               <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tgl_agenda" id="tgl_agenda" />
               <button class="btn btn-primary btn-sm " type="submit">Cari</button>
             </div>
+        </form>
+        
+        <div class="gap-3 ">
+          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#tambah_surat">Tambah Surat</button>
+          <button type="button" class="btn btn-secondary btn-sm">Small button</button>
+        </div>
+      </div>
+
+
+          {% comment %} <div >
+            <button>bgfdfgdfg</button>
+            <button>bfdjkhsklhsfsd</button>
           </div>
 
-    </form>
 
+ {% endcomment %}
 
     <table id="tabel_index" class="table table-striped table-bordered text-white" style="width:100%;  ">
       <thead>
@@ -36,9 +48,9 @@
           <th class="text-center">Perihal</th>
           <th class="text-center">Files</th>
           <th class="text-center">Print</th>
-          <th class="text-center">Upload Disposisi</th>
+          <th class="text-center">Disposisi</th>
           <th class="text-center">Aksi</th>
-          <th class="text-center">Olah Disposisi</th>
+          {% comment %} <th class="text-center">Olah Disposisi</th> {% endcomment %}
         </tr>
       </thead>
       <tbody>
@@ -69,6 +81,11 @@
             
             <td class="text-center gap-2"> 
               <button type="button" class="btn btn-danger btn-sm fa fa-paper-plane"  data-bs-toggle="modal" data-placement="bottom" title="Upload Disposisi" data-bs-target="#upload_disposisi{{ data.id }}"></button>
+            
+              <form method="POST" action="{% url 'olah_disposisi' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-info btn-sm fas fa-info"  data-bs-toggle="modal"  title="Status Disposisi"  name="filter_no_surat"  value ="{{ data.no_surat}}" ></button>  
+              </form>
             </td> 
 
             <td class="text-center gap-2"> 
@@ -76,13 +93,13 @@
                 <button type="button" class="btn btn-danger btn-sm fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="HAPUS" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
             </td> 
 
-            <form method="POST" action="{% url 'olah_disposisi' %}">
+            {% comment %} <form method="POST" action="{% url 'olah_disposisi' %}">
               {% csrf_token %}
 
                 <td class="text-center gap-2"> 
                   <button type="submit" class="btn btn-info btn-sm fas fa-info"  data-bs-toggle="modal"  title="Status Disposisi"  name="filter_no_surat"  value ="{{ data.no_surat}}" ></button>  
                 </td> 
-            </form>
+            </form> {% endcomment %}
 
           </tr>
         {% endfor %}
@@ -93,6 +110,8 @@
   {% include 'modal/disposisi/upload_disposisi.html' %}
 
   {% include 'modal/olah_surat.html' %}
+
+  {% include 'modal/tambah_surat.html' %}
 
 
 

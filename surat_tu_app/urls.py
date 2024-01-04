@@ -31,7 +31,7 @@ urlpatterns = [
     path('filter_tanggal_olah_surat/', views.filter_tanggal_olah_surat, name='filter_tanggal_olah_surat'),
 
 
-    # path('filter_no_surat_disposisi/', views.filter_no_surat_disposisi, name='filter_no_surat_disposisi'),
+    path('generate_no_agenda/', views.generate_no_agenda, name='generate_no_agenda'),
 
 ]
 
