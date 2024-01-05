@@ -7,19 +7,24 @@
         </div>
         <div class="modal-body">
 
-            <select class="form-select" aria-label="Default select example">
+          <form method="POST" action="{% url 'generate_no_agenda' %}">
+            {% csrf_token %}
 
-                <option value=""></option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="form-select" aria-label="Default select example" name="jenis_surat_input" >
+                  <option value=""></option>
+                  {% for v in jenis_surat %}
+                    <option value="{{ v }}">{{ v }}</option>
+                  {% endfor %}
 
             </select>
+   
+        </div>
 
-          
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
-        </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">OK</button>
+            </div>
+
+      </form>
       </div>
     </div>
 </div>

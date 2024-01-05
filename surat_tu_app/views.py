@@ -428,5 +428,56 @@ def filter_tanggal_olah_surat(request):
         return render (request , 'pages/olah_surat.html' , context )
     
 def generate_no_agenda(request):
+
+    bulan_ini  = date.today().month
+    tahun_ini  = date.today().year
+
+
+
+    if request.method == 'POST':
+        get_jenis_surat = request.POST.get('jenis_surat_input')
+        jenis_surat_list = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
+        jenis_surat = jenis_surat_list[0]
+
+        
+        if bulan_ini == 1:
+            bulan = 'I'
+        elif bulan_ini == 2:
+            bulan = 'II'
+        elif bulan_ini == 3:
+            bulan = 'III'
+        elif bulan_ini == 4:
+            bulan = 'IV'
+        elif bulan_ini == 5:
+            bulan = 'V'
+        elif bulan_ini == 6:
+            bulan = 'VI'
+        elif bulan_ini == 7:
+            bulan = 'VII'
+        elif bulan_ini == 8:
+            bulan = 'VIII'
+        elif bulan_ini == 9:
+            bulan = 'IX'
+        elif bulan_ini == 10:
+            bulan = 'X'
+        elif bulan_ini == 11:
+            bulan = 'XI'
+        else:
+            bulan = 'XII'
+
+        no = 1
+
+        format_no_agenda = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+        
+        get_data  =  DbSurat.objects.filter(no_agenda__icontains = format_no_agenda ).latest()
+
+        print(get_data)
+
+
+
+
+        return redirect('olah_surat')
+
+
+    return render (request , 'pages/olah_surat.html'  )
     
-    pass
