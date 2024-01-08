@@ -68,3 +68,6 @@ class DbDerajatSurat(models.Model):
 
     class Meta:
         db_table = "DbDerajatSurat"
+
+class TempNoAgenda(models.Model):
+    no_agenda = models.CharField(max_length=30)

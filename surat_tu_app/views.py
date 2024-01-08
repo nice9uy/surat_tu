@@ -432,51 +432,100 @@ def generate_no_agenda(request):
     bulan_ini  = date.today().month
     tahun_ini  = date.today().year
 
-
+    if bulan_ini == 1:
+            bulan = 'I'
+    elif bulan_ini == 2:
+            bulan = 'II'
+    elif bulan_ini == 3:
+            bulan = 'III'
+    elif bulan_ini == 4:
+            bulan = 'IV'
+    elif bulan_ini == 5:
+            bulan = 'V'
+    elif bulan_ini == 6:
+            bulan = 'VI'
+    elif bulan_ini == 7:
+            bulan = 'VII'
+    elif bulan_ini == 8:
+            bulan = 'VIII'
+    elif bulan_ini == 9:
+            bulan = 'IX'
+    elif bulan_ini == 10:
+            bulan = 'X'
+    elif bulan_ini == 11:
+            bulan = 'XI'
+    else:
+            bulan = 'XII'
 
     if request.method == 'POST':
-        get_jenis_surat = request.POST.get('jenis_surat_input')
-        jenis_surat_list = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
-        jenis_surat = jenis_surat_list[0]
-
-        
-        if bulan_ini == 1:
-            bulan = 'I'
-        elif bulan_ini == 2:
-            bulan = 'II'
-        elif bulan_ini == 3:
-            bulan = 'III'
-        elif bulan_ini == 4:
-            bulan = 'IV'
-        elif bulan_ini == 5:
-            bulan = 'V'
-        elif bulan_ini == 6:
-            bulan = 'VI'
-        elif bulan_ini == 7:
-            bulan = 'VII'
-        elif bulan_ini == 8:
-            bulan = 'VIII'
-        elif bulan_ini == 9:
-            bulan = 'IX'
-        elif bulan_ini == 10:
-            bulan = 'X'
-        elif bulan_ini == 11:
-            bulan = 'XI'
-        else:
-            bulan = 'XII'
 
         no = 1
 
-        format_no_agenda = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+        get_jenis_surat                = request.POST.get('jenis_surat_input')
+        ##############################################################
+        jenis_surat_list               = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
+        jenis_surat                    = jenis_surat_list[0]
+        #############################################################
+        format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+        #############################################################
+        get_data                       = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
+        get_inisial_surat              = get_data.no_agenda
+        ##############################################################
+        cek_surat_berdasarkan_tahun    = DbSurat.objects.filter(no_agenda__contains = format_no_agenda).count()
+        # x = get_data1
         
-        get_data  =  DbSurat.objects.filter(no_agenda__icontains = format_no_agenda ).latest()
 
-        print(get_data)
+        if cek_surat_berdasarkan_tahun == 0:
+             
+             print("kosong")
+        else:
+             print("gdgdgdgdgd")
+
+
+        print(get_inisial_surat)
+        print(format_no_agenda)
+
+
+        
+
+        # no = 1    
+
+        # s = f"{jenis_surat}/{tahun_ini}"
+
+        # # print(s)
+
+        # # format_no_agenda = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+        
+
+        # get_no_agenda = get_data.no_agenda
+        # x_tgl_agenda   = get_data.tgl_agenda
+        # get_tahun   = str(x_tgl_agenda).split('-')[0]
+        # # print(zz)
+
+        # print(get_tahun)
+        # print(get_data)
+        # print(get_no_agenda)
+
+
+        # tanggal_agenda = DbSurat.objects.filter(tanggal_agenda =  x_tgl_agenda )
+        # get_data_y  =  DbSurat.objects.filter(no_agenda__contains = 'B' ).last()
+
+
+
+        # c = get_data.no_agenda
+        # d = get_data_y.no_agenda
+
+        # x  = get_data.
+        # x = get_data.last()
+        
+
+        # print(c)
+        # print(x_tgl_agenda)
 
 
 
 
-        return redirect('olah_surat')
+        return redirect('tambah_surat')
 
 
     return render (request , 'pages/olah_surat.html'  )
