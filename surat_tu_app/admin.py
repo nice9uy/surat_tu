@@ -6,6 +6,7 @@ from .models import DbKlasifikasi
 from .models import DisposisiDb
 from .models import DbJenisSurat
 from .models import DbDerajatSurat
+from .models import TempNoAgenda
 
 
 class ListDbSurat(admin.ModelAdmin):
@@ -26,6 +27,9 @@ class ListDbDerajatSurat(admin.ModelAdmin):
 class ListDisposisiDb(admin.ModelAdmin):
     list_display = ( 'no_surat', 'no_surat_id', 'id' , 'username','disposisi','tgl_disposisi', 'no_agenda', 'catatan','upload_file_disposisi',
                     )
+    
+class ListTempNoAgenda(admin.ModelAdmin):
+    list_display = ['no_agenda']
 
 
 admin.site.register(DbSurat,ListDbSurat)
@@ -33,4 +37,5 @@ admin.site.register(DbKlasifikasi, ListKlasifikasi)
 admin.site.register(DisposisiDb , ListDisposisiDb)
 admin.site.register(DbJenisSurat , ListDbJenisSurat)
 admin.site.register(DbDerajatSurat , ListDbDerajatSurat)
+admin.site.register(TempNoAgenda , ListTempNoAgenda)
 

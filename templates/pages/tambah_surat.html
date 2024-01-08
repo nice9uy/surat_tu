@@ -20,7 +20,6 @@
                 <option value="{{ v }}">{{ v }}</option>
               {% endfor %}
               </select>
-              <button class="btn btn-outline-secondary" type="button">OK</button>
             </div>
         </div>
 
@@ -41,7 +40,7 @@
         </div>  
         <div class="col-3">
           <label for="inputAddress" class="form-label">NO AGENDA</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_agenda" required />
+          <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_agenda" value="{{  no_agenda  }}" required />
         </div>
 
         <div class="col-md-3">

@@ -1,7 +1,7 @@
 import uuid
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
-from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat,DbDerajatSurat
+from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat,DbDerajatSurat,TempNoAgenda
 from datetime import date
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -96,6 +96,7 @@ def home(request):
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+    TempNoAgenda.objects.all().delete()
 
 
     context = {
@@ -115,6 +116,12 @@ def tambah_surat(request):
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
     derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
+
+    try:
+        no_agenda_data = list(TempNoAgenda.objects.all().values_list('no_agenda', flat=True ))
+        no_agenda      = no_agenda_data[0]
+    except:
+        print("fsAfASfafaf")
 
     try:
         if request.method == 'POST':
@@ -151,14 +158,16 @@ def tambah_surat(request):
                 )
             
             tambah_data_surat.save()
+            TempNoAgenda.objects.all().delete()
 
             return redirect('olah_surat')
         
         context = {
-            'page_title' : 'Tambah Surat',
-            'klasifikasi': klasifikasi,
-            'jenis_surat' : jenis_surat,
-            'derajat_surat' : derajat_surat
+            'page_title'     : 'Tambah Surat',
+            'klasifikasi'    : klasifikasi,
+            'jenis_surat'    : jenis_surat,
+            'derajat_surat'  : derajat_surat,
+            'no_agenda'      : no_agenda
         }
         return render (request , 'pages/tambah_surat.html' , context )
     except:
@@ -170,6 +179,7 @@ def olah_surat(request) :
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+    TempNoAgenda.objects.all().delete()
     
     context = {
         'page_title' : 'Olah Surat',
@@ -241,7 +251,7 @@ def delete_olah_surat(request , id_delete_olah_surat):
     if request.method == 'POST':
         delete_olah_surat.upload_file.delete()
         delete_olah_surat.delete()
-        return redirect('home')
+        return redirect('olah_surat')
     
     return render(request,'pages/olah_surat.html')
 
@@ -468,63 +478,45 @@ def generate_no_agenda(request):
         #############################################################
         format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
         #############################################################
-        get_data                       = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
-        get_inisial_surat              = get_data.no_agenda
+        try:
+            get_data                   = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
+            get_inisial_surat          = get_data.no_agenda
+        except:
+             pass
         ##############################################################
         cek_surat_berdasarkan_tahun    = DbSurat.objects.filter(no_agenda__contains = format_no_agenda).count()
-        # x = get_data1
-        
+        # x    = DbSurat.objects.filter(no_agenda__contains = format_no_agenda)
+
+        # print(x)
+
 
         if cek_surat_berdasarkan_tahun == 0:
+
+            temp_no_agenda = TempNoAgenda(   
+
+                no_agenda  = format_no_agenda,
+       
+            )
+
+            temp_no_agenda.save()
              
-             print("kosong")
         else:
-             print("gdgdgdgdgd")
+            get_nomor_urut                      = get_inisial_surat.split('/')
+            olah_no_urut                        = int(get_nomor_urut[1]) 
 
+            print(olah_no_urut)
+            no_urut                             = olah_no_urut + 1
 
-        print(get_inisial_surat)
-        print(format_no_agenda)
+            format_no_agenda_save               = f"{jenis_surat}/{no_urut}/{bulan}/{tahun_ini}"
+                
+            save_to_no_agenda = TempNoAgenda(   
+                
+                no_agenda    =  format_no_agenda_save,
+                
+            )
 
-
-        
-
-        # no = 1    
-
-        # s = f"{jenis_surat}/{tahun_ini}"
-
-        # # print(s)
-
-        # # format_no_agenda = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
-        
-
-        # get_no_agenda = get_data.no_agenda
-        # x_tgl_agenda   = get_data.tgl_agenda
-        # get_tahun   = str(x_tgl_agenda).split('-')[0]
-        # # print(zz)
-
-        # print(get_tahun)
-        # print(get_data)
-        # print(get_no_agenda)
-
-
-        # tanggal_agenda = DbSurat.objects.filter(tanggal_agenda =  x_tgl_agenda )
-        # get_data_y  =  DbSurat.objects.filter(no_agenda__contains = 'B' ).last()
-
-
-
-        # c = get_data.no_agenda
-        # d = get_data_y.no_agenda
-
-        # x  = get_data.
-        # x = get_data.last()
-        
-
-        # print(c)
-        # print(x_tgl_agenda)
-
-
-
-
+            save_to_no_agenda.save()
+      
         return redirect('tambah_surat')
 
 

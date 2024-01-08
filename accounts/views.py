@@ -4,8 +4,11 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,login,logout
 
+from surat_tu_app.models import TempNoAgenda
+
 # Create your views here.
 def login_view(request):
+    TempNoAgenda.objects.all().delete()
     context = {
         'page_title' : 'login'
     }
@@ -26,5 +29,6 @@ def login_view(request):
     return render(request,'auth/login.html', context)
 
 def logout_view(request):
-   logout(request)
-   return redirect('login')
+    logout(request)
+    TempNoAgenda.objects.all().delete()
+    return redirect('login')

@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 
 def save_file_disposisi(instance, filename):
     return f"{instance.username}/Disposisi/{filename}"
@@ -22,7 +23,7 @@ class DbSurat(models.Model):
     surat_dari = models.CharField(max_length=110)
     derajat_surat = models.CharField(max_length=30 , null = True, blank=True)
     perihal = models.CharField(max_length=200)
-    upload_file = models.FileField(upload_to= save_file_surat, null=False, blank=False)
+    upload_file = models.FileField(upload_to= save_file_surat, null=False, blank=False , validators=[FileExtensionValidator(allowed_extensions=["pdf"])] )
 
     def __str__(self):
         return self.no_surat
@@ -38,7 +39,7 @@ class DisposisiDb(models.Model):
     no_surat =  models.ForeignKey(DbSurat, on_delete = models.CASCADE )
     no_agenda = models.CharField(max_length = 30, null=True)
     catatan = models.CharField(max_length = 200)
-    upload_file_disposisi = models.FileField(upload_to=save_file_disposisi, null = True, blank=True)
+    upload_file_disposisi = models.FileField(upload_to=save_file_disposisi, null = True, blank=True , validators=[FileExtensionValidator(allowed_extensions=["pdf"])] )
 
 
     # def __str__(self):
@@ -71,3 +72,6 @@ class DbDerajatSurat(models.Model):
 
 class TempNoAgenda(models.Model):
     no_agenda = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "TempNoAgenda"
