@@ -441,9 +441,7 @@ def generate_no_agenda(request):
 
     no = 1
     bulan_ini  = date.today().month
-    # tahun_ini  = date.today().year
-    tahun_ini  = 2026
-
+    tahun_ini  = date.today().year
 
     if bulan_ini == 1:
             bulan = 'I'
@@ -492,50 +490,26 @@ def generate_no_agenda(request):
             get_datax                      = DbSurat.objects.filter(no_agenda__contains = tahun_ini).count()
             get_datax_inisial_agenda       = DbSurat.objects.filter(no_agenda__contains = jenis_surat).count()
             ############################################################################################
-
-            print(get_thn)
-
             if get_datax_inisial_agenda == 0 or get_datax == 0:
-
-                print("aaaaaaaaa")
-
                 save_to_no_agenda = TempNoAgenda(   
-                        
                     no_agenda    =  format_no_agenda,
-                )
-                    
+                )   
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
-            
-            elif get_thn != tahun_ini :
-
-                print("bbbbbbbbbbbb")
-                
+            elif get_thn != tahun_ini :                
                 format_no_agenda_final               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
-
                 save_to_no_agenda = TempNoAgenda(   
-                        
                     no_agenda                        =  format_no_agenda_final,
                 )
-                    
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
-            
-            else:
-
-                print("cccccccccccc")
-            
+            else:            
                 save_to_no_agenda = TempNoAgenda(   
-                        
                     no_agenda                        =  format_no_agenda_save,
                 )
-                    
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
-            
-
         except:
-            print("dddddddddddd")
             save_to_no_agenda    = TempNoAgenda(   
                     no_agenda    =  format_no_agenda,
                 )
