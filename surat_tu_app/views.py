@@ -471,54 +471,46 @@ def generate_no_agenda(request):
 
         no = 1
 
+        thn = 2026
+
         get_jenis_surat                = request.POST.get('jenis_surat_input')
         ##############################################################
         jenis_surat_list               = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
         jenis_surat                    = jenis_surat_list[0]
         #############################################################
-        format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+        format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{thn}"
         #############################################################
+        get_data                   = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
+
+        tahun                        = str(get_data.tgl_agenda).split("-")
+        get_tahun                    = tahun[0]
+
+
+        
+
         try:
-            get_data                   = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
+        # if get_tahun == tahun_ini:
+            
             get_inisial_surat          = get_data.no_agenda
-        except:
-             pass
-        ##############################################################
-        cek_surat_berdasarkan_tahun    = DbSurat.objects.filter(no_agenda__contains = format_no_agenda).count()
-        # x    = DbSurat.objects.filter(no_agenda__contains = format_no_agenda)
 
-        # print(x)
-
-
-        if cek_surat_berdasarkan_tahun == 0:
-
-            temp_no_agenda = TempNoAgenda(   
-
-                no_agenda  = format_no_agenda,
-       
-            )
-
-            temp_no_agenda.save()
-             
-        else:
-            get_nomor_urut                      = get_inisial_surat.split('/')
-            olah_no_urut                        = int(get_nomor_urut[1]) 
-
-            print(olah_no_urut)
-            no_urut                             = olah_no_urut + 1
-
-            format_no_agenda_save               = f"{jenis_surat}/{no_urut}/{bulan}/{tahun_ini}"
-                
+            get_nomor_urut             = get_inisial_surat.split('/')
+            olah_no_urut               = int(get_nomor_urut[1]) 
+            no_urut                    = olah_no_urut + 1
+            format_no_agenda_save      = f"{jenis_surat}/{no_urut}/{bulan}/{thn}"
+        
             save_to_no_agenda = TempNoAgenda(   
-                
-                no_agenda    =  format_no_agenda_save,
-                
-            )
-
+                    no_agenda    =  format_no_agenda_save,
+                )
             save_to_no_agenda.save()
-      
-        return redirect('tambah_surat')
+            return redirect('tambah_surat')
 
+        except:
+            temp_no_agenda = TempNoAgenda(   
+                   no_agenda  = format_no_agenda,
+                )
+            temp_no_agenda.save()
+        
+     
 
-    return render (request , 'pages/olah_surat.html'  )
+        return render (request , 'pages/olah_surat.html'  )
     
