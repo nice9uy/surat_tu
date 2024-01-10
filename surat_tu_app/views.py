@@ -117,8 +117,10 @@ def tambah_surat(request):
     derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
 
     try:
-        no_agenda_data = list(TempNoAgenda.objects.filter(username = user).values_list('no_agenda', flat=True ))
-        no_agenda      = no_agenda_data[0]
+        no_agenda_data      = list(TempNoAgenda.objects.filter(username = user).values_list('no_agenda', flat=True ))
+        jenis_surat_data    = list(TempNoAgenda.objects.filter(username = user).values_list('jenis_surat', flat=True ))
+        no_agenda           = no_agenda_data[0]
+        jenis_surat_x       = jenis_surat_data[0]
     except:
         pass
 
@@ -166,7 +168,8 @@ def tambah_surat(request):
             'klasifikasi'    : klasifikasi,
             'jenis_surat'    : jenis_surat,
             'derajat_surat'  : derajat_surat,
-            'no_agenda'      : no_agenda
+            'no_agenda'      : no_agenda,
+            'jenis_surat'    : jenis_surat_x
         }
         return render (request , 'pages/tambah_surat.html' , context )
     except:
@@ -181,12 +184,15 @@ def olah_surat(request) :
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+    derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
+
     
     context = {
-        'page_title'  : 'Olah Surat',
-        'data_surat'  : datasemuasurat,
-        'klasifikasi' : Klasifikasi,
-        'jenis_surat' : jenis_surat
+        'page_title'      : 'Olah Surat',
+        'data_surat'      : datasemuasurat,
+        'klasifikasi'     : Klasifikasi,
+        'jenis_surat'     : jenis_surat,
+        'derajat_surat'   : derajat_surat,
     }
     
     return render (request , 'pages/olah_surat.html' , context )
@@ -432,7 +438,6 @@ def generate_no_agenda(request):
     no = 1
     bulan_ini  = date.today().month
     tahun_ini  = date.today().year
-    tahun_ini  = 2026
 
     if bulan_ini == 1:
             bulan = 'I'
@@ -484,27 +489,27 @@ def generate_no_agenda(request):
             ############################################################################################
             
             if get_datax_inisial_agenda == 0 or get_datax == 0:
-                print("aaaaaaaaaa")
                 save_to_no_agenda = TempNoAgenda(   
                     username     =  user,
                     no_agenda    =  format_no_agenda,
+                    jenis_surat  =  str(get_jenis_surat)
                 )   
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
             elif get_thn != tahun_ini :   
-                print("bbbbbbbbbb")             
                 format_no_agenda_final               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
                 save_to_no_agenda = TempNoAgenda(  
                     username                         =  user,
                     no_agenda                        =  format_no_agenda_final,
+                    jenis_surat                      =  str(get_jenis_surat)
                 )
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
             else:            
-                print("cccccccccc")
                 save_to_no_agenda = TempNoAgenda(   
                     username                         =  user,
                     no_agenda                        =  format_no_agenda_save,
+                    jenis_surat                      =  str(get_jenis_surat)
                 )
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
@@ -513,10 +518,70 @@ def generate_no_agenda(request):
                 save_to_no_agenda    = TempNoAgenda(   
                         username                         =  user,
                         no_agenda                        =  format_no_agenda,
+                        jenis_surat                      =  str(get_jenis_surat)
                     )
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
             except:
                 return redirect('olah_surat')
     return render (request , 'pages/olah_surat.html'  )
+
     
+# @login_required(login_url="/accounts/login/")
+# def laporan_harian(request):
+
+#     data_surat = list(DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last())
+#     hari_ini   = date.today()
+
+#     label = []
+#     y_masuk = []
+#     y_keluar = []
+#     jumlah_surat = []
+#     harian_temp = []
+       
+#     try : 
+#         if request.method == 'POST':
+#             harian = request.POST.get('lapor_per_hari')
+#             hari = parse_date(harian)
+#             harian_temp.append(hari)
+                        
+#             for i in all_users:
+#                 label.append(i)
+#                 surat_masuk = DatabaseSurat.objects.filter(username = i, surat = 'Masuk', today =  hari ).count()
+#                 y_masuk.append(surat_masuk)
+#                 surat_keluar = DatabaseSurat.objects.filter(username = i, surat = 'Keluar' , today = hari ).count()
+#                 y_keluar.append(surat_keluar)
+
+#                 temp_jumlah = surat_masuk + surat_keluar
+#                 jumlah_surat.append(temp_jumlah)
+            
+#         else:
+
+#             for i in all_users:
+#                 label.append(i)
+#                 surat_masuk = DatabaseSurat.objects.filter(username = i, surat = 'Masuk', today =  hari_ini ).count()
+#                 y_masuk.append(surat_masuk)
+#                 surat_keluar = DatabaseSurat.objects.filter(username = i, surat = 'Keluar' , today = hari_ini ).count()
+#                 y_keluar.append(surat_keluar)
+
+#                 temp_jumlah = surat_masuk + surat_keluar
+#                 jumlah_surat.append(temp_jumlah)
+#     except:
+#         pass
+
+#     list_jumlah = zip(label , jumlah_surat)
+#     surat = dict(list_jumlah)
+#     surat_tersedia = sum(y_masuk) + sum(y_keluar)
+
+#     context = {
+#         'page_title' : 'Laporan Harian',
+#         'label' : label,
+#         'y_masuk' : y_masuk,
+#         'y_keluar' : y_keluar,
+#         'jumlah' :  surat,
+#         'hari_ini' : hari_ini,
+#         'harian'  : harian_temp,
+#         'tersedia' : surat_tersedia
+#     }
+
+#     return render(request , 'pages/laporan_harian.html', context)

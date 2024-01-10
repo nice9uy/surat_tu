@@ -29,7 +29,7 @@ class ListDisposisiDb(admin.ModelAdmin):
                     )
     
 class ListTempNoAgenda(admin.ModelAdmin):
-    list_display = ['no_agenda']
+    list_display = ('username','no_agenda','jenis_surat')
 
 
 admin.site.register(DbSurat,ListDbSurat)

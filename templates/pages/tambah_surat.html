@@ -13,14 +13,15 @@
        
         <div class="col-3">
             <label for="inputEmail4" class="form-label">JENIS SURAT</label>
-            <div class="input-group">
+            <input type="text" class="form-control" id="inputAddress" placeholder=""  name="jenis_surat" value="{{  jenis_surat  }}" readonly />
+            {% comment %} <div class="input-group">
               <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon"  name="jenis_surat">
                 <option value=""></option>
                 {% for v in jenis_surat %}
                 <option value="{{ v }}">{{ v }}</option>
               {% endfor %}
               </select>
-            </div>
+            </div> {% endcomment %}
         </div>
 
 

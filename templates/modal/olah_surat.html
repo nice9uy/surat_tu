@@ -73,8 +73,19 @@
               </div>
 
               <div class="col-5">
-                <label for="inputAddress" class="form-label">DERAJAT SURAT</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="" name="derajat_surat" value="{{ data.derajat_surat }}"  />
+                {% comment %} <label for="inputAddress" class="form-label">DERAJAT SURAT</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="" name="derajat_surat" value="{{ data.derajat_surat }}"  /> {% endcomment %}
+
+                <label for="inputEmail4" class="form-label">DERAJAT SURAT</label>
+                <select class="form-select" aria-label="Default select example" id="klasifikasi" name="derajat_surat" >
+                  <option value="{{ data.derajat_surat }}">{{ data.derajat_surat }}</option>
+                  <option value="">================</option>
+                  {% for v in derajat_surat %}
+                    <option value="{{ v }}">{{ v }}</option>
+                  {% endfor %}
+                </select>
+
+
               </div>
 
             </div>
