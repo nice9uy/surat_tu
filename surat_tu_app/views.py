@@ -92,11 +92,12 @@ def bagum(request , getIDdisosisi_bagum):
 
 @login_required(login_url="/accounts/login/")
 def home(request):
+    user           = request.user
+    TempNoAgenda.objects.filter(username = user).delete()
    
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
-    TempNoAgenda.objects.all().delete()
 
 
     context = {
@@ -109,19 +110,17 @@ def home(request):
 
 
 @login_required(login_url="/accounts/login/")
-def tambah_surat(request):
-    
-    # hari_ini       = date.today()
-    username       = request.user
+def tambah_surat(request):    
+    user           = request.user
     klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
     derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
 
     try:
-        no_agenda_data = list(TempNoAgenda.objects.all().values_list('no_agenda', flat=True ))
+        no_agenda_data = list(TempNoAgenda.objects.filter(username = user).values_list('no_agenda', flat=True ))
         no_agenda      = no_agenda_data[0]
     except:
-        print("fsAfASfafaf")
+        pass
 
     try:
         if request.method == 'POST':
@@ -141,7 +140,7 @@ def tambah_surat(request):
 
             tambah_data_surat = DbSurat(
 
-                username      = username,
+                username      = user,
                 jenis_surat   = get_jenis_surat,
                 klasifikasi   = get_klasifikasi,
                 tgl_agenda    = get_tanggal_agenda,
@@ -176,15 +175,17 @@ def tambah_surat(request):
 @staff_member_required(login_url="/surat/")
 @login_required(login_url="/accounts/login/")
 def olah_surat(request) :
+    user           = request.user
+    TempNoAgenda.objects.filter(username = user).delete()
+
     datasemuasurat = DbSurat.objects.all()
     Klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
     jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
-    TempNoAgenda.objects.all().delete()
     
     context = {
-        'page_title' : 'Olah Surat',
-        'data_surat' : datasemuasurat,
-        'klasifikasi': Klasifikasi,
+        'page_title'  : 'Olah Surat',
+        'data_surat'  : datasemuasurat,
+        'klasifikasi' : Klasifikasi,
         'jenis_surat' : jenis_surat
     }
     
@@ -386,9 +387,7 @@ def upload_disposisi(request):
  
 
 def filter_tanggal(request):
-
     data_x = DbSurat.objects.all()
-
     try:
         if request.method == 'POST':
             get_tgl_agenda = request.POST.get('tgl_agenda')
@@ -399,11 +398,8 @@ def filter_tanggal(request):
             'data_surat'   : datasemuasurat,
         }
         return render (request , 'pages/index.html' , context )
-    
     except:
-
         datasurat = data_x
-
         context = {
             'page_title'   : 'Home',
             'data_surat'   : datasurat,
@@ -412,36 +408,31 @@ def filter_tanggal(request):
         return render (request , 'pages/index.html' , context )
     
 def filter_tanggal_olah_surat(request):
-
     data_x = DbSurat.objects.all()
-
     try:
         if request.method == 'POST':
             get_tgl_agenda = request.POST.get('tgl_agenda')
             datasemuasurat = DbSurat.objects.filter( tgl_agenda = get_tgl_agenda)
-        
         context = {
             'page_title'   : 'Olah Surat',
             'data_surat'   : datasemuasurat,
         }
         return render (request , 'pages/olah_surat.html' , context )
-    
     except:
-
         datasurat = data_x
-
         context = {
             'page_title'   : 'Olah Surat',
             'data_surat'   : datasurat,
         }
-
         return render (request , 'pages/olah_surat.html' , context )
     
 def generate_no_agenda(request):
+    user       = request.user
 
     no = 1
     bulan_ini  = date.today().month
     tahun_ini  = date.today().year
+    tahun_ini  = 2026
 
     if bulan_ini == 1:
             bulan = 'I'
@@ -469,15 +460,16 @@ def generate_no_agenda(request):
             bulan = 'XII'
 
     if request.method == 'POST':
-
-        get_jenis_surat                = request.POST.get('jenis_surat_input')
-        ##############################################################
-        jenis_surat_list               = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
-        jenis_surat                    = jenis_surat_list[0]
-        #############################################################
-        format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
-        #############################################################
-
+        try:
+            get_jenis_surat                = request.POST.get('jenis_surat_input')
+            ##############################################################
+            jenis_surat_list               = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
+            jenis_surat                    = jenis_surat_list[0]
+            #############################################################
+            format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
+            #############################################################
+        except:
+            pass
         try:
             get_data                       = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
             x_data                         = get_data.no_agenda.split("/")
@@ -490,32 +482,41 @@ def generate_no_agenda(request):
             get_datax                      = DbSurat.objects.filter(no_agenda__contains = tahun_ini).count()
             get_datax_inisial_agenda       = DbSurat.objects.filter(no_agenda__contains = jenis_surat).count()
             ############################################################################################
+            
             if get_datax_inisial_agenda == 0 or get_datax == 0:
+                print("aaaaaaaaaa")
                 save_to_no_agenda = TempNoAgenda(   
+                    username     =  user,
                     no_agenda    =  format_no_agenda,
                 )   
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
-            elif get_thn != tahun_ini :                
+            elif get_thn != tahun_ini :   
+                print("bbbbbbbbbb")             
                 format_no_agenda_final               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
-                save_to_no_agenda = TempNoAgenda(   
+                save_to_no_agenda = TempNoAgenda(  
+                    username                         =  user,
                     no_agenda                        =  format_no_agenda_final,
                 )
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
             else:            
+                print("cccccccccc")
                 save_to_no_agenda = TempNoAgenda(   
+                    username                         =  user,
                     no_agenda                        =  format_no_agenda_save,
                 )
                 save_to_no_agenda.save()
                 return redirect('tambah_surat')
         except:
-            save_to_no_agenda    = TempNoAgenda(   
-                    no_agenda    =  format_no_agenda,
-                )
-            save_to_no_agenda.save()
-            return redirect('tambah_surat')
-
-
+            try:
+                save_to_no_agenda    = TempNoAgenda(   
+                        username                         =  user,
+                        no_agenda                        =  format_no_agenda,
+                    )
+                save_to_no_agenda.save()
+                return redirect('tambah_surat')
+            except:
+                return redirect('olah_surat')
     return render (request , 'pages/olah_surat.html'  )
     

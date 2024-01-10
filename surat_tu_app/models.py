@@ -19,7 +19,7 @@ class DbSurat(models.Model):
     tgl_agenda = models.DateField()
     no_agenda = models.CharField(max_length=30 , unique=True)
     tgl_surat = models.DateField(null=True ,  blank=True)
-    no_surat = models.CharField(max_length=30 , unique=True )
+    no_surat = models.CharField(max_length=30 )
     surat_dari = models.CharField(max_length=110)
     derajat_surat = models.CharField(max_length=30 , null = True, blank=True)
     perihal = models.CharField(max_length=200)
@@ -71,6 +71,7 @@ class DbDerajatSurat(models.Model):
         db_table = "DbDerajatSurat"
 
 class TempNoAgenda(models.Model):
+    username = models.CharField(max_length=30)
     no_agenda = models.CharField(max_length=30)
 
     class Meta:

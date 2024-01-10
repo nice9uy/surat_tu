@@ -25,9 +25,9 @@
             <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat </a>
           </li>
 
-          {% comment %} <li class="nav-item">
-            <a class="nav-link" href="">Export Ke Excel</a>
-          </li> {% endcomment %}
+          <li class="nav-item">
+            <a class="nav-link" href="">Laporan</a>
+          </li> 
         
           <li class="nav-item">
             <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
