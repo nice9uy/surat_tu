@@ -12,31 +12,31 @@
 
 
         <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
-          <span class="mt-2 text-warning">Selamat Datang , {{ user|capfirst }}</span>
           
           <li class="nav-item">
-            <a class="nav-link   {% if request.path == '/surat/' %} active {% endif %}" href="{% url 'home' %}">Home</a>
+            <a class="nav-link  fa fa-arrow-left " href="{% url 'home' %}"></a>
+          </li>
+        
+          
+          <li class="nav-item">
+            <a class="nav-link   {% if request.path == '/surat/surat_masuk' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
           </li>
 
           {% comment %} <li class="nav-item">
             <a class="nav-link  {% if request.path == '/surat/tambah_surat/' %} active {% endif %}" href="{% url 'tambah_surat' %}">Tambah Surat </a>
           </li> {% endcomment %}
           <li class="nav-item">
-            <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat </a>
+            <a class="nav-link {% if request.path == '/surat/surat_masuk/olah_surat/' %} active {% endif %}" href="{% url 'olah_surat' %}">Olah Surat </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="">Laporan</a>
+            <a class="nav-link" href="{% url 'laporan_harian' %}">Laporan</a>
           </li> 
         
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
-          </li>
+         
 
         </div>
-        <li class="nav-item">
-          <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
-        </li>
+     
 
       </ul>
     </div>

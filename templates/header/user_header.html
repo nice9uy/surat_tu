@@ -3,7 +3,7 @@
 <div>
   <nav class="navbar bg-body-secondary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home'%}">
+      <a class="navbar-brand" href="{% url 'surat_masuk'%}">
         <img src="{% static 'img/kemhan_logo.png' %}" alt="KEMHAN Logo" width="45" height="45" />
         <span>ARSIP TU SETBARANAHAN</span>
       </a>
@@ -14,7 +14,7 @@
           <span class="mt-2 text-warning">Selamat Datang , {{ user|capfirst }}</span>
           
           <li class="nav-item">
-            <a class="nav-link   {% if request.path == '/surat/' %} active {% endif %}" href="{% url 'home' %}">Home</a>
+            <a class="nav-link   {% if request.path == '/surat/surat_masuk/' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
           </li>
 
         </div>

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block laporan_harian %}
+
+{% include 'header/laporan.html' %}
+
+
+<div class="container-fluid mt-3">
+    <h3 class="text-center">LAPORAN HARIAN</h3>
+    <div class="">
+        <div class="d-flex mt-2 align-content-center justify-content-center ">
+            <canvas id="laporan_harian" style="max-width:1200px; max-height: 600px;"></canvas>
+
+            <div class="d-flex flex-column border border-primary rounded p-4">
+
+                <form method="POST" >
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="date" required id="lapor_per_hari" name="lapor_per_hari" class="form-control" >
+                        <button class="btn btn-primary" type="submit">Cari</button>
+                    </div>
+                </form>
+
+                    {% if harian  %}
+                    <div class="mt-3 ">
+                        {% for data in harian %}
+                            <h5 class="text-light text-center  text-decoration-underline">Laporan : {{  data  }}</h5>
+                        {% endfor %}
+                    </div>
+                    {% else %}  
+                    <div class="mt-3 ">                      
+                            <h5 class="text-light text-center text-decoration-underline" >Laporan : {{  hari_ini  }}</h5>
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-3">
+                    {% if  tersedia == 0 %}
+                        <h5 class="text-danger text-center ">Data tidak tersedia</h5>                  
+                    {% else %}  
+                        {% for key, val  in jumlah.items  %}
+                            <h5>{{ forloop.counter }}. {{ key }} = {{  val }} </h5>  
+
+                        {% endfor %}
+                    {% endif %}     
+                    </div>     
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById("laporan_harian").getContext("2d"); 
+    var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: {{ label | safe }},
+            datasets: [
+            {
+                label: 'Surat Masuk',
+                data   :  {{ y_masuk | safe }},
+                backgroundColor: 'green',
+            },
+            {
+                label: 'Surat Keluar',
+                data   :  {{ y_keluar | safe }},
+                backgroundColor: 'blue',
+            }]
+        },
+        options: { 
+            responsive: true,
+            legend : {
+                display : true,
+                labels : {
+                    fontColor : "white",
+                },
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: "white",
+                        fontSize: 14,
+                        beginAtZero: true,
+                        stepSize : 1,
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "white",
+                        fontSize: 14,
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
+
+
+
+{% endblock laporan_harian %}
