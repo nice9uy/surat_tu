@@ -482,14 +482,22 @@ def generate_no_agenda(request):
             get_jenis_surat                = request.POST.get('jenis_surat_input')
             ##############################################################
             jenis_surat_list               = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('inisial_nama', flat=True))
+            id_jenis_surat                 = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('id', flat=True))
             jenis_surat                    = jenis_surat_list[0]
+            id_surat                       = id_jenis_surat[0]
             #############################################################
             format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
             #############################################################
+
+            print(get_jenis_surat)
+            print(jenis_surat_list)
+            print(jenis_surat)
+            print(id_surat)
+
         except:
             pass
         try:
-            get_data                       = DbSurat.objects.filter(no_agenda__contains = jenis_surat ).last()
+            get_data                       = DbSurat.objects.filter(no_agenda__icontains = jenis_surat ).last()
             x_data                         = get_data.no_agenda.split("/")
             get_thn                        = int(x_data[3])
             no_urut_data                   = int(x_data[1])
@@ -500,6 +508,9 @@ def generate_no_agenda(request):
             get_datax                      = DbSurat.objects.filter(no_agenda__contains = tahun_ini).count()
             get_datax_inisial_agenda       = DbSurat.objects.filter(no_agenda__contains = jenis_surat).count()
             ############################################################################################
+
+            print(get_data)
+            print(x_data)
             
             if get_datax_inisial_agenda == 0 or get_datax == 0:
                 save_to_no_agenda = TempNoAgenda(   
