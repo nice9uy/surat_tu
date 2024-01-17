@@ -9,6 +9,7 @@ from weasyprint import HTML
 from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.dateparse import parse_date
+from django.http import JsonResponse
 # from django.shortcuts import create_object
 
 
@@ -546,89 +547,61 @@ def generate_no_agenda(request):
 @login_required(login_url="/accounts/login/")
 def laporan_harian(request):
 
-    label                  = []
-    y_semua_surat          = []
-    # y_keluar = []
-    # jumlah_surat = []
-    harian_temp = []
-
-    hari_ini               = date.today()
-    daftar_jenis_surat     = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
+    label                          = []
+    y_data_surat                   = []
+    harian_temp                    = []
+    color_bar                      = []
+    hari_ini                       = date.today()
+    daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
+    x_hari                         = []
+    format                         = "%d-%M-%Y"
 
     if request.method == 'POST':
-        harian             = request.POST.get('lapor_per_hari')
-        hari               = parse_date(harian)
-        harian_temp.append(hari)
+        harian                     = request.POST.get('lapor_per_hari')
+        hari                       = parse_date(harian)
+        now_date                   = date.strftime (hari ,"%d %b %Y")
+        harian_temp.append(now_date)
 
         for index in daftar_jenis_surat:
-            data_surat_masuk   = DbSurat.objects.filter(tgl_agenda = hari_ini , jenis_surat = index ).count()
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda = hari , jenis_surat = index  ).count()
 
-            y_semua_surat.append(data_surat_masuk)
+            y_data_surat.append(data_surat_masuk)
             label.append(index)
     
     else:
         for index in daftar_jenis_surat:
-            data_surat_masuk   = DbSurat.objects.filter(tgl_agenda = hari_ini , jenis_surat = index ).count()
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda = hari_ini , jenis_surat = index ).count()
 
-            y_semua_surat.append(data_surat_masuk)
+            y_data_surat.append(data_surat_masuk)
             label.append(index)
 
+    color_bar_x                      = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164"]
+    x = len(label)
+
+    for i in color_bar_x[0:x]:
+        color_bar.append(i)
+
+    jumlah                            = zip(label, y_data_surat) 
+    jumlah_surat                      = dict(jumlah)
+    data_tersedia                     = sum(y_data_surat)
+ 
+
+    context = {
+        'page_title'    : 'Laporan Harian',
+        'hari_ini'      :  hari_ini,
+        'jumlah_surat'  :  jumlah_surat,
+        'label'         :  label,
+        'y_data_surat'  :  y_data_surat,
+        'color_bar'     :  color_bar,
+        'data_tersedia' :  data_tersedia,
+        'harian_temp'   :  harian_temp
+    }
+    
+    return render(request , 'pages/laporan/harian.html', context)
+
+
     
 
-    print(label)
-    print(y_semua_surat)
-
-    
 
 
 
-
-
-
-       
-    # try : 
-    #     if request.method == 'POST':
-    #         harian = request.POST.get('lapor_per_hari')
-    #         hari = parse_date(harian)
-    #         harian_temp.append(hari)
-                        
-    #         for i in all_users:
-    #             label.append(i)
-    #             surat_masuk = DatabaseSurat.objects.filter(username = i, surat = 'Masuk', today =  hari ).count()
-    #             y_masuk.append(surat_masuk)
-    #             surat_keluar = DatabaseSurat.objects.filter(username = i, surat = 'Keluar' , today = hari ).count()
-    #             y_keluar.append(surat_keluar)
-
-    #             temp_jumlah = surat_masuk + surat_keluar
-    #             jumlah_surat.append(temp_jumlah)
-            
-    #     else:
-
-    #         for i in all_users:
-    #             label.append(i)
-    #             surat_masuk = DatabaseSurat.objects.filter(username = i, surat = 'Masuk', today =  hari_ini ).count()
-    #             y_masuk.append(surat_masuk)
-    #             surat_keluar = DatabaseSurat.objects.filter(username = i, surat = 'Keluar' , today = hari_ini ).count()
-    #             y_keluar.append(surat_keluar)
-
-    #             temp_jumlah = surat_masuk + surat_keluar
-    #             jumlah_surat.append(temp_jumlah)
-    # except:
-    #     pass
-
-    # list_jumlah = zip(label , jumlah_surat)
-    # surat = dict(list_jumlah)
-    # surat_tersedia = sum(y_masuk) + sum(y_keluar)
-
-    # context = {
-    #     'page_title' : 'Laporan Harian',
-    #     'label' : label,
-    #     'y_masuk' : y_masuk,
-    #     'y_keluar' : y_keluar,
-    #     'jumlah' :  surat,
-    #     # 'hari_ini' : hari_ini,
-    #     'harian'  : harian_temp,
-    #     'tersedia' : surat_tersedia
-    # }
-
-    return render(request , 'pages/laporan/harian.html')
