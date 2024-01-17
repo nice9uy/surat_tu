@@ -11,7 +11,7 @@ from .models import TempNoAgenda
 
 class ListDbSurat(admin.ModelAdmin):
     list_display = ('id', 'username','klasifikasi', 'tgl_agenda',
-                    'no_agenda','tgl_surat','no_surat','surat_dari','perihal','derajat_surat',
+                    'id_jenis_surat','no_agenda','tgl_surat','no_surat','surat_dari','perihal','derajat_surat',
                     'upload_file'
                     )
     

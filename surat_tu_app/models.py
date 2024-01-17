@@ -17,6 +17,7 @@ class DbSurat(models.Model):
     jenis_surat     = models.CharField(max_length=30 , null=True , blank=True)
     klasifikasi     = models.CharField(max_length=30 , null=True , blank=True)
     tgl_agenda      = models.DateField()
+    id_jenis_surat  = models.CharField(max_length=1)
     no_agenda       = models.CharField(max_length=30 , unique=True)
     tgl_surat       = models.DateField(null=True ,  blank=True)
     no_surat        = models.CharField(max_length=30 )

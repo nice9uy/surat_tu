@@ -118,10 +118,10 @@ def surat_masuk(request):
 @login_required(login_url="/accounts/login/")
 def tambah_surat(request):    
     # hari_ini       = date.today()
-    user           = request.user
-    klasifikasi    = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
-    jenis_surat    = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
-    derajat_surat  = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
+    user                    = request.user
+    klasifikasi             = DbKlasifikasi.objects.all().values_list('klasifikasi', flat=True )
+    jenis_surat             = DbJenisSurat.objects.all().values_list('jenis_surat', flat=True )
+    derajat_surat           = DbDerajatSurat.objects.all().values_list('dejarat_surat', flat=True )
 
     try:
         no_agenda_data      = list(TempNoAgenda.objects.filter(username = user).values_list('no_agenda', flat=True ))
@@ -149,12 +149,19 @@ def tambah_surat(request):
             get_perihal           = request.POST.get('perihal')
             files_upload          = request.FILES.get('file_name')
 
+            #############################################################################
+            id_jenis_surat        = list(DbJenisSurat.objects.filter(jenis_surat = get_jenis_surat ).values_list('id', flat=True))
+            id_surat_final        = id_jenis_surat[0]
+            #############################################################################
+
+
             tambah_data_surat = DbSurat(
 
                 username      = user,
                 jenis_surat   = get_jenis_surat,
                 klasifikasi   = get_klasifikasi,
                 tgl_agenda    = get_tanggal_agenda,
+                id_jenis_surat= id_surat_final,
                 no_agenda     = get_no_agenda,
 
                 tgl_surat     = get_tanggal_surat if get_tanggal_surat else None ,
@@ -244,6 +251,7 @@ def edit_olah_surat(request , id_edit_olah_surat ):
                 jenis_surat    = get_jenis_surat,
                 klasifikasi    = get_klasifikasi,
                 tgl_agenda     = get_tgl_agenda,
+                id_jenis_surat = edit_olah_surat.id_jenis_surat,
                 no_agenda      = get_no_agenda,
                 
                 tgl_surat      = get_tanggal_surat if get_tanggal_surat else None ,
@@ -488,16 +496,10 @@ def generate_no_agenda(request):
             #############################################################
             format_no_agenda               = f"{jenis_surat}/{no}/{bulan}/{tahun_ini}"
             #############################################################
-
-            print(get_jenis_surat)
-            print(jenis_surat_list)
-            print(jenis_surat)
-            print(id_surat)
-
         except:
             pass
         try:
-            get_data                       = DbSurat.objects.filter(no_agenda__icontains = jenis_surat ).last()
+            get_data                       = DbSurat.objects.filter(no_agenda__icontains = jenis_surat , id_jenis_surat = id_surat ).last()
             x_data                         = get_data.no_agenda.split("/")
             get_thn                        = int(x_data[3])
             no_urut_data                   = int(x_data[1])
@@ -507,11 +509,7 @@ def generate_no_agenda(request):
             ###########################################################################################
             get_datax                      = DbSurat.objects.filter(no_agenda__contains = tahun_ini).count()
             get_datax_inisial_agenda       = DbSurat.objects.filter(no_agenda__contains = jenis_surat).count()
-            ############################################################################################
-
-            print(get_data)
-            print(x_data)
-            
+            ############################################################################################        
             if get_datax_inisial_agenda == 0 or get_datax == 0:
                 save_to_no_agenda = TempNoAgenda(   
                     username     =  user,
@@ -564,9 +562,7 @@ def laporan_harian(request):
     color_bar                      = []
     hari_ini                       = date.today()
     daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
-    x_hari                         = []
-    format                         = "%d-%M-%Y"
-
+  
     if request.method == 'POST':
         harian                     = request.POST.get('lapor_per_hari')
         hari                       = parse_date(harian)
