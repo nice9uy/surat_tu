@@ -1,4 +1,3 @@
-import uuid
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat,DbDerajatSurat,TempNoAgenda
@@ -10,7 +9,16 @@ from django.db.models import Count
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.dateparse import parse_date
 from django.http import JsonResponse
+import calendar
+
 # from django.shortcuts import create_object
+# color_bar_x                      = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164","#4F7942","#E936A7"]
+color_bar_x                      = [
+     "#7CB9E8","#DB2D43","#C46210","#9F2B68","#F19CBB","#3B7A57","#FFBF00","#9966CC","#3DDC84",
+     "#FBCEB1","#00FFFF","#7FFFD4","#D0FF14","#4B6F44","#E9D66B","#007FFF","#F4C2C2","#DA1884",
+     "#9F8170","#2E5894","#967117","#126180","#FFAA1D","#7BB661","#BD33A4","#5F9EA0","#006B3C",
+     "#D70040","#ED9121","#703642","#ACE1AF","#1DACD6","#E68FAC","#80FF00","#E4D00A","#58427C"    
+]
 
 
 def home(request):
@@ -39,7 +47,7 @@ def kabaranahan(request, getIDdisosisi_kabaranahan ):
 
     pdf_file = HTML(string=html_content).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="people_report.pdf"'
+    response['Content-Disposition'] = 'filename="Kabaranahan - Disposisi"'
     return response
 
 @login_required(login_url="/accounts/login/")
@@ -66,7 +74,7 @@ def sekretariat(request, getIDdisosisi_sekretariat):
 
     pdf_file = HTML(string=html_content).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="people_report.pdf"'
+    response['Content-Disposition'] = 'filename="Sekretariat - Disposisi"'
     return response
 
 @login_required(login_url="/accounts/login/")
@@ -92,7 +100,7 @@ def bagum(request , getIDdisosisi_bagum):
 
     pdf_file = HTML(string=html_content).write_pdf()
     response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="people_report.pdf"'
+    response['Content-Disposition'] = 'filename="Bagian Umum - Disposisi"'
     return response
 
 
@@ -107,7 +115,7 @@ def surat_masuk(request):
 
 
     context = {
-        'page_title'   : 'surat_masuk',
+        'page_title'   : 'Surat Masuk',
         'data_surat'   : datasemuasurat,
         'klasifikasi'  : Klasifikasi,
         'jenis_surat'  : jenis_surat
@@ -582,7 +590,6 @@ def laporan_harian(request):
             y_data_surat.append(data_surat_masuk)
             label.append(index)
 
-    color_bar_x                      = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164"]
     x = len(label)
 
     for i in color_bar_x[0:x]:
@@ -612,44 +619,61 @@ def laporan_bulanan(request):
 
     now                            = datetime.now()
     month_x                        = now.strftime("%m")
-    year                           = now.strftime("%Y")
-
+    year_x                         = now.strftime("%Y")
     label                          = []
     y_data_surat                   = []
-    harian_temp                    = []
     color_bar                      = []
-    # hari_ini                       = date.today()
     daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
     data_tahun                     = list(DbSurat.objects.all().values_list('tgl_agenda__year' , flat=True).distinct())
+    bulan_laporan                  = []
+    tahun_laporan                  = []
 
     if request.method == 'POST':
         bulan                      = request.POST.get('bulan')
         tahun                      = request.POST.get('tahun')
 
+        bulan_name                 = calendar.month_name[int(bulan)]
+        bulan_laporan.append(bulan_name)
+        tahun_laporan.append(tahun)
+       
         for index in daftar_jenis_surat:
-            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__month = bulan , jenis_surat = index ).count()
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__month = bulan,tgl_agenda__year = tahun,jenis_surat = index ).count()
 
             y_data_surat.append(data_surat_masuk)
             label.append(index)
-    
     else:
+        bulan_name                 = calendar.month_name[int(month_x)]
+
+        bulan_laporan.append(bulan_name)
+        tahun_laporan.append(year_x)
+
         for index in daftar_jenis_surat:
             data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__month = month_x , jenis_surat = index ).count()
 
             y_data_surat.append(data_surat_masuk)
             label.append(index)
 
-    color_bar_x                     = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164"]
     x = len(label)
 
     for i in color_bar_x[0:x]:
         color_bar.append(i)
 
-    # print(y_data_surat)
-    # print(label)
+    bulan_tahun_raw                 = zip(bulan_laporan, tahun_laporan)
+    bulan_tahun_final               = dict(bulan_tahun_raw)
+    jumlah_data_tersedia            = sum(y_data_surat)
 
+    data                            = zip(label, y_data_surat)
+    data_final                      = dict(data)
+   
     context = {
-         'data_tahun' : data_tahun,
+         'page_title'    : 'Laporan Bulanan',
+         'data_tahun'    :  data_tahun,
+         'label'         :  label,
+         'y_data_surat'  :  y_data_surat,
+         'color_bar'     :  color_bar,
+         'bulan_tahun'   :  bulan_tahun_final,
+         'data_tersedia' :  jumlah_data_tersedia,
+         'data_final'    :  data_final
     }
 
     return render(request , 'pages/laporan/bulanan.html', context)

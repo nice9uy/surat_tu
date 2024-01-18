@@ -48,7 +48,7 @@
             {% block error_upload_surat %}{% endblock error_upload_surat %}
             {% block error404 %}{% endblock error404 %}
             {% block laporan_harian %}{% endblock laporan_harian %}
-            {% block bulanan %}{% endblock bulanan %}
+            {% block laporan_bulanan %}{% endblock laporan_bulanan %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -58,26 +58,6 @@
             <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script> 
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
 
-{% comment %}             
-            <script>
-
-                $(document).ready(function() {
-                    // Initialize DataTables
-                    var table = $('#tabel_index').DataTable();
-                
-                    // Add event listeners to the select elements
-                    $('#klasifikasi' ).on('change', function() {
-                        // Get the selected values from both select options
-                        var selectedValue = $('#klasifikasi').val();
-                        var selectedValue1 = $('#tgl_agenda').val();
-                
-                        // Apply the filters to the DataTable
-                        table.columns(1).search(selectedValue).draw();
-                        
-                        });
-                    });
-
-            </script> {% endcomment %}
 
             <script>
                 // Display the loader
