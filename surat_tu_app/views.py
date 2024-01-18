@@ -678,6 +678,54 @@ def laporan_bulanan(request):
 
     return render(request , 'pages/laporan/bulanan.html', context)
 
+def laporan_tahunan(request):
+    now                            = datetime.now()
+    year_x                         = now.strftime("%Y")
+    label                          = []
+    y_data_surat                   = []
+    color_bar                      = []
+    daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
+    data_tahun                     = list(DbSurat.objects.all().values_list('tgl_agenda__year' , flat=True).distinct())
+    tahun_laporan                  = []
 
+    if request.method == 'POST':
+        tahun                      = request.POST.get('tahun')
+        tahun_laporan.append(tahun)
+       
+        for index in daftar_jenis_surat:
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__year = tahun,jenis_surat = index ).count()
 
+            y_data_surat.append(data_surat_masuk)
+            label.append(index)
+    else:
+        tahun_laporan.append(year_x)
 
+        for index in daftar_jenis_surat:
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__year = year_x , jenis_surat = index ).count()
+
+            y_data_surat.append(data_surat_masuk)
+            label.append(index)
+
+    x = len(label)
+
+    for i in color_bar_x[0:x]:
+        color_bar.append(i)
+
+    jumlah_data_tersedia            = sum(y_data_surat)
+
+    data                            = zip(label, y_data_surat)
+    data_final                      = dict(data)
+
+    final_tahunan                   = tahun_laporan[0]
+
+    context = {
+         'page_title'    : 'Laporan Tahunan',
+         'data_tahun'    :  data_tahun,
+         'label'         :  label,
+         'y_data_surat'  :  y_data_surat,
+         'color_bar'     :  color_bar,
+         'data_tersedia' :  jumlah_data_tersedia,
+         'data_final'    :  data_final,
+         'tahun_laporan' :  final_tahunan
+    }
+    return render(request , 'pages/laporan/tahunan.html', context)

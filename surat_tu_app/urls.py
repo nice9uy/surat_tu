@@ -30,6 +30,7 @@ urlpatterns = [
 
     path('surat_masuk/laporan_harian/', views.laporan_harian, name='laporan_harian'),
     path('surat_masuk/laporan_bulanan/', views.laporan_bulanan, name='laporan_bulanan'),
+    path('surat_masuk/laporan_tahunan/', views.laporan_tahunan, name='laporan_tahunan'),
 ]
 
 

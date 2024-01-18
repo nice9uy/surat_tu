@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %} 
+
+{% block laporan_tahunan %}
+
+{% include 'header/laporan.html' %}
+
+<div class="container-fluid mt-3">
+    <h3 class="text-center">LAPORAN TAHUNAN</h3>
+    <div class="">
+        <div class="d-flex mt-2 align-content-center justify-content-center">
+            <canvas id="laporan_tahunan" style="max-width:1200px; max-height: 600px;"></canvas>
+
+            <div class="d-flex flex-column border border-primary rounded p-4">
+
+                <form method="POST" >
+
+                    {% csrf_token %}
+                    <div class="d-flex flex-row gap-3">
+
+                        <select class="form-select" id="tahun" required name="tahun">
+                            <option value="">TAHUN</option>
+                            <option value="">-----</option>
+                            {% for thn in data_tahun %}
+                                <option value="{{ thn }}" >{{ thn  }}</option>
+                            {% endfor %}
+                        </select>  
+                    </div> 
+                    <div class="d-grid  ">    
+                        <button class="btn btn-primary mt-3 " type="submit" >Cari</button>
+                    </div>
+                </form>
+
+                <div style="font-size: x-large;" class="text-center mt-3">
+                  Tahun  {{ tahun_laporan }}
+                </div>
+                
+                <div class="mt-1">
+                    {% if data_tersedia == 0 %}
+                        <div class="mt-1 ">
+                            {% for key, val in bulan_tahun.items %}
+                                <h5 class="text-light text-center " >{{ key }}  {{ val }}</h5>
+                            {% endfor %}                      
+                        </div>  
+                        <div class="mt-1">
+                            <h5 class="text-danger text-center ">Data tidak tersedia</h5>  
+                        </div>
+                    {% else %}  
+                   
+                        <div class="mt-1 ">
+                            {% for key, val in bulan_tahun.items %}
+                            <h5 class="text-light text-center " > {{ key }}  {{ val }}</h5>
+                            {% endfor %}
+                        </div>
+                        <div class="mt-1 ">
+                            {% for key, val  in data_final.items  %}
+                            <h5>{{ forloop.counter }}. {{ key }} = {{  val }} </h5>  
+                             {% endfor %}
+                        </div>
+                        <div style="font-size: x-large;" class="mt-1 text-warning text-center ">
+                            Total = {{ data_tersedia | intcomma }}
+                        </div> 
+                    {% endif %}
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const ctx = document.getElementById("laporan_tahunan").getContext("2d"); 
+    var myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: {{ label | safe }},
+                datasets: [
+                {
+                    label            : 'JUMLAH SURAT  ',
+                    data             :  {{ y_data_surat | safe }},
+                    backgroundColor  :  {{ color_bar | safe }},
+                }
+               ]
+            },
+            options: { 
+                responsive: true,
+                legend : {
+                    display : false,
+                    labels : {
+                        fontColor : "white",
+                    },
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            beginAtZero: true,
+                            stepSize : 1,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+ 
+
+{% endblock laporan_tahunan %}
+
+
+
