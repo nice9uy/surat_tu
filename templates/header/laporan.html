@@ -18,11 +18,11 @@
               </li>
             
             <li class="nav-item">
-              <a class="nav-link   {% if request.path == '/surat/surat_masuk/laporan_harian/' %} active {% endif %}" href="">Harian</a>
+              <a class="nav-link   {% if request.path == '/surat/surat_masuk/laporan_harian/' %} active {% endif %}" href="{% url 'laporan_harian' %}">Harian</a>
             </li>
   
             <li class="nav-item">
-              <a class="nav-link {% if request.path == '/surat/olah_surat/' %} active {% endif %}" href="">Bulanan </a>
+              <a class="nav-link {% if request.path == '/surat/surat_masuk/laporan_bulanan/' %} active {% endif %}" href="{% url 'laporan_bulanan' %}">Bulanan </a>
             </li>
   
             <li class="nav-item">

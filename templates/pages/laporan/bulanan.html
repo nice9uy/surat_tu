@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %} 
+
+{% block bulanan %}
+
+{% include 'header/laporan.html' %}
+
+<div class="container-fluid mt-3">
+    <h3 class="text-center">LAPORAN BULANAN</h3>
+    <div class="">
+        <div class="d-flex mt-2 align-content-center justify-content-center">
+            <canvas id="laporan_bulanan" style="max-width:1200px; max-height: 600px;"></canvas>
+
+            <div class="d-flex flex-column border border-primary rounded p-4">
+
+                <form method="POST" >
+
+                    {% csrf_token %}
+                    <div class="d-flex flex-row gap-3">
+
+                        <select class="form-select " id="bulan" required name="bulan">
+                            <option value="">BULAN</option>
+                            <option value="">-----</option>
+                            <option value="1" >Januari</option>
+                            <option value="2">Februari</option>
+                            <option value="3">Maret</option>
+                            <option value="4">April</option>
+                            <option value="5">Mei</option>
+                            <option value="6">Juni</option>
+                            <option value="7">Juli</option>
+                            <option value="8">Agustus</option>
+                            <option value="9">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">Nopember</option>
+                            <option value="12">Desember</option>
+                        </select>  
+
+                        <select class="form-select" id="tahun" required name="tahun">
+                            <option value="">TAHUN</option>
+                            <option value="">-----</option>
+                            {% for thn in data_tahun %}
+                                <option value="{{ thn }}" >{{ thn  }}</option>
+                            {% endfor %}
+                        </select>  
+                    </div> 
+                    <div class="d-grid  ">    
+                        <button class="btn btn-primary mt-3 " type="submit" >Cari</button>
+                    </div>
+                </form>
+                
+                <div class="mt-2">
+                    {% if tersedia == 0 %}
+                    <div class="mt-3 ">
+                        {% for key, val in bulan_tahun.items %}
+                            <h5 class="text-light text-center text-decoration-underline" >Laporan : {{ key }} - {{ val }}</h5>
+                        {% endfor %}                      
+                    </div>  
+                    {% else %}  
+                    <div class="mt-3 ">
+                        {% for key, val in bulan_tahun.items %}
+                        <h5 class="text-light text-center text-decoration-underline" >Laporan : {{ key }} - {{ val }}</h5>
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mt-3">
+                    {% if tersedia == 0 %}
+                        <h5 class="text-danger text-center ">Data tidak tersedia</h5>                  
+                    {% else %}  
+                        {% for key, val  in jumlah.items  %}
+                            <h5>{{ forloop.counter }}. {{ key }} = {{  val }} </h5>  
+
+                        {% endfor %}
+                    {% endif %}     
+                    </div>     
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const ctx = document.getElementById("laporan_bulanan").getContext("2d"); 
+    var myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: {{ label | safe }},
+                datasets: [
+                {
+                    label            : 'JUMLAH SURAT  ',
+                    data             :  {{ y_data_surat | safe }},
+                    backgroundColor  : {{ color_bar | safe }},
+                },
+                {
+                    label            : 'JUMLAH SURAT  ',
+                    data             :  {{ y_data_surat | safe }},
+                    backgroundColor  : {{ color_bar | safe }},
+                },
+                
+               ]
+            },
+            options: { 
+                responsive: true,
+                legend : {
+                    display : false,
+                    labels : {
+                        fontColor : "white",
+                    },
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            beginAtZero: true,
+                            stepSize : 1,
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+ 
+
+{% endblock bulanan %}
+
+
+

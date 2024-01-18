@@ -2,7 +2,7 @@ import uuid
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . models import DbSurat , DbKlasifikasi, DisposisiDb, DbJenisSurat,DbDerajatSurat,TempNoAgenda
-from datetime import date
+from datetime import date, datetime
 from django.http import HttpResponse
 from django.template.loader import get_template
 from weasyprint import HTML
@@ -607,7 +607,52 @@ def laporan_harian(request):
     return render(request , 'pages/laporan/harian.html', context)
 
 
+@login_required(login_url="/accounts/login/")
+def laporan_bulanan(request):
+
+    now                            = datetime.now()
+    month_x                        = now.strftime("%m")
+    year                           = now.strftime("%Y")
+
+    label                          = []
+    y_data_surat                   = []
+    harian_temp                    = []
+    color_bar                      = []
+    # hari_ini                       = date.today()
+    daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
+    data_tahun                     = list(DbSurat.objects.all().values_list('tgl_agenda__year' , flat=True).distinct())
+
+    if request.method == 'POST':
+        bulan                      = request.POST.get('bulan')
+        tahun                      = request.POST.get('tahun')
+
+        for index in daftar_jenis_surat:
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__month = bulan , jenis_surat = index ).count()
+
+            y_data_surat.append(data_surat_masuk)
+            label.append(index)
     
+    else:
+        for index in daftar_jenis_surat:
+            data_surat_masuk       = DbSurat.objects.filter(tgl_agenda__month = month_x , jenis_surat = index ).count()
+
+            y_data_surat.append(data_surat_masuk)
+            label.append(index)
+
+    color_bar_x                     = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164"]
+    x = len(label)
+
+    for i in color_bar_x[0:x]:
+        color_bar.append(i)
+
+    # print(y_data_surat)
+    # print(label)
+
+    context = {
+         'data_tahun' : data_tahun,
+    }
+
+    return render(request , 'pages/laporan/bulanan.html', context)
 
 
 
