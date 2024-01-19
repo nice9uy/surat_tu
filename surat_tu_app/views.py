@@ -22,7 +22,38 @@ color_bar_x                      = [
 
 
 def home(request):
-    return render (request , 'pages/home.html' )
+    ################################### SURAT MASUK ################################
+    label                          = []
+    y_data_surat                   = []
+    color_bar                      = []
+    daftar_jenis_surat             = list(DbJenisSurat.objects.all().values_list('jenis_surat' , flat=True))
+
+    for index in daftar_jenis_surat:
+        data_surat_masuk       = DbSurat.objects.filter(jenis_surat = index ).count()
+
+        y_data_surat.append(data_surat_masuk)
+        label.append(index)
+
+    x = len(label)
+
+    for i in color_bar_x[0:x]:
+        color_bar.append(i)
+
+    jumlah_surat_masuk_semuanya   = sum(y_data_surat)
+
+    ###################################################################################
+
+   
+
+    context = {
+        'page_title'                  : 'Home',
+        'label'                       :  label,
+        'y_data_surat'                :  y_data_surat,
+        'color_bar'                   :  color_bar,
+        'jumlah_surat_masuk_semuanya' :  jumlah_surat_masuk_semuanya
+        
+     }
+    return render (request , 'pages/home.html' , context)
 
 @login_required(login_url="/accounts/login/")
 def kabaranahan(request, getIDdisosisi_kabaranahan ):

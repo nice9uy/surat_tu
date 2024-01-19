@@ -7,7 +7,13 @@
 {% include 'header/laporan.html' %}
 
 <div class="container-fluid mt-3">
-    <h3 class="text-center">LAPORAN BULANAN</h3>
+    {% comment %} <h3 class="text-center">LAPORAN BULANAN</h3> {% endcomment %}
+
+    <div class="mt-2 ">
+        {% for key, val in bulan_tahun.items %}
+        <h5 class="text-light text-center " >Laporan {{ key }}  {{ val }}</h5>
+        {% endfor %}
+    </div>
     <div class="">
         <div class="d-flex mt-2 align-content-center justify-content-center">
             <canvas id="laporan_bulanan" style="max-width:1200px; max-height: 600px;"></canvas>
@@ -51,22 +57,13 @@
                 
                 <div class="mt-2">
                     {% if data_tersedia == 0 %}
-                        <div class="mt-2 ">
-                            {% for key, val in bulan_tahun.items %}
-                                <h5 class="text-light text-center " >{{ key }}  {{ val }}</h5>
-                            {% endfor %}                      
-                        </div>  
+                    
                         <div class="mt-2">
                             <h5 class="text-danger text-center ">Data tidak tersedia</h5>  
                         </div>
                     {% else %}  
                    
-                        <div class="mt-2 ">
-                            {% for key, val in bulan_tahun.items %}
-                            <h5 class="text-light text-center " > {{ key }}  {{ val }}</h5>
-                            {% endfor %}
-                        </div>
-                        <div class="mt-1 ">
+                        <div class="mt-3 ">
                             {% for key, val  in data_final.items  %}
                             <h5>{{ forloop.counter }}. {{ key }} = {{  val }} </h5>  
                              {% endfor %}
@@ -83,7 +80,7 @@
 
 
             </div>
-        </div>
+        </div>                                                                 
     </div>
 </div>
 

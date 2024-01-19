@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'surat_tu_app',
     'accounts',
+    'surat_tu_keluar', 
 ]
 
 MIDDLEWARE = [

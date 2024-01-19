@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('surat/',include('surat_tu_app.urls')),
+    path('surat/',include('surat_tu_keluar.urls')),
 ]
 
 if settings.DEBUG:

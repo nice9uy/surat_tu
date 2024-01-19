@@ -1,11 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block home %}
 
 {% include 'header/home.html' %}
 
-<div class="container">
+  <div style="justify-content: center;" class="d-flex mt-5 gap-5">
+      <div class="card text-center col-4">
+        <div class="card-header">
+          TOTAL SURAT MASUK
+        </div>
+        <div class="card-body">
+          <canvas id="total_surat_masuk" class="mb-2  " style="max-width:800px; max-height: 800px;"></canvas>       
+        </div>
+        <div style="font-size: 16px;" class="card-footer text-body-secondary fw-bold">
+          Total = {{ jumlah_surat_masuk_semuanya | intcomma }} Surat
+        </div>
+      </div>
+
+      <div class="card text-center col-4">
+        <div class="card-header">
+          TOTAL SURAT MASUK
+        </div>
+        <div class="card-body">
+          <canvas id="total_surat_masuk" class="mb-2  " style="max-width:800px; max-height: 800px;"></canvas>       
+        </div>
+        <div class="card-footer text-body-secondary">
+          2 days ago
+        </div>
+      </div>
+  </div>
+
+
+<div class="container mt-5">
   <footer class="">
     <p class="text-center text-muted">
       &copy; 2023 - {% now 'Y' %} By Abdul Rachman <br>
@@ -13,6 +41,34 @@
     </p>
   </footer>
 </div>
+
+<script>
+
+  const ctx = document.getElementById("total_surat_masuk").getContext("2d"); 
+  var myChart = new Chart(ctx, {
+          type: "pie",
+          data: {
+              labels: {{ label | safe }},
+              datasets: [
+              {
+                  label            : 'JUMLAH SURAT  ',
+                  data             :  {{ y_data_surat | safe }},
+                  backgroundColor  : {{ color_bar | safe }},
+              }
+             ]
+          },
+          options: { 
+              responsive: true,
+              legend : {
+                  display : false,
+                  labels : {
+                      fontColor : "white",
+                  },
+              }
+             
+          }
+      });
+  </script>
 
 
 
