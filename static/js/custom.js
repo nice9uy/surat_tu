@@ -33,6 +33,24 @@ function tabel_data() {
     // "dom": 'rtip'
   });
 
+  new DataTable('#tabel_nota_dinas',{
+    // scrollX: true,
+    // autoWidth: true,
+    // scrollCollapse: true,
+    // scrollY : "500px"
+    "searching": false,
+    "dom"      : 'rtip'
+});
+
+
+new DataTable('#tabel_detail_nota_dinas',{
+  // scrollX: true,
+  // autoWidth: true,
+  // scrollCollapse: true,
+  // scrollY : "500px"
+  
+});
+
 
 
 

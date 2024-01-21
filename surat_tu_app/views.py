@@ -12,7 +12,7 @@ from django.http import JsonResponse
 import calendar
 
 # from django.shortcuts import create_object
-# color_bar_x                      = ["#7CB9E8", "#C46210", "#9F2B68","#F19CBB","#3B7A57","#FFBF00","#3DDC84","#00FFFF","#FDEE00","#007FFF","#CAE00D","#A57164","#4F7942","#E936A7"]
+
 color_bar_x                      = [
      "#7CB9E8","#DB2D43","#C46210","#9F2B68","#F19CBB","#3B7A57","#FFBF00","#9966CC","#3DDC84",
      "#FBCEB1","#00FFFF","#7FFFD4","#D0FF14","#4B6F44","#E9D66B","#007FFF","#F4C2C2","#DA1884",
@@ -233,7 +233,6 @@ def tambah_surat(request):
          print(e)
         # return render (request , 'pages/error_upload_surat.html' )
     
-@staff_member_required(login_url="/surat/")
 @login_required(login_url="/accounts/login/")
 def olah_surat(request) :
     user           = request.user
@@ -428,11 +427,11 @@ def upload_disposisi(request):
             no_surat_data = request.POST.get('no_surat')
             no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data )
 
-            get_tgl_disposisi      = hari_ini
-            get_disposisi          = request.POST.get('disposisi')
-            no_agenda              = request.POST.get('no_agenda')
-            catatan                = request.POST.get('catatan')
-            files_upload_disposisi = request.FILES.get('file_name')
+            get_tgl_disposisi         = hari_ini
+            get_disposisi             = request.POST.get('disposisi')
+            no_agenda                 = request.POST.get('no_agenda')
+            catatan                   = request.POST.get('catatan')
+            files_upload_disposisi    = request.FILES.get('file_name')
 
             disposisi_instance = DisposisiDb(   
 
@@ -453,6 +452,7 @@ def upload_disposisi(request):
     return redirect('olah_surat')
  
 
+@login_required(login_url="/accounts/login/")
 def filter_tanggal(request):
     data_x = DbSurat.objects.all()
     try:
@@ -473,7 +473,9 @@ def filter_tanggal(request):
         }
 
         return render (request , 'pages/index.html' , context )
-    
+
+
+@login_required(login_url="/accounts/login/")
 def filter_tanggal_olah_surat(request):
     data_x = DbSurat.objects.all()
     try:
@@ -492,7 +494,9 @@ def filter_tanggal_olah_surat(request):
             'data_surat'   : datasurat,
         }
         return render (request , 'pages/olah_surat.html' , context )
-    
+
+
+@login_required(login_url="/accounts/login/")
 def generate_no_agenda(request):
     user       = request.user
 
@@ -712,6 +716,7 @@ def laporan_bulanan(request):
 
     return render(request , 'pages/laporan/bulanan.html', context)
 
+@login_required(login_url="/accounts/login/")
 def laporan_tahunan(request):
     now                            = datetime.now()
     year_x                         = now.strftime("%Y")

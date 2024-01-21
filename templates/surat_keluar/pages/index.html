@@ -6,24 +6,24 @@
 {% include 'surat_keluar/header/main_header.html' %}
 
 
-<div style="margin-top: 6rem;" class="wrapper">
+<div style="margin-top: 6rem;" class="wrapper text-center">
 	<div style="font-size: 2rem;" class="text-center mb-5">
 		PILIH SURAT KELUAR
 	</div>
 
 
-	<div class="accordion_wrap">
+	<div class="accordion_wrap text-center">
 		<ul>
 			<li class="walk">
 				<div class="accordion_item">
 					<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">ND</div>
 				</div>
-				<div class="accordion_menu">
+				<div class="accordion_menu text-center">
 					<div class="inner_am">
 						<div style="font-size: 18px;" class="title text-center mt-3">NOTA DINAS</div>
 						<div class="text-center mt-3">
 							{% comment %} <button class="btn btn-primary">PILIH</button> {% endcomment %}
-							<a class="btn btn-danger" aria-current="page" title="KABADAN" target="_blank" href="{% url 'nota_dinas'  %}">PILIH</a>
+							<a class="btn btn-primary" href="{% url 'nota_dinas'  %}">PILIH</a>
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 				</div>
-			</li>
+			</li> 
 			
 		</ul>
 	</div>

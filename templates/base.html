@@ -64,7 +64,7 @@
             <script type="text/javascript" src="{% static 'js/dataTables.bootstrap5.min.js' %}"></script> 
 
 
-            <script>
+            {% comment %} <script>
                 // Display the loader
                 document.getElementById('loader').style.display = 'inline-block';
             
@@ -75,7 +75,7 @@
                   // You can update the content or perform other actions here
                 //  document.getElementById('content').innerHTML += '<p>Async action complete!</p>';
                 }, 3000); // Simulating a 3-second delay
-            </script>
+            </script> {% endcomment %}
 
             <script>
                   var li_items = document.querySelectorAll(".accordion_wrap ul li");
