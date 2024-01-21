@@ -14,26 +14,48 @@
         <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
             <span class="mt-2 text-warning">Selamat Datang , {{ user|capfirst }}</span>
 
-         
-            
-            <li class="nav-item">
-              <a class="nav-link   {% if request.path == '/surat/surat_masuk/' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
-            </li>
-  
-            <li class="nav-item">
-              <a class="nav-link {% if request.path == '/surat/surat_keluar/' %} active {% endif %}" href="{% url 'surat_keluar' %}">Surat Keluar </a>
-            </li>
-  
+            {% if user.is_active and user.is_staff and user.is_authenticated %}
+          
+                <li class="nav-item">
+                  <a class="nav-link   {% if request.path == '/surat/surat_masuk/' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
+                </li>
+      
+                <li class="nav-item">
+                  <a class="nav-link {% if request.path == '/surat/surat_keluar/' %} active {% endif %}" href="{% url 'surat_keluar' %}">Surat Keluar </a>
+                </li>
 
+               <li class="nav-item">
+                  <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
+                </li> 
+
+           </div>
               <li class="nav-item">
-                <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
+                <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
               </li>
-        
-        </div>
-        <li class="nav-item">
-            <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
-          </li>
 
+             
+               {% else %} 
+
+                <li class="nav-item">
+                  <a class="nav-link   {% if request.path == '/surat/surat_masuk/' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
+                </li>
+      
+                <li class="nav-item">
+                  <a class="nav-link {% if request.path == '/surat/surat_keluar/' %} active {% endif %}" href="{% url 'surat_keluar' %}">Surat Keluar </a>
+                </li>
+
+                 {% comment %} <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/admin/' %} active {% endif %} " href="{% url 'admin:index' %}">Admin</a>
+                  </li>  {% endcomment %}
+                
+                </div>
+                      <li class="nav-item">
+                        <a type="button" class="btn btn-danger fa fa-sign-out mt-1" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logout" href="{% url 'logout' %}"></a>
+                      </li>
+            
+
+
+            {% endif %}
 
       </ul>
     </div>

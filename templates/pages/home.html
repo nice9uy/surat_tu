@@ -6,22 +6,26 @@
 
 {% include 'header/home.html' %}
 
+<div style="font-size: 2rem;" class="mt-3 text-center">
+  TOTAL SEMUA SURAT
+</div>
+
   <div style="justify-content: center;" class="d-flex mt-5 gap-5">
-      <div class="card text-center col-4">
-        <div class="card-header">
-          TOTAL SURAT MASUK
+      <div class="card text-center col-5">
+        <div style="font-size: 18px;" class="card-header text-white">
+            SURAT MASUK
         </div>
         <div class="card-body">
           <canvas id="total_surat_masuk" class="mb-2  " style="max-width:800px; max-height: 800px;"></canvas>       
         </div>
-        <div style="font-size: 16px;" class="card-footer text-body-secondary fw-bold">
+        <div style="font-size: 18px;" class="card-footer text-body-secondary fw-bold">
           Total = {{ jumlah_surat_masuk_semuanya | intcomma }} Surat
         </div>
       </div>
 
       <div class="card text-center col-4">
         <div class="card-header">
-          TOTAL SURAT MASUK
+           SURAT KELUAR
         </div>
         <div class="card-body">
           <canvas id="total_surat_masuk" class="mb-2  " style="max-width:800px; max-height: 800px;"></canvas>       

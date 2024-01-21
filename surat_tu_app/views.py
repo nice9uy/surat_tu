@@ -20,7 +20,8 @@ color_bar_x                      = [
      "#D70040","#ED9121","#703642","#ACE1AF","#1DACD6","#E68FAC","#80FF00","#E4D00A","#58427C"    
 ]
 
-
+# @staff_member_required(login_url="/surat/")
+@login_required(login_url="/accounts/login/")
 def home(request):
     ################################### SURAT MASUK ################################
     label                          = []
@@ -232,7 +233,7 @@ def tambah_surat(request):
          print(e)
         # return render (request , 'pages/error_upload_surat.html' )
     
-# @staff_member_required(login_url="/surat/")
+@staff_member_required(login_url="/surat/")
 @login_required(login_url="/accounts/login/")
 def olah_surat(request) :
     user           = request.user
@@ -330,10 +331,12 @@ def disposisi(request ):
         disposisi = DisposisiDb.objects.filter(no_surat = filtered).values()
 
         context = {
-            'disposisi': disposisi,
+            'page_title'      : 'Disposisi',
+            'disposisi'       : disposisi,
         }
 
         return render(request, 'pages/disposisi.html',  context)
+        
 
     return render(request, 'pages/disposisi.html')
   

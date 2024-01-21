@@ -32,6 +32,10 @@ class ListTempNoAgenda(admin.ModelAdmin):
     list_display = ('username','no_agenda','jenis_surat')
 
 
+admin.site.site_header = 'Admin ARSIP TU SETBARANAHAN'                    # default: "Django Administration"
+admin.site.index_title = 'SEMUA DATABASE ARSIP'   
+
+
 admin.site.register(DbSurat,ListDbSurat)
 admin.site.register(DbKlasifikasi, ListKlasifikasi)
 admin.site.register(DisposisiDb , ListDisposisiDb)

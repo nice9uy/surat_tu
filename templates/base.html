@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" >
     <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap5.min.css' %}">
     <script type="text/javascript" src="{% static 'js/chart.min.js' %}"></script> 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/kemhan_logo.png' %}">
@@ -52,6 +53,7 @@
             {% block laporan_tahunan %}{% endblock laporan_tahunan %}
 
             {% block surat_keluar %}{% endblock surat_keluar %}
+            {% block nota_dinas %}{% endblock nota_dinas %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -73,6 +75,26 @@
                   // You can update the content or perform other actions here
                 //  document.getElementById('content').innerHTML += '<p>Async action complete!</p>';
                 }, 3000); // Simulating a 3-second delay
+            </script>
+
+            <script>
+                  var li_items = document.querySelectorAll(".accordion_wrap ul li");
+                  var ul = document.querySelector(".accordion_wrap ul");
+
+                  li_items.forEach(function(item){
+                    item.addEventListener("click", function(){
+                      li_items.forEach(function(item){
+                        item.classList.remove("active");
+                      })
+                      item.classList.add("active");
+                    });
+                  });
+
+                  ul.addEventListener("mouseleave", function(){
+                    li_items.forEach(function(item){
+                      item.classList.remove("active");
+                    })
+                  });
             </script>
 
          
