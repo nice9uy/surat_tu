@@ -3,7 +3,7 @@ from django.apps import AppConfig
 def create_group(sender, **kwargs):
     from django.contrib.auth.models import Group
 
-    group_names = ['ADMIN_TU']
+    group_names = ['ADMIN_TU',"SUPERVISOR","USER"]
 
     # Check if the group already exists to avoid duplicates
     for group_name in group_names:

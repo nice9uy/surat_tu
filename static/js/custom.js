@@ -38,8 +38,8 @@ function tabel_data() {
     // autoWidth: true,
     // scrollCollapse: true,
     // scrollY : "500px"
-    "searching": false,
-    "dom"      : 'rtip'
+    // "searching": false,
+    // "dom"      : 'rtip'
 });
 
 

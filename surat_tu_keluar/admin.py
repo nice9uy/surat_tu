@@ -8,8 +8,8 @@ class ListNotaDinas(admin.ModelAdmin):
 
 class ListDetailNotaDinas(admin.ModelAdmin):
     list_display = ('id', 'id_nota_dinas','username',
-                    'tanggal', 'no_takah', 'kepada',
-                    'perihal','keterangan','keterangan_tambahan'
+                    'no_urut', 'no_takah', 'kepada',
+                    'perihal','keterangan','catatan'
                     )
 
 

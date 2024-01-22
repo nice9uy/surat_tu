@@ -22,12 +22,13 @@ class SemuaNotaDinas(models.Model):
     id                     = models.AutoField(primary_key=True, unique=True)
     id_nota_dinas          = models.ForeignKey(NotaDinas, on_delete = models.CASCADE )
     username               = models.CharField(max_length=30)
-    tanggal                = models.DateField()
-    no_takah               = models.CharField(max_length=30)
-    kepada                 = models.CharField(max_length=30)
-    perihal                = models.CharField(max_length=200)
-    keterangan             = models.CharField(max_length=200)
-    keterangan_tambahan    = models.CharField(max_length=200)
+    no_urut                = models.CharField(max_length=100, null=True ,  blank=True)
+    no_takah               = models.CharField(max_length=30, null=True ,  blank=True)
+    kepada                 = models.CharField(max_length=30, null=True ,  blank=True)
+    perihal                = models.CharField(max_length=200, null=True ,  blank=True)
+    keterangan             = models.CharField(max_length=200, null=True ,  blank=True)
+    catatan                = models.CharField(max_length=200, null=True ,  blank=True)
+    bagian                 = models.CharField(max_length=10, null=True ,  blank=True)
 
     class Meta:
         db_table = "SemuaNotaDinas"

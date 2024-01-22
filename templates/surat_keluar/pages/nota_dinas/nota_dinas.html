@@ -16,10 +16,10 @@
             </div>
         </form>
         
-        <form method="POST" action="{% url 'tambah_nota_dinas' %}">
+        <form method="POST" action="{% url 'tambah_tanggal_nota_dinas' %}">
             {% csrf_token %}
             <div  class="gap-3">
-                <button class="btn btn-primary btn-sm " type="submit">TAMBAH NOTA DINAS</button>
+                <button class="btn btn-primary btn-sm " type="submit">BUAT NOTA DINAS</button>
             </div>
         </form>
       </div>
@@ -40,7 +40,6 @@
             <td class="text-center">{{ data.tanggal  |date:'l , d F Y' }}</td>
 
             <td class="text-center gap-2"> 
-                <a type="button" class="btn btn-success btn-sm fa-solid fa-file-lines"  title="DETAIL NOTA DINAS" aria-current="page" href="{% url 'detail_nota_dinas' data.id %}"></a>
                 <a type="button" class="btn btn-success btn-sm fa-solid fa-file-lines"  title="DETAIL NOTA DINAS" aria-current="page" href="{% url 'detail_nota_dinas' data.id %}"></a>
 
               </td> 

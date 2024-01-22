@@ -1,9 +1,11 @@
 from datetime import date
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 from . models import NotaDinas
 
 # Create your views here.
 
+@login_required(login_url="/accounts/login/")
 def surat_keluar(request):
     context = {
         'page_title'    : 'Surat Keluar',
@@ -11,6 +13,7 @@ def surat_keluar(request):
     return render (request , 'surat_keluar/pages/index.html', context )
 
 
+@login_required(login_url="/accounts/login/")
 def nota_dinas(request):
     nota_dinas                     =  NotaDinas.objects.all()
     context = {
@@ -19,7 +22,9 @@ def nota_dinas(request):
     }
     return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
 
-def tambah_nota_dinas(request):
+
+@login_required(login_url="/accounts/login/")
+def tambah_tanggal_nota_dinas(request):
     username                       =  request.user
     hari_ini                       =  date.today()
     tgl_nota_dinas                 =  NotaDinas.objects.filter(tanggal = hari_ini).values().count()
@@ -31,7 +36,7 @@ def tambah_nota_dinas(request):
             tanggal                =  hari_ini,                        
         )
         save_to_no_agenda.save()
-        return redirect('tambah_nota_dinas')
+        return redirect('tambah_tanggal_nota_dinas')
     else:
         pass
     context = {
@@ -42,11 +47,13 @@ def tambah_nota_dinas(request):
     return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
 
 
-def detail_nota_dinas(request , id_nota_dinas):
+@login_required(login_url="/accounts/login/")
+def detail_nota_dinas(request , id_detail_nota_dinas):
 
-    tanggal                          = list(NotaDinas.objects.filter(id = id_nota_dinas ).values_list('tanggal' , flat=True))
+    tanggal                          = list(NotaDinas.objects.filter(id = id_detail_nota_dinas ).values_list('tanggal' , flat=True))
     get_tanggal                      = tanggal[0]
 
+    # print(get_tanggal)
 
     # username                       =  request.user
     # hari_ini                       =  date.today()

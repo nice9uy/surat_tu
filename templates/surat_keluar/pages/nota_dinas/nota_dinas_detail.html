@@ -10,10 +10,13 @@
       <div style="margin-top: -2.5rem; justify-content: end" class="d-flex mb-3">
         
         
-        <form method="POST" action="{% url 'tambah_nota_dinas' %}">
+        <form method="POST" action="">
             {% csrf_token %}
             <div  class="gap-3">
-                <button class="btn btn-primary btn-sm " type="submit">TAMBAH NOTA DINAS</button>
+                {% comment %} <a class="btn btn-primary btn-sm " type="submit" aria-current="page" href="" >TAMBAH NOTA DINAS</a> {% endcomment %}
+                <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="TAMBAH NOTA DINAS" data-bs-target="#tambah_nota_dinas">TAMBAH NOTA DINAS</button>
+
+
             </div>
         </form>
       </div>
@@ -30,7 +33,6 @@
           <th class="text-center">Keterangan</th>
           <th class="text-center">Catatan</th>
           <th class="text-center">Bagian</th>
-          <th class="text-center">File</th>
           <th class="text-center">Aksi</th>
         </tr>
       </thead>
@@ -41,7 +43,7 @@
             <td class="text-center">{{ data.tanggal | date:'d F Y' }}</td>
 
             <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fa-solid fa-file-lines"  data-bs-toggle="modal" data-placement="bottom" title="DETAIL NOTA DINAS" data-bs-target="#button_edit_olah_surat"></button>
+                <button type="button" class="btn btn-success btn-sm fa-solid fa-file-lines"  data-bs-toggle="modal" data-placement="bottom" title="DETAIL NOTA DINAS" data-bs-target="#tambah_nota_dinas"></button>
                 <button type="button" class="btn btn-info btn-sm fa-solid fa-file-circle-check"  data-bs-toggle="modal" data-placement="bottom" title="SEMUA NOTA DINAS" data-bs-target="#button_hapus_olah_surat"></button>
             </td> 
 
@@ -52,6 +54,7 @@
 
   </div>
 
+  {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}
 
   <div class="container">
     <footer class="">
