@@ -8,6 +8,7 @@
 <div class="container-fluid mt-3 text-white" style="">
     <h5 class="text-center">NOTA DINAS</h5>
       <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
+
         <form method="POST" action="">
           <div class="d-flex mb-2 ">   
               {% csrf_token %}
@@ -24,30 +25,39 @@
         </form>
       </div>
 
-
-    <table id="tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
-      <thead>
-        <tr>
-          <th class="text-center">Nomor</th>
-          <th class="text-center">Tanggal</th>
-          <th class="text-center">Detail</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for data in nota_dinas %}
+      
+   
+      <table id="tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
+        <thead>
           <tr>
-            <td class="text-center" >{{ forloop.counter }}</td>
-            <td class="text-center">{{ data.tanggal  |date:'l , d F Y' }}</td>
-
-            <td class="text-center gap-2"> 
-                <a type="button" class="btn btn-success btn-sm fa-solid fa-file-lines"  title="DETAIL NOTA DINAS" aria-current="page" href="{% url 'detail_nota_dinas' data.id %}"></a>
-
-              </td> 
-
+            <th class="text-center">No</th>
+            <th class="text-center">Tanggal</th>
+            <th class="text-center">Detail</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table> 
+        </thead>
+        <tbody>
+
+          {% for data in nota_dinas %}
+          
+            <tr>
+              <td class="text-center" >{{ forloop.counter }}</td>
+              <td class="text-center ">{{ data.tanggal|date:'l , d M Y' }}</td>
+
+              <td class="text-center">
+                <div>
+                    <a type="button" class="btn btn-success btn-sm fa-solid fa-share-from-square"  title="DETAIL NOTA DINAS" href="{% url 'detail_nota_dinas' data.id %}"></a>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+
+
+
+
+     
 
   </div>
 
