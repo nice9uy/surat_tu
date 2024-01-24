@@ -22,7 +22,7 @@ class SemuaNotaDinas(models.Model):
     id                     = models.AutoField(primary_key=True, unique=True)
     id_nota_dinas          = models.ForeignKey(NotaDinas, on_delete = models.CASCADE )
     username               = models.CharField(max_length=30)
-    no_urut                = models.CharField(max_length=100, null=True ,  blank=True)
+    no_urut                = models.CharField(max_length=50)
     no_takah               = models.CharField(max_length=30, null=True ,  blank=True)
     kepada                 = models.CharField(max_length=30, null=True ,  blank=True)
     perihal                = models.CharField(max_length=200, null=True ,  blank=True)

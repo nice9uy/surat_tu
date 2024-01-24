@@ -22,6 +22,15 @@ def nota_dinas(request):
     }
     return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
 
+@login_required(login_url="/accounts/login/")
+def tanggal_nota_dinas(request):
+    nota_dinas                     =  NotaDinas.objects.all()
+
+    context = {
+        'tgl_nota_dinas'   : nota_dinas
+    }
+
+    return render (request , 'surat_keluar/pages/nota_dinas/tanggal_nota_dinas.html', context)
 
 @login_required(login_url="/accounts/login/")
 def tambah_tanggal_nota_dinas(request):
@@ -29,6 +38,8 @@ def tambah_tanggal_nota_dinas(request):
     hari_ini                       =  date.today()
     tgl_nota_dinas                 =  NotaDinas.objects.filter(tanggal = hari_ini).values().count()
     nota_dinas                     =  NotaDinas.objects.all()
+
+    print(nota_dinas)
     
     if tgl_nota_dinas  == 0 :
         save_to_no_agenda          =  NotaDinas(   
@@ -44,7 +55,7 @@ def tambah_tanggal_nota_dinas(request):
         'hari_ini'      :  hari_ini,
         'nota_dinas'    :  nota_dinas
     }
-    return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
+    return render (request , 'surat_keluar/pages/nota_dinas/tanggal_nota_dinas.html', context)
 
 
 @login_required(login_url="/accounts/login/")

@@ -8,18 +8,18 @@
         <span>ARSIP TU SETBARANAHAN</span>
       </a>
 
-      <ul class="nav nav-underline">
+      <ul class="nav nav-underline fw-bold ">
 
         <li class="nav-item">
             <a class="nav-link  fa fa-arrow-left " href="{% url 'surat_keluar' %}"></a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'surat_keluar' %}">Tanggal Nota Dinas</a>
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/tanggal_nota_dinas/' %} active {% endif %}" href="{% url 'tanggal_nota_dinas' %}">Tanggal</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'surat_keluar' %}">Semua Nota Dinas</a>
+          <a class="nav-link " href="{% url 'surat_keluar' %}">Nota Dinas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="{% url 'surat_keluar' %}">Bon Nomor</a>
