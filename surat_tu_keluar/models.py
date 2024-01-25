@@ -20,7 +20,7 @@ class NotaDinas(models.Model):
 class SemuaNotaDinas(models.Model):
 
     id                     = models.AutoField(primary_key=True, unique=True)
-    id_nota_dinas          = models.ForeignKey(NotaDinas, on_delete = models.CASCADE )
+    id_semua_nota_dinas    = models.ForeignKey(NotaDinas, on_delete = models.CASCADE )
     username               = models.CharField(max_length=30)
     no_urut                = models.CharField(max_length=50)
     no_takah               = models.CharField(max_length=30, null=True ,  blank=True)

@@ -8,5 +8,5 @@ urlpatterns = [
 
 
     path('surat_keluar/tambah_tanggal_nota_dinas/', views.tambah_tanggal_nota_dinas, name='tambah_tanggal_nota_dinas' ),
-    path('surat_keluar/detail_nota_dinas/<int:id_detail_nota_dinas>/', views.detail_nota_dinas, name='detail_nota_dinas' ),
+    path('surat_keluar/tambah_detail_nota_dinas/<int:id_tambah_detail_nota_dinas>/', views.tambah_detail_nota_dinas, name='tambah_detail_nota_dinas' ),
 ]

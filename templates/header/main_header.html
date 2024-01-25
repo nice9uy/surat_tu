@@ -13,13 +13,13 @@
 
         <div style="margin-right: 3.5rem; font-weight: bold; " class="d-flex gap-4">
           
-          <li class="nav-item">
+          <li class="nav-item mt-1">
             <a class="nav-link  fa fa-arrow-left " href="{% url 'home' %}"></a>
           </li>
         
           {% if user.is_active and user.is_staff %}
           
-          <li class="nav-item">
+          <li class="nav-item ">
             <a class="nav-link   {% if request.path == '/surat/surat_masuk' %} active {% endif %}" href="{% url 'surat_masuk' %}">Surat Masuk</a>
           </li>
 
