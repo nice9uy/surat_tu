@@ -30,5 +30,8 @@ class SemuaNotaDinas(models.Model):
     catatan                = models.CharField(max_length=200, null=True ,  blank=True)
     bagian                 = models.CharField(max_length=10, null=True ,  blank=True)
 
+    # def __int__(self):
+    #     return self.id_semua_nota_dinas
+
     class Meta:
         db_table = "SemuaNotaDinas"
