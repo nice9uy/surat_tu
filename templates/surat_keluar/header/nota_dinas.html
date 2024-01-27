@@ -15,11 +15,11 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {% if request.path == '/surat/surat_keluar/tanggal_nota_dinas/' %} active {% endif %}" href="">Nota Dinas</a>
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/nota_dinas/' %} active {% endif %}" href="{% url 'nota_dinas' %}">Nota Dinas</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'surat_keluar' %}">Olah Nota Dinas</a>
+          <a class="nav-link {% if request.path == '/surat/surat_keluar/olah_nota_dinas/' %} active {% endif %}" href="{% url 'olah_nota_dinas' %}">Olah Nota Dinas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="{% url 'surat_keluar' %}">Bon Nomor</a>
@@ -28,6 +28,8 @@
     </div>
   </nav>
 </div>
+
+
 
 
 

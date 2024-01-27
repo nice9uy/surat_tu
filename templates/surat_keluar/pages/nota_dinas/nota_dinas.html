@@ -19,35 +19,30 @@
           </div>
       </form>
       
-      <form method="POST" action="">
-          {% csrf_token %}
-          <div  class="gap-3">
-              <button class="btn btn-primary btn-sm " type="submit">TAMBAH NOTA DINAS</button>
-          </div>
-      </form>
     </div>
 
-      <table id="detail_tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
+      <table id="tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
 
             <th class="text-center">No</th>
-            <th class="text-center">Nomor Urut</th>
+            <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Takah</th>
             <th class="text-center">Kepada</th>
             <th class="text-center">Perihal</th>
             <th class="text-center">Keterangan</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
-            <th class="text-center">Aksi</th>
+            <th class="text-center">File</th>
+            
             
           </tr>
         </thead>
         <tbody>
-          {% for data in detail_nota_dinas %}
+          {% for data in nota_dinas %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
-              <td >{{ data.no_urut }}</td>
+              <td class="text-center">{{ data.tanggal }}</td>
               <td>{{ data.no_takah | default_if_none:""  }}</td>
               <td>{{ data.kepada | default_if_none:"" }}</td>
               <td>{{ data.perihal | default_if_none:"" }}</td>
@@ -55,10 +50,12 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
               <td>{{ data.bagian | default_if_none:"" }}</td>
   
-    
-              <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-danger btn-sm fa fa-trash"  data-bs-toggle="modal" data-placement="bottom" title="HAPUS" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
-              </td> 
+              <td class="text-center">
+                <div style="margin-left: -15px;">
+                  <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
+                </div>
+              </td>
+            
   
             </tr>
           {% endfor %}

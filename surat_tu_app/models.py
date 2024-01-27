@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 
 def save_file_disposisi(instance, filename):
-    return f"{instance.username}/Disposisi/{filename}"
+    return f"Surat_Masuk/{instance.username}/Disposisi/{filename}"
 
 def save_file_surat(instance, filename):
-    return f"{instance.username}/SuratMasuk/{filename}"
+    return f"Surat_Masuk/{instance.username}/SuratMasuk/{filename}"
     
 
 class DbSurat(models.Model):

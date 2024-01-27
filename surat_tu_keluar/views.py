@@ -2,6 +2,7 @@ from datetime import date
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . models import NotaDinas
+from django.db.models import Q
 
 # Create your views here.
 
@@ -15,7 +16,11 @@ def surat_keluar(request):
 
 @login_required(login_url="/accounts/login/")
 def nota_dinas(request):
-    nota_dinas                     =  NotaDinas.objects.all()
+    x   = request.user
+    print(x)
+
+    nota_dinas                      =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+
     context = {
         'page_title'    : 'Nota Dinas',
         'nota_dinas'    :  nota_dinas
@@ -23,8 +28,61 @@ def nota_dinas(request):
     return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
 
 
+def olah_nota_dinas(request):
+    nota_dinas                      =  NotaDinas.objects.all()
+
+    context = {
+        'page_title'          : 'Nota Dinas',
+        'olah_nota_dinas'     :  nota_dinas
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html', context)
 
 
+def tambah_olah_nota_dinas(request):
+    #####################################################################################################
+    try:
+        no_urut_nota_dinas               = list(NotaDinas.objects.all().values_list('no_urut').last())
+        nota_dinas_data                  = no_urut_nota_dinas[0]
+
+        get_no_akhir                     = int(nota_dinas_data) + 1
+    except:
+        get_no_akhir  = 1
+        
+    #####################################################################################################   
+        
+    get_username                         =  request.user
+    get_hari_ini                         =  date.today()
+    get_no_urut                          =  get_no_akhir
+    get_no_takah                         =  ''
+    get_kepada                           =  ''
+    get_perihal                          =  ''
+    get_keterangan                       =  ''
+    get_catatan                          =  ''
+    get_bagian                           =  ''
+    get_upload_file                      =  ''
+
+    SemuaNotaDinas_instance = NotaDinas(   
+
+        username                         = get_username,
+        tanggal                          = get_hari_ini,
+        no_urut                          = get_no_urut,
+        no_takah                         = get_no_takah,
+        kepada                           = get_kepada,
+        perihal                          = get_perihal,
+        keterangan                       = get_keterangan,
+        catatan                          = get_catatan,
+        bagian                           = get_bagian,
+        upload_file                      = get_upload_file
+                 
+    )
+
+    SemuaNotaDinas_instance.save()
+
+    context = {
+        'page_title'     : 'Olah Nota Dinas',
+        'tanggal'        :  get_hari_ini
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html', context)
 
 
 

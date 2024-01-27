@@ -13,5 +13,6 @@ urlpatterns = [
 
 
     path('surat_keluar/nota_dinas/', views.nota_dinas, name='nota_dinas' ),
+    path('surat_keluar/olah_nota_dinas/', views.olah_nota_dinas, name='olah_nota_dinas' ),
 
 ]

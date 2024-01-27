@@ -53,9 +53,11 @@
             {% block laporan_tahunan %}{% endblock laporan_tahunan %}
 
             {% block surat_keluar %}{% endblock surat_keluar %}
+            {% comment %} {% block tambah_nota_dinas %}{% endblock tambah_nota_dinas %}
+            {% block tambah_tanggal_nota_dinas %}{% endblock tambah_tanggal_nota_dinas %} {% endcomment %}
+
             {% block nota_dinas %}{% endblock nota_dinas %}
-            {% block tambah_nota_dinas %}{% endblock tambah_nota_dinas %}
-            {% block tambah_tanggal_nota_dinas %}{% endblock tambah_tanggal_nota_dinas %}
+            {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -102,15 +104,10 @@
 
             <script>
                   new DataTable('#tabel_nota_dinas',{
-                    "searching": false,
-                    "dom"      : 'rtip',
-                    "info"     : false, 
-                    
+                                       
                   });
-
-                  new DataTable('#detail_tabel_nota_dinas',{
-                   
-                    
+                  new DataTable('#tabel_olah_tabel_nota_dinas',{
+          
                   });
 
             </script>

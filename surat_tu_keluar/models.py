@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 
 def save_file_nota_dinas(instance, filename):
-    return f"{instance.username}/NotaDinas/{filename}"
+    return f"Surat_Keluar/{instance.username}/NotaDinas/{filename}"
 
-def save_file_surat(instance, filename):
-    return f"{instance.username}/SuratMasuk/{filename}"
+# def save_file_surat(instance, filename):
+#     return f"{instance.username}/SuratMa/{filename}"
     
 # class NotaDinas(models.Model):
   
