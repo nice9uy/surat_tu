@@ -27,8 +27,8 @@ class NotaDinas(models.Model):
     kepada                 = models.CharField(max_length=30, null=True ,  blank=True)
     perihal                = models.CharField(max_length=200, null=True ,  blank=True)
     keterangan             = models.CharField(max_length=200, null=True ,  blank=True)
-    catatan                = models.CharField(max_length=200, null=True ,  blank=True)
     bagian                 = models.CharField(max_length=10, null=True ,  blank=True)
+    catatan               = models.CharField(max_length=200, null=True ,  blank=True)
     upload_file            = models.FileField(upload_to = save_file_nota_dinas, null = True, blank=True , validators=[FileExtensionValidator(allowed_extensions=["pdf"])] )
 
     # def __int__(self):

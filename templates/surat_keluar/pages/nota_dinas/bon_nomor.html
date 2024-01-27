@@ -1,56 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block nota_dinas %} 
+{% block bon_nomor %} 
 
 {% include 'surat_keluar/header/nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">NOTA DINAS  {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">BON NOMOR  {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
     
-    <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
+    {% comment %} <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_nota_dinas' %}">
+    <form method="POST" action="{% url 'filter_bon_nomor' %}">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
             <button class="btn btn-primary btn-sm " type="submit">Cari</button>
           </div>
-      </form>
+      </form> 
       
-    </div>
+    </div> {% endcomment %}
 
       <table id="tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
 
-            <th class="text-center">No</th>
+            <th class="text-center">No</th> 
             <th class="text-center">Tanggal</th>
-            <th class="text-center">Nomor Takah</th>
-            <th class="text-center">Kepada</th>
-            <th class="text-center">Perihal</th>
-            <th class="text-center">Keterangan</th>
-            <th class="text-center">File</th>
+            <th class="text-center">No Urut</th>
+            <th class="text-center">Bagian</th>
+            <th class="text-center">Catatan</th>
             
             
           </tr>
         </thead>
         <tbody>
-          {% for data in nota_dinas %}
+          {% for data in bon_nomor_nota_dinas %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
-              <td>{{ data.no_takah | default_if_none:""  }}</td>
-              <td>{{ data.kepada | default_if_none:"" }}</td>
-              <td>{{ data.perihal | default_if_none:"" }}</td>
-              <td>{{ data.keterangan | default_if_none:"" }}</td>
-              <td class="text-center">
-                <div style="margin-left: -15px;">
-                  <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
-                </div>
-              </td>
-            
+              <td class="text-center ">{{ data.no_urut | default_if_none:""  }}</td>
+              <td>{{ data.bagian | default_if_none:"" }}</td>
+              <td>{{ data.catatan | default_if_none:"" }}</td>
   
             </tr>
           {% endfor %}
@@ -71,7 +62,7 @@
   </div>
 
 
-{% endblock nota_dinas %} 
+{% endblock bon_nomor %} 
 
 
 
