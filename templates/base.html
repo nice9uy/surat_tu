@@ -59,6 +59,10 @@
             {% block nota_dinas %}{% endblock nota_dinas %}
             {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
             {% block bon_nomor %}{% endblock bon_nomor %}
+            {% block no_tersedia %}{% endblock no_tersedia %}
+            {% block bon_nomor_filter %}{% endblock bon_nomor_filter %}
+            {% block filter_tanggal_no_tersedia %}{% endblock filter_tanggal_no_tersedia %}
+            {% block filter_tanggal_bon_nomor %}{% endblock filter_tanggal_bon_nomor %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -108,6 +112,15 @@
                                        
                   });
                   new DataTable('#tabel_olah_tabel_nota_dinas',{
+          
+                  });
+                  new DataTable('#tabel_bon_nomor',{
+          
+                  });
+                  new DataTable('#tabel_no_tersedia',{
+          
+                  });
+                  new DataTable('#tabel_filter_bon_nomor',{
           
                   });
 

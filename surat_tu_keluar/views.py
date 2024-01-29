@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from . models import NotaDinas
 from django.db.models import Q
 from datetime import datetime
+from django.utils.dateparse import parse_date
 
 # Create your views here.
 
@@ -14,6 +15,8 @@ def surat_keluar(request):
     }
     return render (request , 'surat_keluar/pages/index.html', context )
 
+#################### NOTA DINAS ############################################################
+
 @login_required(login_url="/accounts/login/")
 def nota_dinas(request):
     nota_dinas                      =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
@@ -23,51 +26,210 @@ def nota_dinas(request):
     }
     return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html', context)
 
+def filter_nota_dinas(request):
+    nota_dinas                               =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+    try:
+        if request.method == 'POST':
+            get_tgl_nota_dinas               = request.POST.get('tanggal')
+            data_nota_dinas                  = NotaDinas.objects.filter( tanggal = get_tgl_nota_dinas).values()
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'nota_dinas'                   :  data_nota_dinas,
+            'tanggal_nota_dinas'           :  get_tgl_nota_dinas
+        }
+        return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
+    except:
+        datasurat_keluar = nota_dinas
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'nota_dinas'                   :  datasurat_keluar,
+            'tanggal_nota_dinas'           :  get_tgl_nota_dinas
+        }
 
-def olah_nota_dinas(request):
-    # nota_dinas                      =  NotaDinas.objects.filter(~Q(no_takah__isnull=False) &  ~Q(no_takah__exact='') , ~Q(kepada__isnull=False) &  ~Q(kepada__exact='')  , ~Q(perihal__isnull=False) &  ~Q(perihal__exact='') , ~Q(keterangan__isnull=False) &  ~Q(keterangan__exact=''), ~Q(bagian__isnull=False) &  ~Q(bagian__exact=''), ~Q(catatan__isnull=False) &  ~Q(catatan__exact=''))
-    nota_dinas                      =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
+        return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
 
-    context = {
-        'page_title'          : 'Nota Dinas',
-        'olah_nota_dinas'     :  nota_dinas
-    }
-    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html', context)
-
+###################  BON NOMOR               ##############################################
+    
 def bon_nomor(request):
-    nota_dinas                           =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
+    # nota_dinas                           =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
+    nota_dinas                           =  NotaDinas.objects.all()
+
     context = {
         'page_title'                     : 'Nota Dinas',
-        'bon_nomor_nota_dinas'           :  nota_dinas
+        'olah_nota_dinas'                :  nota_dinas 
     }
     return render (request , 'surat_keluar/pages/nota_dinas/bon_nomor.html', context)
 
 
-# def filter_bon_nomor(request):
-#     nota_dinas                           =  NotaDinas.objects.filter(~Q(__isnull=True) & ~Q(bon_oleh__exact=''))
-#     try:
-#         if request.method == 'POST':
-#             get_tgl_nota_dinas               = request.POST.get('tanggal')
-#             data_nota_dinas                  = NotaDinas.objects.filter( tanggal = get_tgl_nota_dinas, ~Q(bon_oleh__isnull=True) & ~Q(bon_oleh__exact='')).values()
-#         context = {
-#             'page_title'                   : 'Olah Nota Dinas',
-#             'bon_nomor_nota_dinas'         :  data_nota_dinas,
-#             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
-#         }
-#         return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
-#     except:
-#         datasurat_keluar = nota_dinas
-#         context = {
-#             'page_title'                   : 'Olah Nota Dinas',
-#             'bon_nomor_nota_dinas'         :  datasurat_keluar,
-#             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
-#         }
 
-#         return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
+def bon_nomor_filter(request):
+    nota_dinas                           =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
+
+    # print(nota_dinas)
+    context = {
+        'page_title'                     : 'Nota Dinas',
+        'olah_nota_dinas'                :  nota_dinas 
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/bon_nomor_filter.html', context)
+
+##############################################################################################################3
+def filter_tanggal_no_tersedia(request):
+    nota_dinas                           =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
+    try:
+        if request.method == 'POST':
+            get_tgl_nota_dinas               = request.POST.get('tanggal')
+            data_nota_filter_tanggal         = NotaDinas.objects.filter( Q(no_takah__isnull=False) &  Q(no_takah__exact='' ), tanggal = get_tgl_nota_dinas).values()
+            tanggal                          = parse_date(get_tgl_nota_dinas)
+
+            print()
+
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_tanggal_bon_nomor'    :  data_nota_filter_tanggal,
+            'tanggal_nota_dinas'           :  tanggal
+        }
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_tanggal_bon_nomor.html' , context )
+    except:
+        datasurat_keluar = nota_dinas
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_tanggal_bon_nomor'    :  datasurat_keluar,
+            # 'tanggal_nota_dinas'           :  tanggal
+        }
+
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_tanggal_bon_nomor.html' , context )
+
+
+################### NO TERSEDIA ##########################
+def no_tersedia(request):
+    nota_dinas                           =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
+    # print(nota_dinas)
+    context = {
+        'page_title'                     : 'Nota Dinas',
+        'olah_nota_dinas'                :  nota_dinas 
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/nomor_tersedia.html', context)
+
+
+
+
+################## BON NOMOR ####################################################################
+def bon_nomor_halaman(request):
+    nota_dinas                           =  NotaDinas.objects.all()
+
+    # print(nota_dinas)
+    context = {
+        'page_title'                     : 'Nota Dinas',
+        'olah_nota_dinas'                :  nota_dinas 
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/bon_nomor.html', context)
+
+def filter_tanggal_bon_nomor(request):
+    nota_dinas                           =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
+
+    try:
+        if request.method == 'POST':
+            get_tgl_nota_dinas               = request.POST.get('tanggal')
+            data_nota_filter_tanggal         = NotaDinas.objects.filter( Q(no_takah__isnull=False) &  Q(no_takah__exact='' ), tanggal = get_tgl_nota_dinas).values()
+            tanggal                          = parse_date(get_tgl_nota_dinas)
+
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_tanggal_nota_dinas'    :  data_nota_filter_tanggal,
+            'tanggal_nota_dinas'           :  tanggal
+        }
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_tanggal_nomor_tersedia.html' , context )
+    except:
+        datasurat_keluar = nota_dinas
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_tanggal_nota_dinas'    :  datasurat_keluar,
+            # 'tanggal_nota_dinas'           :  tanggal
+        }
+
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_tanggal_nomor_tersedia.html' , context )
+######################################################################################################################
+
+def olah_nota_dinas(request):
+    # nota_dinas                      =  NotaDinas.objects.filter(~Q(no_takah__isnull=False) &  ~Q(no_takah__exact='') , ~Q(kepada__isnull=False) &  ~Q(kepada__exact='')  , ~Q(perihal__isnull=False) &  ~Q(perihal__exact='') , ~Q(keterangan__isnull=False) &  ~Q(keterangan__exact=''), ~Q(bagian__isnull=False) &  ~Q(bagian__exact=''), ~Q(catatan__isnull=False) &  ~Q(catatan__exact=''))
+    # nota_dinas                      =  NotaDinas.objects.all()
+    tanggal_sekarang                    =  date.today()
+    nota_dinas                          =  NotaDinas.objects.filter(tanggal = tanggal_sekarang).values()
+
+    context = {
+        'page_title'          : 'Nota Dinas',
+        'olah_nota_dinas'     :  nota_dinas,
+        'tanggal_sekarang'    : tanggal_sekarang
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html', context)
+
+
+
+
+
+def no_tersedia(request):
+    nota_dinas                           =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
+    # print(nota_dinas)
+    context = {
+        'page_title'                     : 'Nota Dinas',
+        'olah_nota_dinas'           :  nota_dinas 
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/nomor_tersedia.html', context)
+
+
+def filter_no_tersedia(request):
+    # nota_dinas                           =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
+    # # print(nota_dinas)
+    # context = {
+    #     'page_title'                     : 'Nota Dinas',
+    #     'olah_nota_dinas'           :  nota_dinas 
+    # }
+    # return render (request , 'surat_keluar/pages/nota_dinas/nomor_tersedia.html', context)
+    # data_nota_dinas                  = NotaDinas.objects.filter( Q(no_takah__isnull=False) &  Q(no_takah__exact='' ), tanggal = get_tgl_nota_dinas).values()
+    # print(data_nota_dinas)
+
+    try:
+        if request.method == 'POST':
+            get_tgl_nota_dinas               = request.POST.get('tanggal')
+            data_nota_dinas                  = NotaDinas.objects.filter( Q(no_takah__isnull=False) &  Q(no_takah__exact='' ), tanggal = get_tgl_nota_dinas).values()
+            print(data_nota_dinas)
+        
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'nota_dinas'                   :  data_nota_dinas,
+            'tanggal_nota_dinas'           :  get_tgl_nota_dinas
+        }
+        return render (request , 'surat_keluar/pages/nota_dinas/no_tersedia.html' , context )
+    except:
+        datasurat_keluar = nota_dinas
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'nota_dinas'                   :  datasurat_keluar,
+            'tanggal_nota_dinas'           :  get_tgl_nota_dinas
+        }
+
+        return render (request , 'surat_keluar/pages/nota_dinas/no_tersedia.html' , context )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def tambah_olah_nota_dinas(request):
-    nota_dinas                          =  NotaDinas.objects.all()
+    tanggal_sekarang                    =  date.today()
+    nota_dinas                          =  NotaDinas.objects.filter(tanggal = tanggal_sekarang).values()
     #####################################################################################################
     try:
         no_urut_nota_dinas               = list(NotaDinas.objects.all().values_list('no_urut').last())
@@ -114,8 +276,12 @@ def tambah_olah_nota_dinas(request):
     }
     return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html', context)
 
-def filter_nota_dinas(request):
-    nota_dinas                               =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+
+    
+def filter_bon_nomor(request):
+    # nota_dinas                               =  NotaDinas.objects.all()
+    tanggal_sekarang                         =  date.today()
+    nota_dinas                               =  NotaDinas.objects.filter(tanggal = tanggal_sekarang).values()
     try:
         if request.method == 'POST':
             get_tgl_nota_dinas               = request.POST.get('tanggal')
@@ -125,7 +291,7 @@ def filter_nota_dinas(request):
             'nota_dinas'                   :  data_nota_dinas,
             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
         }
-        return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html' , context )
     except:
         datasurat_keluar = nota_dinas
         context = {
@@ -134,24 +300,27 @@ def filter_nota_dinas(request):
             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
         }
 
-        return render (request , 'surat_keluar/pages/nota_dinas/nota_dinas.html' , context )
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html' , context )
     
 def filter_olah_nota_dinas(request):
-    nota_dinas                               =  NotaDinas.objects.all()
+    # nota_dinas                               =  NotaDinas.objects.all()
+    tanggal_sekarang                    =  date.today()
+    nota_dinas                          =  NotaDinas.objects.filter(tanggal = tanggal_sekarang).values()
+
     try:
         if request.method == 'POST':
             get_tgl_nota_dinas               = request.POST.get('tanggal')
             data_nota_dinas                  = NotaDinas.objects.filter( tanggal = get_tgl_nota_dinas).values()
             # x                                = datetime.strptime(get_tgl_nota_dinas, '%d/%m/%y')
 
-            # print(type(xget_tgl_nota_dinas))
+            print(get_tgl_nota_dinas)
 
         context = {
             'page_title'                   : 'Olah Nota Dinas',
             'olah_nota_dinas'              :  data_nota_dinas,
             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
         }
-        return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html' , context )
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html' , context )
     except:
         datasurat_keluar = nota_dinas
         context = {
@@ -160,7 +329,7 @@ def filter_olah_nota_dinas(request):
             'tanggal_nota_dinas'           :  get_tgl_nota_dinas
         }
 
-        return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html' , context )
+        return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html' , context )
 
 
 
