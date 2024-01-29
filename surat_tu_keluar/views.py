@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from . models import NotaDinas
 from django.db.models import Q
+from datetime import datetime
 
 # Create your views here.
 
@@ -24,7 +25,8 @@ def nota_dinas(request):
 
 
 def olah_nota_dinas(request):
-    nota_dinas                      =  NotaDinas.objects.all()
+    # nota_dinas                      =  NotaDinas.objects.filter(~Q(no_takah__isnull=False) &  ~Q(no_takah__exact='') , ~Q(kepada__isnull=False) &  ~Q(kepada__exact='')  , ~Q(perihal__isnull=False) &  ~Q(perihal__exact='') , ~Q(keterangan__isnull=False) &  ~Q(keterangan__exact=''), ~Q(bagian__isnull=False) &  ~Q(bagian__exact=''), ~Q(catatan__isnull=False) &  ~Q(catatan__exact=''))
+    nota_dinas                      =  NotaDinas.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ))
 
     context = {
         'page_title'          : 'Nota Dinas',
@@ -140,6 +142,10 @@ def filter_olah_nota_dinas(request):
         if request.method == 'POST':
             get_tgl_nota_dinas               = request.POST.get('tanggal')
             data_nota_dinas                  = NotaDinas.objects.filter( tanggal = get_tgl_nota_dinas).values()
+            # x                                = datetime.strptime(get_tgl_nota_dinas, '%d/%m/%y')
+
+            # print(type(xget_tgl_nota_dinas))
+
         context = {
             'page_title'                   : 'Olah Nota Dinas',
             'olah_nota_dinas'              :  data_nota_dinas,
