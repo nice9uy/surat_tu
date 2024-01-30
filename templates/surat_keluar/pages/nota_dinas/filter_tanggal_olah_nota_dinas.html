@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block olah_nota_dinas %} 
+{% block filter_tanggal_olah_nota_dinas %} 
 
 {% include 'surat_keluar/header/nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">OLAH NOTA DINAS {{ tanggal_sekarang | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">NOMOR YANG TERSEDIA {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
@@ -25,11 +25,11 @@
           <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
         </div>
 
-      
+
       </div>
     </div>
 
-      <table id="tabel_olah_tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
+      <table id="tabel_no_tersedia" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
 
@@ -42,13 +42,12 @@
             <th class="text-center">Keterangan</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
-            <th class="text-center">File</th>
-            <th class="text-center">Isi Nota Dinas</th>
+            <th class="text-center">Bon Nomor</th>
             
           </tr>
         </thead>
         <tbody>
-          {% for data in olah_nota_dinas %}
+          {% for data in data_olah_nota_dinas %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
@@ -59,19 +58,12 @@
               <td>{{ data.keterangan | default_if_none:"" }}</td>
               <td>{{ data.bagian | default_if_none:"" }}</td>
               <td>{{ data.catatan | default_if_none:"" }}</td>
-
-              <td class="text-center">
-                <div style="margin-left: -15px;">
-                  <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
-                </div>
-              </td>
-  
     
               <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#isi_nota_dinas{{ data.id }}"></button>
+                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
 
               </td> 
-               
+  
             </tr>
           {% endfor %}
         </tbody>
@@ -79,8 +71,7 @@
 
   </div>
 
-{% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-{% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas.html' %}
+{% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %} 
 
   <div class="container">
     <footer class="">
@@ -92,7 +83,7 @@
   </div>
 
 
-{% endblock olah_nota_dinas %} 
+{% endblock filter_tanggal_olah_nota_dinas %} 
 
 
 

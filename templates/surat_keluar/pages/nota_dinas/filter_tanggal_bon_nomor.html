@@ -27,7 +27,7 @@
               <div  class="gap-3">
                 <button type="submit" class="btn btn-warning   btn-sm" title="BON NOMOR">NOMOR YANG TERSEDIA</button>
               </div>
-            </form>filter_tanggal_no_tersedia
+            </form>
              
             <form method="POST" action="{% url 'bon_nomor_filter' %}">  
               {% csrf_token %}
@@ -38,7 +38,6 @@
 
       </div>
     </div>
-    filter_tanggal_no_tersedia
       <table id="tabel_no_tersedia" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
@@ -75,7 +74,7 @@
               </td> 
   
             </tr>
-          {% endfor %}filter_tanggal_no_tersedia
+          {% endfor %}
         </tbody>
       </table>
 

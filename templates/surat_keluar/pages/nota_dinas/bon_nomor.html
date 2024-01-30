@@ -7,23 +7,14 @@
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">BON NOMOR {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">SEMUA NOTA DINAS {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: end; " class="d-flex mb-2">
 
-      {% comment %} <form method="POST" action="">
-        <div class="d-flex mb-2 ">   
-            {% csrf_token %}
-            <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
-            <button class="btn btn-primary btn-sm " type="submit">Cari</button>
-        </div>
-      </form> {% endcomment %}
        
       <div style="justify-content: end;" class="d-flex gap-2">
 
-        {% comment %} <div  class="gap-3">
-          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
-        </div> {% endcomment %}
+     
 
           <form method="POST" action="{% url 'no_tersedia' %}">  
             {% csrf_token %}
@@ -55,7 +46,6 @@
             <th class="text-center">Keterangan</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
-            <th class="text-center">Isi Nota Dinas</th>
             
           </tr>
         </thead>
@@ -72,10 +62,7 @@
               <td>{{ data.bagian | default_if_none:"" }}</td>
               <td>{{ data.catatan | default_if_none:"" }}</td>
     
-              <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
-
-              </td> 
+             
   
             </tr>
           {% endfor %}

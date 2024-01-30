@@ -11,6 +11,7 @@ urlpatterns = [
     path('surat_keluar/bon_nomor_halaman/', views.bon_nomor_halaman, name='bon_nomor_halaman' ),
     path('surat_keluar/bon_nomor_filter/', views.bon_nomor_filter, name='bon_nomor_filter' ),
     path('surat_keluar/filter_tanggal_bon_nomor/', views.filter_tanggal_bon_nomor, name='filter_tanggal_bon_nomor' ),
+    path('surat_keluar/filter_tanggal_olah_nota_dinas/', views.filter_tanggal_olah_nota_dinas, name='filter_tanggal_olah_nota_dinas' ),
 
     
     
@@ -20,6 +21,6 @@ urlpatterns = [
     path('surat_keluar/tambah_olah_nota_dinas/', views.tambah_olah_nota_dinas, name='tambah_olah_nota_dinas' ),
 
 
-    path('surat_keluar/filter_olah_nota_dinas/', views.filter_olah_nota_dinas, name='filter_olah_nota_dinas' ),
+    # path('surat_keluar/filter_olah_nota_dinas/', views.filter_olah_nota_dinas, name='filter_olah_nota_dinas' ),
     path('surat_keluar/filter_nota_dinas/', views.filter_nota_dinas, name='filter_nota_dinas' ),
 ]
