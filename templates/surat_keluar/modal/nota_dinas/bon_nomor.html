@@ -10,16 +10,16 @@
   
           <div class="modal-body">
                 
-            <form action="{% url 'isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+            <form action="{% url 'bon_nomor_no_tersedia' data.id %}" method="POST"  class="was-validated row g-3 text-center" >
               {% csrf_token %}
                
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">BAGIAN</label>
-                  <input type="text" class="form-control" name="perihal" value="{{ data.perihal }}" required >
+                  <input type="text" class="form-control" name="bagian" value="{{ data.bagian }}" required >
                 </div>
                 <div class="col-12">
                   <label for="inputAddress2" class="form-label">CATATAN</label>
-                  <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan }}" required >
+                  <input type="text" class="form-control" name="catatan" value="{{ data.catatan }}" required >
                 </div>
                 </div>
                 <div class="modal-footer">
@@ -27,7 +27,7 @@
                 </div>
                 </form>
           
-        </div>
+            </div>
       </div>
     </div>
 {% endfor %}

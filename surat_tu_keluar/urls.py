@@ -18,13 +18,14 @@ urlpatterns = [
     path('surat_keluar/no_tersedia/', views.no_tersedia, name='no_tersedia' ),
     path('surat_keluar/filter_tanggal_no_tersedia/', views.filter_tanggal_no_tersedia, name='filter_tanggal_no_tersedia' ),
 
+    ### NOTA DINAS #####
+
     path('surat_keluar/tambah_olah_nota_dinas/', views.tambah_olah_nota_dinas, name='tambah_olah_nota_dinas' ),
-
-
     path('surat_keluar/filter_nota_dinas/', views.filter_nota_dinas, name='filter_nota_dinas' ),
-
-
     path('surat_keluar/isi_nota_dinas/<int:id_isi_nota_dinas>/', views.isi_nota_dinas, name='isi_nota_dinas' ),
+    path('surat_keluar/bon_nomor_no_tersedia/<int:id_bon_nomor_no_tersedia>/', views.bon_nomor_no_tersedia, name='bon_nomor_no_tersedia' ),
+    path('surat_keluar/isi_nota_dinas_bon_nomor/<int:id_isi_nota_dinas_bon_nomor>/', views.isi_nota_dinas_bon_nomor, name='isi_nota_dinas_bon_nomor' ),
 
 
+    #####################
 ]
