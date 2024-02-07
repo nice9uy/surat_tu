@@ -21,9 +21,6 @@
        
       <div style="justify-content: end;" class="d-flex gap-2">
 
-        {% comment %} <div  class="gap-3">
-          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
-        </div> {% endcomment %}
 
           <form method="POST" action="{% url 'no_tersedia' %}">  
             {% csrf_token %}
@@ -49,10 +46,6 @@
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Urut</th>
-            <th class="text-center">Nomor Takah</th>
-            <th class="text-center">Kepada</th>
-            <th class="text-center">Perihal</th>
-            <th class="text-center">Keterangan</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
             <th class="text-center">Isi Nota Dinas</th>
@@ -65,10 +58,6 @@
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
               <td class="text-center">{{ data.no_urut }}</td>
-              <td>{{ data.no_takah | default_if_none:""  }}</td>
-              <td>{{ data.kepada | default_if_none:"" }}</td>
-              <td>{{ data.perihal | default_if_none:"" }}</td>
-              <td>{{ data.keterangan | default_if_none:"" }}</td>
               <td>{{ data.bagian | default_if_none:"" }}</td>
               <td>{{ data.catatan | default_if_none:"" }}</td>
     

@@ -40,8 +40,6 @@
             <th class="text-center">Kepada</th>
             <th class="text-center">Perihal</th>
             <th class="text-center">Keterangan</th>
-            <th class="text-center">Bagian</th>
-            <th class="text-center">Catatan</th>
             <th class="text-center">File</th>
             <th class="text-center">Isi Nota Dinas</th>
             
@@ -57,9 +55,6 @@
               <td>{{ data.kepada | default_if_none:"" }}</td>
               <td>{{ data.perihal | default_if_none:"" }}</td>
               <td>{{ data.keterangan | default_if_none:"" }}</td>
-              <td>{{ data.bagian | default_if_none:"" }}</td>
-              <td>{{ data.catatan | default_if_none:"" }}</td>
-
               <td class="text-center">
                 <div style="margin-left: -15px;">
                   <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>

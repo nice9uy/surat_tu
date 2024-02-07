@@ -1,17 +1,33 @@
 
-<div class="modal fade" id="bon_nota_dinas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Tambah Nota Dinas ?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+{% for data in olah_nota_dinas %}
+  <div class="modal fade" id="bon_nota_dinas{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">BON NOMOR </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+  
+          <div class="modal-body">
+                
+            <form action="{% url 'isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+              {% csrf_token %}
+               
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">BAGIAN</label>
+                  <input type="text" class="form-control" name="perihal" value="{{ data.perihal }}" required >
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">CATATAN</label>
+                  <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan }}" required >
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">SIMPAN</button>
+                </div>
+                </form>
+          
         </div>
- 
-        <form method="POST" action="{% url 'tambah_olah_nota_dinas' %}">
-          {% csrf_token %}
-            <button type="submit" class="btn btn-success col-12" data-bs-dismiss="modal">OK</button>
-        </form>
-        
       </div>
     </div>
-  </div>
+{% endfor %}

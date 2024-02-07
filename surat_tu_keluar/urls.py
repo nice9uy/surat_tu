@@ -21,6 +21,10 @@ urlpatterns = [
     path('surat_keluar/tambah_olah_nota_dinas/', views.tambah_olah_nota_dinas, name='tambah_olah_nota_dinas' ),
 
 
-    # path('surat_keluar/filter_olah_nota_dinas/', views.filter_olah_nota_dinas, name='filter_olah_nota_dinas' ),
     path('surat_keluar/filter_nota_dinas/', views.filter_nota_dinas, name='filter_nota_dinas' ),
+
+
+    path('surat_keluar/isi_nota_dinas/<int:id_isi_nota_dinas>/', views.isi_nota_dinas, name='isi_nota_dinas' ),
+
+
 ]

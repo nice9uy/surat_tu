@@ -1,5 +1,5 @@
 from datetime import date
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from . models import NotaDinas
 from django.db.models import Q
@@ -294,5 +294,54 @@ def filter_tanggal_olah_nota_dinas(request):
 
 
 ###########################################################################################################################
-def isi_nota_dinas(request):
-    pass
+def isi_nota_dinas(request, id_isi_nota_dinas):
+    edit_olah_nota_dinas  = get_object_or_404(NotaDinas, pk = id_isi_nota_dinas)
+    username              = request.user
+
+    # edit_surat_olah_nota_dinas convert_id = edit_olah_surat.id
+
+    if request.method == 'POST':
+
+        get_id                         = id_isi_nota_dinas
+        get_username                   = str(username)
+        get_tanggal                    = edit_olah_nota_dinas.tanggal
+        get_no_urut                    = edit_olah_nota_dinas.no_urut
+        get_no_takah                   = request.POST.get('no_takah') 
+        get_kepada                     = request.POST.get('kepada')
+        get_perihal                    = request.POST.get('perihal') 
+        get_keterangan                 = request.POST.get('keterangan')
+        get_bagian                     = edit_olah_nota_dinas.bagian
+        get_catatan                    = edit_olah_nota_dinas.catatan
+        files_upload_olah_nota_dinas   = request.FILES.get('file_name')
+
+
+        data_olah_nota_dinas           =  edit_olah_nota_dinas.upload_file.name
+
+        if  files_upload_olah_nota_dinas == None:
+            files_upload_olah_nota_dinas_final = data_olah_nota_dinas
+
+        else:
+            files_upload_olah_nota_dinas_final = files_upload_olah_nota_dinas
+            edit_olah_nota_dinas.upload_file.delete()
+
+        edit_olah_nota_dinas = NotaDinas(
+
+            id                      = get_id,
+            username                = get_username,
+            tanggal                 = get_tanggal,
+            no_urut                 = get_no_urut,
+            no_takah                = get_no_takah,
+            kepada                  = get_kepada,
+            perihal                 = get_perihal,
+            keterangan              = get_keterangan,
+            bagian                  = get_bagian,
+            catatan                 = get_catatan,
+            upload_file             = files_upload_olah_nota_dinas_final,
+            
+            )
+
+        edit_olah_nota_dinas.save()
+
+        return redirect('olah_nota_dinas')
+
+    # return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas.html')
