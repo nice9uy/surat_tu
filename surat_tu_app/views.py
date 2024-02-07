@@ -61,12 +61,13 @@ def kabaranahan(request, getIDdisosisi_kabaranahan ):
     getIDdisposisi = get_object_or_404(DbSurat, pk = getIDdisosisi_kabaranahan)
     template = get_template('pdf_disposisi/kabaranahan.html')
 
-    no_agenda   = getIDdisposisi.no_agenda
-    tgl_agenda  = getIDdisposisi.tgl_agenda
-    surat_dari = getIDdisposisi.surat_dari
-    no_surat   = getIDdisposisi.no_surat
-    tgl_surat  = getIDdisposisi.tgl_surat
-    klasifikasi = getIDdisposisi.klasifikasi
+    no_agenda         = getIDdisposisi.no_agenda
+    tgl_agenda        = getIDdisposisi.tgl_agenda
+    surat_dari        = getIDdisposisi.surat_dari
+    no_surat          = getIDdisposisi.no_surat
+    tgl_surat         = getIDdisposisi.tgl_surat
+    klasifikasi       = getIDdisposisi.klasifikasi
+    derajat           = getIDdisposisi.derajat_surat
 
     html_content = template.render({
         'no_agenda'       : no_agenda,
@@ -74,7 +75,8 @@ def kabaranahan(request, getIDdisosisi_kabaranahan ):
         'surat_dari'      : surat_dari,
         'no_surat'        : no_surat,
         'tgl_surat'       : tgl_surat,
-        'klasifikasi'     : klasifikasi
+        'klasifikasi'     : klasifikasi,
+        'derajat'         : derajat
     })
 
     pdf_file = HTML(string=html_content).write_pdf()
@@ -87,13 +89,14 @@ def sekretariat(request, getIDdisosisi_sekretariat):
     getIDdisposisi = get_object_or_404(DbSurat, pk = getIDdisosisi_sekretariat)
     template = get_template('pdf_disposisi/sekretariat.html')
 
-    no_agenda   = getIDdisposisi.no_agenda
-    tgl_agenda  = getIDdisposisi.tgl_agenda
-    surat_dari = getIDdisposisi.surat_dari
-    no_surat   = getIDdisposisi.no_surat
-    tgl_surat  = getIDdisposisi.tgl_surat
-    klasifikasi = getIDdisposisi.klasifikasi
- 
+    no_agenda         = getIDdisposisi.no_agenda
+    tgl_agenda        = getIDdisposisi.tgl_agenda
+    surat_dari        = getIDdisposisi.surat_dari
+    no_surat          = getIDdisposisi.no_surat
+    tgl_surat         = getIDdisposisi.tgl_surat
+    klasifikasi       = getIDdisposisi.klasifikasi
+    derajat           = getIDdisposisi.derajat_surat
+
 
     html_content = template.render({
         'no_agenda'       : no_agenda,
@@ -101,7 +104,8 @@ def sekretariat(request, getIDdisosisi_sekretariat):
         'surat_dari'      : surat_dari,
         'no_surat'        : no_surat,
         'tgl_surat'       : tgl_surat,
-        'klasifikasi'     : klasifikasi
+        'klasifikasi'     : klasifikasi,
+        'derajat'         : derajat
     })
 
     pdf_file = HTML(string=html_content).write_pdf()
@@ -114,12 +118,13 @@ def bagum(request , getIDdisosisi_bagum):
     getIDdisposisi = get_object_or_404(DbSurat, pk = getIDdisosisi_bagum)
     template = get_template('pdf_disposisi/bagum.html')
 
-    no_agenda   = getIDdisposisi.no_agenda
-    tgl_agenda  = getIDdisposisi.tgl_agenda
-    surat_dari = getIDdisposisi.surat_dari
-    no_surat   = getIDdisposisi.no_surat
-    tgl_surat  = getIDdisposisi.tgl_surat
-    klasifikasi = getIDdisposisi.klasifikasi
+    no_agenda             = getIDdisposisi.no_agenda
+    tgl_agenda            = getIDdisposisi.tgl_agenda
+    surat_dari            = getIDdisposisi.surat_dari
+    no_surat              = getIDdisposisi.no_surat
+    tgl_surat             = getIDdisposisi.tgl_surat
+    klasifikasi           = getIDdisposisi.klasifikasi
+    derajat               = getIDdisposisi.derajat_surat
 
     html_content = template.render({
         'no_agenda'       : no_agenda,
@@ -127,7 +132,8 @@ def bagum(request , getIDdisosisi_bagum):
         'surat_dari'      : surat_dari,
         'no_surat'        : no_surat,
         'tgl_surat'       : tgl_surat,
-        'klasifikasi'     : klasifikasi
+        'klasifikasi'     : klasifikasi,
+        'derajat'         : derajat
     })
 
     pdf_file = HTML(string=html_content).write_pdf()

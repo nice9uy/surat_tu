@@ -63,25 +63,25 @@
 
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>No. Agenda</td>
-      <td colspan="8">: {{ no_agenda }}</td>
+      <td colspan="8">: {{ no_agenda | default_if_none:""  }}</td>
       <td>Tanggal</td>
-      <td>: {{ tgl_agenda }} </td>
+      <td>: {{ tgl_agenda | default_if_none:""  }} </td>
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>Surat Dari </td>
-      <td>: {{ surat_dari  }}</td>
+      <td>: {{ surat_dari | default_if_none:""   }}</td>
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>No. Surat </td>
-      <td colspan="8">: {{ no_surat }}</td>
+      <td colspan="8">: {{ no_surat | default_if_none:""  }}</td>
       <td>Derajat</td>
-      <td>:</td>
+      <td>: {{ derajat | default_if_none:""  }}</td>
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>Tanggal Surat</td>
       <td colspan="8">:{{ tgl_surat | default_if_none:""  }} </td>
       <td>Klasifikasi</td>
-      <td>: {{ klasifikasi }} </td>
+      <td>: {{ klasifikasi | default_if_none:"" }} </td>
     </tr>
     <tr style="border: 1px solid black; border-left: none; border-right: none; padding-top: 2px; padding-bottom: 2px;">
       <td>Catatan TU</td>
