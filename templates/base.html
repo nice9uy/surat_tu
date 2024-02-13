@@ -34,7 +34,8 @@
 
 </head>
 <body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 14px;" class="text-light">
-
+           
+            {% comment %} Surat Masuk {% endcomment %}
 
             {% block index %}{% endblock index %} 
             {% block login %}{% endblock login %}  
@@ -52,17 +53,28 @@
             {% block laporan_bulanan %}{% endblock laporan_bulanan %}
             {% block laporan_tahunan %}{% endblock laporan_tahunan %}
 
+
+            {% comment %} surat keluar {% endcomment %}
+
             {% block surat_keluar %}{% endblock surat_keluar %}
            
-
             {% block nota_dinas %}{% endblock nota_dinas %}
-            {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
+            {% block filter_nota_dinas %}{% endblock filter_nota_dinas %}
+             
             {% block bon_nomor %}{% endblock bon_nomor %}
-            {% block no_tersedia %}{% endblock no_tersedia %}
+            {% block filter_bon_nomor %}{% endblock filter_bon_nomor %}
+
+            {% block nomor_tersedia %}{% endblock nomor_tersedia %}
+
+            {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
+
+            
+            {% comment %} {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
             {% block bon_nomor_filter %}{% endblock bon_nomor_filter %}
+
             {% block filter_tanggal_no_tersedia %}{% endblock filter_tanggal_no_tersedia %}
             {% block filter_tanggal_bon_nomor %}{% endblock filter_tanggal_bon_nomor %}
-            {% block filter_tanggal_olah_nota_dinas %}{% endblock filter_tanggal_olah_nota_dinas %}
+            {% block filter_tanggal_olah_nota_dinas %}{% endblock filter_tanggal_olah_nota_dinas %} {% endcomment %}
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
@@ -108,21 +120,15 @@
 
 
             <script>
-                  new DataTable('#tabel_nota_dinas',{
-                                       
-                  });
-                  new DataTable('#tabel_olah_tabel_nota_dinas',{
-          
+                  new DataTable('#tabel_nota_dinas',{               
                   });
                   new DataTable('#tabel_bon_nomor',{
-          
                   });
-                  new DataTable('#tabel_no_tersedia',{
-          
+                  new DataTable('#tabel_nomor_tersedia',{
                   });
-                  new DataTable('#tabel_filter_bon_nomor',{
-          
+                  new DataTable('#tabel_olah_nota_dinas',{
                   });
+                  
 
             </script>
 

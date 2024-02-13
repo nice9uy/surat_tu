@@ -11,7 +11,7 @@
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_tanggal_olah_nota_dinas' %}">
+      <form method="POST" action="">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
@@ -19,17 +19,10 @@
         </div>
       </form>
        
-      <div style="justify-content: end;" class="d-flex gap-2">
-
-        <div  class="gap-3">
-          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
-        </div>
-
       
-      </div>
     </div>
 
-      <table id="tabel_olah_tabel_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
+      <table id="tabel_olah_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
 
@@ -41,7 +34,7 @@
             <th class="text-center">Perihal</th>
             <th class="text-center">Keterangan</th>
             <th class="text-center">File</th>
-            <th class="text-center">Isi Nota Dinas</th>
+            <th class="text-center">Edit</th>
             
           </tr>
         </thead>
@@ -74,8 +67,6 @@
 
   </div>
 
-{% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-{% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas.html' %}
 
   <div class="container">
     <footer class="">

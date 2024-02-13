@@ -1,45 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block filter_tanggal_no_tersedia %} 
+{% block filter_bon_nomor %} 
 
 {% include 'surat_keluar/header/nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">NOMOR YANG TERSEDIA {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">BON NOMOR {{ tgl_bon_nomor | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_tanggal_no_tersedia' %}">
+      <form method="POST" action="{% url 'filter_bon_nomor' %}">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
             <button class="btn btn-primary btn-sm " type="submit">Cari</button>
-        </div>
+          </div>
       </form>
-       
-      <div style="justify-content: end;" class="d-flex gap-2">
-
-  
-            <form method="POST" action="{% url 'no_tersedia' %}">  
-              {% csrf_token %}
-              <div  class="gap-3">
-                <button type="submit" class="btn btn-warning   btn-sm" title="BON NOMOR">NOMOR YANG TERSEDIA</button>
-              </div>
-            </form>
-             
-            <form method="POST" action="{% url 'bon_nomor_filter' %}">  
-              {% csrf_token %}
-              <div  class="gap-3">
-                <button type="submit" class="btn btn-info  btn-sm" title="BON NOMOR">BON NOMOR</button>
-              </div>
-            </form>
-
-      </div>
+      
     </div>
 
-      <table id="tabel_no_tersedia" class="table table-striped table-bordered text-white" style="width:100%;  ">
+     
+      <table id="tabel_bon_nomor" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
 
@@ -52,12 +35,12 @@
             <th class="text-center">Keterangan</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
-            <th class="text-center">Bon Nomor</th>
+            <th class="text-center">Isi Nota Dinas</th>
             
           </tr>
         </thead>
         <tbody>
-          {% for data in filter_tanggal_nota_dinas %}
+          {% for data in filter_bon_nomor %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
@@ -70,9 +53,8 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
     
               <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
-
-              </td> 
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
+               </td> 
   
             </tr>
           {% endfor %}
@@ -81,7 +63,8 @@
 
   </div>
 
-{% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %} 
+
+  {% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_untuk_bon_nomor.html' %}
 
   <div class="container">
     <footer class="">
@@ -93,7 +76,9 @@
   </div>
 
 
-{% endblock filter_tanggal_no_tersedia %} 
+{% endblock filter_bon_nomor %} 
+
+
 
 
 

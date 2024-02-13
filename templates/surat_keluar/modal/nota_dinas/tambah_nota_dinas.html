@@ -5,11 +5,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Tambah Nota Dinas ?</h1>
+          <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Tambah Nomor Nota Dinas ?</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
  
-        <form method="POST" action="{% url 'tambah_olah_nota_dinas' %}">
+        <form method="POST" action="">
           {% csrf_token %}
             <button type="submit" class="btn btn-success col-12" data-bs-dismiss="modal">Tambah</button>
         </form>

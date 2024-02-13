@@ -25,14 +25,14 @@
           <form method="POST" action="{% url 'no_tersedia' %}">  
             {% csrf_token %}
             <div  class="gap-3">
-              <button type="submit" class="btn btn-warning   btn-sm" title="BON NOMOR">NOMOR YANG TERSEDIA</button>
+              <button type="submit" class="btn btn-warning   btn-sm" title="BON NOMOR">TERSEDIA</button>
             </div>
           </form>
            
           <form method="POST" action="{% url 'bon_nomor_filter' %}">  
             {% csrf_token %}
             <div  class="gap-3">
-              <button type="submit" class="btn btn-info  btn-sm" title="BON NOMOR">BON NOMOR</button>
+              <button type="submit" class="btn btn-info  btn-sm" title="BON NOMOR">BON</button>
             </div>
           </form>
 
@@ -74,7 +74,7 @@
   </div>
 
 {% include 'surat_keluar/modal/nota_dinas/bon_nomor.html' %} 
-{% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_bon_nomor.html' %} 
+{% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_bon_nomor.html' %}   
 
 
   <div class="container">
