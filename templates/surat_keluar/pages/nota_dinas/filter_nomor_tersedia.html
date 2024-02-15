@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block nomor_tersedia %} 
+{% block filter_nomor_tersedia %} 
 
 {% include 'surat_keluar/header/nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">NOMOR TERSEDIA  {{ tanggal | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">NOMOR TERSEDIA {{ tgl_sekarang | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
@@ -20,17 +20,13 @@
       </form>
 
       <div style="justify-content: end;" class="d-flex gap-2">
-
-
-          <div  class="gap-3">
-            <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
-          </div>
-
+        <div  class="gap-3">
+          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="Tambah Nota Dinas" data-bs-target="#tambah_nota_dinas">TAMBAH NOMOR</button>
+        </div>
       </div>
       
     </div>
 
-     
       <table id="tabel_nomor_tersedia" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
@@ -47,25 +43,27 @@
             <th class="text-center">Bon Nomor</th>
             
             
+            
           </tr>
         </thead>
         <tbody>
-          {% for data in nomor_tersedia %}
+          {% for data in filter_nomor_tersedia %}
             <tr>
-              <td class="text-center" >{{ forloop.counter }}</td>
-              <td class="text-center">{{ data.tanggal }}</td>
-              <td class="text-center">{{ data.no_urut }}</td>
-              <td>{{ data.no_takah | default_if_none:""  }}</td>
-              <td>{{ data.kepada | default_if_none:"" }}</td>
-              <td>{{ data.perihal | default_if_none:"" }}</td>
-              <td>{{ data.keterangan | default_if_none:"" }}</td>
-              <td>{{ data.bagian | default_if_none:"" }}</td>
-              <td>{{ data.catatan | default_if_none:"" }}</td>
-    
-              <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_nomor_tersedia{{ data.id }}"></button>
-               </td> 
+                <td class="text-center" >{{ forloop.counter }}</td>
+                <td class="text-center">{{ data.tanggal }}</td>
+                <td class="text-center">{{ data.no_urut }}</td>
+                <td>{{ data.no_takah | default_if_none:""  }}</td>
+                <td>{{ data.kepada | default_if_none:"" }}</td>
+                <td>{{ data.perihal | default_if_none:"" }}</td>
+                <td>{{ data.keterangan | default_if_none:"" }}</td>
+                <td>{{ data.bagian | default_if_none:"" }}</td>
+                <td>{{ data.catatan | default_if_none:"" }}</td>
+      
+                <td class="text-center gap-2"> 
+                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_isi_nota_dinas{{ data.id }}"></button>
+                 </td> 
             
+  
             </tr>
           {% endfor %}
         </tbody>
@@ -73,10 +71,7 @@
 
   </div>
 
-
   {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/bon_nomor_untuk_no_tersedia.html' %}
-
 
   <div class="container">
     <footer class="">
@@ -88,7 +83,7 @@
   </div>
 
 
-{% endblock nomor_tersedia %} 
+{% endblock filter_nomor_tersedia %} 
 
 
 

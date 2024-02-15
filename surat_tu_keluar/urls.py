@@ -14,6 +14,8 @@ urlpatterns = [
 
     ### Nomor Tersedia #####
     path('surat_keluar/nomor_tersedia/', views.nomor_tersedia, name='nomor_tersedia' ),
+    path('surat_keluar/tambah_nomor/', views.tambah_nomor, name='tambah_nomor' ),
+    path('surat_keluar/filter_nomor_tersedia/', views.filter_nomor_tersedia, name='filter_nomor_tersedia' ),
 
 
     ##### Olah Nota Dinas #####
