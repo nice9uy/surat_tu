@@ -1,0 +1,47 @@
+  
+{% for data in bon_nomor %}
+
+<div class="modal fade" id="button_bon_nomor_isi_nota_dinas{{ data.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">ISI NOTA DINAS</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+            <form action="{% url 'bon_nomor_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+              {% csrf_token %}
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
+                  <input type="text" class="form-control" name="no_takah" placeholder="Nomor Urut : {{ data.no_urut  }}" value="{{ data.no_takah  | default_if_none:""  }}"  required >
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">KEPADA</label>
+                  <input type="text" class="form-control" name="kepada" value="{{ data.kepada  | default_if_none:""  }}" required >
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">PERIHAL</label>
+                  <input type="text" class="form-control" name="perihal" value="{{ data.perihal  | default_if_none:""  }}" required >
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">KETERANGAN</label>
+                  <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan  | default_if_none:""  }}" required >
+                </div>
+
+                <div class="mb-3 mt-3">
+                  <label for="formFile" class="form-label">UPLOAD FILES</label>
+                  <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name" /  >
+                </div>
+            
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </div>
+         </form>
+                
+    </div>
+    </div>
+</div>
+{% endfor %}

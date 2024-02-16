@@ -45,6 +45,7 @@
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
             <th class="text-center">Bon Nomor</th>
+            <th class="text-center">Isi Nota Dinas</th>
             
             
           </tr>
@@ -63,7 +64,11 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
     
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_nomor_tersedia{{ data.id }}"></button>
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Bon Nomor" data-bs-target="#button_bon_nomor_nomor_tersedia{{ data.id }}"></button>
+               </td> 
+
+              <td class="text-center gap-2"> 
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Isi Nota Dinas" data-bs-target="#button_isi_nota_dinas_nomor_tersedia{{ data.id }}"></button>
                </td> 
             
             </tr>
@@ -73,9 +78,9 @@
 
   </div>
 
-
+  {% include 'surat_keluar/modal/nota_dinas/bon_nomor.html' %}  
   {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/bon_nomor_untuk_no_tersedia.html' %}
+  {% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_untuk_no_tersedia.html' %} 
 
 
   <div class="container">

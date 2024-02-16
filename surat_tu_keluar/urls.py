@@ -10,12 +10,12 @@ urlpatterns = [
     ## BON NOMOR ###
     path('surat_keluar/bon_nomor/', views.bon_nomor, name='bon_nomor' ),
     path('surat_keluar/filter_bon_nomor/', views.filter_bon_nomor, name='filter_bon_nomor' ),
-    path('surat_keluar/bon_nomor_isi_nota_dinas/<int:id_bon_nomor_isi_nota_dinas>/', views.bon_nomor_isi_nota_dinas, name='bon_nomor_isi_nota_dinas' ),
 
     ### Nomor Tersedia #####
     path('surat_keluar/nomor_tersedia/', views.nomor_tersedia, name='nomor_tersedia' ),
     path('surat_keluar/tambah_nomor/', views.tambah_nomor, name='tambah_nomor' ),
     path('surat_keluar/filter_nomor_tersedia/', views.filter_nomor_tersedia, name='filter_nomor_tersedia' ),
+    path('surat_keluar/no_tersedia_isi_nota_dinas/<int:id_no_tersedia_isi_nota_dinas>/', views.no_tersedia_isi_nota_dinas, name='no_tersedia_isi_nota_dinas' ),
 
 
     ##### Olah Nota Dinas #####

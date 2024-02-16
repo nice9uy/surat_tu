@@ -1,16 +1,16 @@
-
+ 
 {% for data in nomor_tersedia %}
 
-    <div class="modal fade" id="button_bon_nomor_nomor_tersedia{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="button_isi_nota_dinas_nomor_tersedia{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Isi Nota Dinas</h1>
+                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">ISI NOTA DINAS</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 
-                <form action="{% url 'bon_nomor_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+                <form action="{% url 'no_tersedia_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
                   {% csrf_token %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>

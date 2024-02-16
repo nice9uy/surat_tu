@@ -87,20 +87,20 @@ def filter_bon_nomor(request):
         return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html', context)
 
 @login_required(login_url="/accounts/login/")
-def bon_nomor_isi_nota_dinas(request, id_bon_nomor_isi_nota_dinas):
-    bon_nomor_isi_nota_dinas                     =  get_object_or_404(NotaDinas, pk = id_bon_nomor_isi_nota_dinas)
+def no_tersedia_isi_nota_dinas(request, id_no_tersedia_isi_nota_dinas):
+    bon_nomor_isi_nota_dinas                     =  get_object_or_404(NotaDinas, pk = id_no_tersedia_isi_nota_dinas)
     username                                     =  request.user
 
     if request.method == 'POST':
 
-        get_id                                   = id_bon_nomor_isi_nota_dinas
+        get_id                                   = id_no_tersedia_isi_nota_dinas
         get_username                             = str(username)
         get_tanggal                              = bon_nomor_isi_nota_dinas.tanggal
         get_no_urut                              = bon_nomor_isi_nota_dinas.no_urut
-        get_no_takah                             = request.POST.get('bagian')
-        get_kepada                               = request.POST.get('bagian')
-        get_perihal                              = request.POST.get('bagian')
-        get_keterangan                           = request.POST.get('bagian')
+        get_no_takah                             = request.POST.get('no_takah') 
+        get_kepada                               = request.POST.get('kepada')
+        get_perihal                              = request.POST.get('perihal') 
+        get_keterangan                           = request.POST.get('keterangan')
         get_bagian                               = ""
         get_catatan                              = ""
         files_upload_bon_nomor                   = bon_nomor_isi_nota_dinas.upload_file
@@ -122,7 +122,7 @@ def bon_nomor_isi_nota_dinas(request, id_bon_nomor_isi_nota_dinas):
         )
         
         bon_nomor_isi_nota_dinas_save.save()
-        return redirect('bon_nomor')
+        return redirect('nomor_tersedia')
     
 ################  NO tersedia ####################################################
 

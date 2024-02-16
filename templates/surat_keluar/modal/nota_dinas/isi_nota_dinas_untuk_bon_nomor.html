@@ -5,7 +5,7 @@
         <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">ISI BON NOMOR</h1>
+                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">ISI NOTA DINAS</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -14,19 +14,19 @@
                   {% csrf_token %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
-                      <input type="text" class="form-control" name="no_takah" placeholder="Nomor Urut : {{ data.no_urut  }}" value="{{ data.no_takah }}"  required >
+                      <input type="text" class="form-control" name="no_takah" placeholder="Nomor Urut : {{ data.no_urut  }}" value="{{ data.no_takah  | default_if_none:""  }}"  required >
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">KEPADA</label>
-                      <input type="text" class="form-control" name="kepada" value="{{ data.kepada }}" required >
+                      <input type="text" class="form-control" name="kepada" value="{{ data.kepada  | default_if_none:""  }}" required >
                     </div>
                     <div class="col-12">
                       <label for="inputAddress" class="form-label">PERIHAL</label>
-                      <input type="text" class="form-control" name="perihal" value="{{ data.perihal }}" required >
+                      <input type="text" class="form-control" name="perihal" value="{{ data.perihal  | default_if_none:""  }}" required >
                     </div>
                     <div class="col-12">
                       <label for="inputAddress2" class="form-label">KETERANGAN</label>
-                      <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan }}" required >
+                      <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan  | default_if_none:""  }}" required >
                     </div>
 
                     <div class="mb-3 mt-3">
