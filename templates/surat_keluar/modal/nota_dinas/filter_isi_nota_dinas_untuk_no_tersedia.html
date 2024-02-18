@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             
-            <form action="" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+            <form action="{% url 'filter_nomor_tersedia_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
               {% csrf_token %}
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
@@ -31,7 +31,7 @@
 
                 <div class="mb-3 mt-3">
                   <label for="formFile" class="form-label">UPLOAD FILES</label>
-                  <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name" /  >
+                  <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name" / required >
                 </div>
             
 

@@ -7,7 +7,7 @@ def save_file_nota_dinas(instance, filename):
 
 # def save_file_surat(instance, filename):
 #     return f"{instance.username}/SuratMa/{filename}"
-    
+     
 # class NotaDinas(models.Model):
   
 #     id                     = models.AutoField(primary_key=True, unique=True)

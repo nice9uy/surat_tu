@@ -34,12 +34,6 @@
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Urut</th>
-            <th class="text-center">Nomor Takah</th>
-            <th class="text-center">Kepada</th>
-            <th class="text-center">Perihal</th>
-            <th class="text-center">Keterangan</th>
-            <th class="text-center">Bagian</th>
-            <th class="text-center">Catatan</th>
             <th class="text-center">Bon Nomor</th>
             <th class="text-center">Isi Nota Dinas</th>
             
@@ -53,16 +47,9 @@
                 <td class="text-center" >{{ forloop.counter }}</td>
                 <td class="text-center">{{ data.tanggal }}</td>
                 <td class="text-center">{{ data.no_urut }}</td>
-                <td>{{ data.no_takah | default_if_none:""  }}</td>
-                <td>{{ data.kepada | default_if_none:"" }}</td>
-                <td>{{ data.perihal | default_if_none:"" }}</td>
-                <td>{{ data.keterangan | default_if_none:"" }}</td>
-                <td>{{ data.bagian | default_if_none:"" }}</td>
-                <td>{{ data.catatan | default_if_none:"" }}</td>
-
-      
+              
                 <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Bon Nomor" data-bs-target="#button_filter_bon_nomor_nomor_tersedia{{ data.id }}"></button>
+                  <button type="button" class="btn btn-primary btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Bon Nomor" data-bs-target="#button_filter_bon_nomor_nomor_tersedia{{ data.id }}"></button>
                  </td> 
   
                 <td class="text-center gap-2"> 
