@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block bon_nomor %} 
+{% block filter_bon_nomor %} 
 
 {% include 'surat_keluar/header/nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">BON NOMOR {{ tanggal_nota_dinas | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">BON NOMOR {{ tgl_bon_nomor | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for data in bon_nomor %}
+          {% for data in filter_bon_nomor %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
@@ -45,7 +45,7 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
     
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_isi_nota_dinas{{ data.id }}"></button>
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
                </td> 
   
             </tr>
@@ -55,8 +55,8 @@
 
   </div>
 
-{% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_untuk_bon_nomor.html' %} 
 
+  {% include 'surat_keluar/modal/nota_dinas/bon_nomor/bon_nomor_isi_nota_dinas.html' %}
 
   <div class="container">
     <footer class="">
@@ -68,7 +68,9 @@
   </div>
 
 
-{% endblock bon_nomor %} 
+{% endblock filter_bon_nomor %} 
+
+
 
 
 
