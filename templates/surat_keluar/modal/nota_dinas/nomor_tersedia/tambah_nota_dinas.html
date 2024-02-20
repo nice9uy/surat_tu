@@ -1,5 +1,4 @@
 
-{% comment %} {% for data in tambah_nota_dinas %} {% endcomment %}
 
   <div class="modal fade" id="tambah_nota_dinas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -9,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
  
-        <form method="POST" action="{% url 'tambah_nomor' %}">
+        <form method="POST" action="{% url 'nomor_tersedia_tambah_nomor' %}">
           {% csrf_token %}
             <button type="submit" class="btn btn-success col-12" data-bs-dismiss="modal">Tambah</button>
         </form>
@@ -18,4 +17,3 @@
     </div>
   </div>
 
-{% comment %} {% endfor %} {% endcomment %}

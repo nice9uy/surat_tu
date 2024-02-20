@@ -11,7 +11,7 @@
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_nomor_tersedia' %}">
+      <form method="POST" action="">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
@@ -68,9 +68,9 @@
 
   </div>
 
-  {% include 'surat_keluar/modal/nota_dinas/bon_nomor.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/isi_nota_dinas_untuk_no_tersedia.html' %} 
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/bon_nomor.html' %}  
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/tambah_nota_dinas.html' %}  
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/isi_nota_dinas_untuk_no_tersedia.html' %} 
 
 
   <div class="container">
