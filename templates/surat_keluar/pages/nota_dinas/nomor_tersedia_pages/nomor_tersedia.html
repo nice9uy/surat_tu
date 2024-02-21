@@ -11,7 +11,7 @@
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="">
+      <form method="POST" action="{% url 'filter_nomor_tersedia' %}">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
@@ -34,7 +34,7 @@
       <table id="tabel_nomor_tersedia" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
           <tr>
-
+ 
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Urut</th>

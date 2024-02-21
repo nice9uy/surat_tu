@@ -45,7 +45,7 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
     
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_hapus_olah_surat{{ data.id }}"></button>
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#filter_bon_nomor_isi_nota_dinas{{ data.id }}"></button>
                </td> 
   
             </tr>
@@ -56,7 +56,7 @@
   </div>
 
 
-{% include 'surat_keluar/modal/nota_dinas/bon_nomor/bon_nomor_isi_nota_dinas.html' %} 
+{% include 'surat_keluar/modal/nota_dinas/bon_nomor/filter_bon_nomor_isi_nota_dinas.html' %} 
 
   <div class="container">
     <footer class="">

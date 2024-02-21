@@ -7,7 +7,7 @@
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">NOMOR TERSEDIA {{ tgl_sekarang | date:'l, d F Y' }}</h5>
+    <h5 class="text-center">NOMOR TERSEDIA {{ tgl_nomor_tersedia | date:'l, d F Y' }}</h5>
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
@@ -43,21 +43,22 @@
         </thead>
         <tbody>
           {% for data in filter_nomor_tersedia %}
-            <tr>
-                <td class="text-center" >{{ forloop.counter }}</td>
-                <td class="text-center">{{ data.tanggal }}</td>
-                <td class="text-center">{{ data.no_urut }}</td>
-              
-                <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-primary btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Bon Nomor" data-bs-target="#button_filter_bon_nomor_nomor_tersedia{{ data.id }}"></button>
-                 </td> 
-  
-                <td class="text-center gap-2"> 
-                  <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Isi Nota Dinas" data-bs-target="#button_filter_isi_nota_dinas_nomor_tersedia{{ data.id }}"></button>
-                 </td> 
+          <tr>
+            <td class="text-center" >{{ forloop.counter }}</td>
+            <td class="text-center">{{ data.tanggal }}</td>
+            <td class="text-center">{{ data.no_urut }}</td>
+    
+            <td class="text-center gap-2"> 
+              <button type="button" class="btn btn-primary btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Bon Nomor" data-bs-target="#button_nomor_tersedia_filter_bon_nomor{{ data.id }}"></button>
+             </td> 
+
+            <td class="text-center gap-2"> 
+              <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Isi Nota Dinas" data-bs-target="#button_nomor_tersedia_filter_isi_nota_dinas{{ data.id }}"></button>
+             </td> 
+          
             
-  
-            </tr>
+
+          </tr>
           {% endfor %}
         </tbody>
       </table>
@@ -65,9 +66,14 @@
   </div>
 
 
-  {% include 'surat_keluar/modal/nota_dinas/filter_bon_nomor.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
-  {% include 'surat_keluar/modal/nota_dinas/filter_isi_nota_dinas_untuk_no_tersedia.html' %} 
+  {% comment %} {% include 'surat_keluar/modal/nota_dinas/filter_bon_nomor.html' %}   {% endcomment %}
+  {% comment %} {% include 'surat_keluar/modal/nota_dinas/tambah_nota_dinas.html' %}  
+  {% include 'surat_keluar/modal/nota_dinas/filter_isi_nota_dinas_untuk_no_tersedia.html' %}  {% endcomment %}
+
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/tambah_nota_dinas.html' %}  
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/nomor_tersedia_filter_bon_nomor.html' %} 
+  {% include 'surat_keluar/modal/nota_dinas/nomor_tersedia/nomor_tersedia_filter_isi_nota_dinas.html' %} 
+
 
   <div class="container">
     <footer class="">
