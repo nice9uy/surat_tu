@@ -67,18 +67,20 @@ def bon_nomor(request):
 
 @login_required(login_url="/accounts/login/")
 def filter_bon_nomor(request):
-    filter_bon_nomor                            =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
+    filter_bon_nomor                             =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
     try:
         if request.method == 'POST':
             get_tgl_bon_nomor                    =  request.POST.get('tanggal')
             tanggal_bon_filter                   =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''), tanggal = get_tgl_bon_nomor)
             tanggal                              =  parse_date(get_tgl_bon_nomor)
+
+            print(tanggal_bon_filter)
         context = {
                 'page_title'                     : 'Nota Dinas - Bon Nomor',
                 'filter_bon_nomor'               :  tanggal_bon_filter,
                 'tgl_bon_nomor'                  :  tanggal 
             }
-        return render (request , 'surat_keluar/pages/nota_dinas/filter_bon_nomor.html', context)
+        return render (request , 'surat_keluar/pages/nota_dinas/bon_nomor_pages/filter_bon_nomor.html', context)
     except:
         filter_bon_nomor_1                       = filter_bon_nomor     
         context = {

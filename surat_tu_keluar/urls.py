@@ -5,20 +5,20 @@ urlpatterns = [
     path('surat_keluar/', views.surat_keluar, name='surat_keluar' ),
 
     path('surat_keluar/nota_dinas/', views.nota_dinas, name='nota_dinas' ),
-    path('surat_keluar/filter_nota_dinas/', views.filter_nota_dinas, name='filter_nota_dinas' ),
+    path('surat_keluar/nota_dinas/filter_nota_dinas/', views.filter_nota_dinas, name='filter_nota_dinas' ),
 
     ############ NOTA DINAS -> BON NOMOR ##########################################
-    path('surat_keluar/bon_nomor/', views.bon_nomor, name='bon_nomor' ),
-    path('surat_keluar/filter_bon_nomor/', views.filter_bon_nomor, name='filter_bon_nomor' ),
-    path('surat_keluar/bon_nomor_isi_nota_dinas/<int:id_bon_nomor_isi_nota_dinas>/', views.bon_nomor_isi_nota_dinas, name='bon_nomor_isi_nota_dinas' ),
-    path('surat_keluar/filter_bon_nomor_isi_nota_dinas/<int:id_filter_bon_nomor_isi_nota_dinas>/', views.filter_bon_nomor_isi_nota_dinas, name='filter_bon_nomor_isi_nota_dinas' ),
+    path('surat_keluar/nota_dinas/bon_nomor/', views.bon_nomor, name='bon_nomor' ),
+    path('surat_keluar/nota_dinas/bon_nomor_isi_nota_dinas/<int:id_bon_nomor_isi_nota_dinas>/', views.bon_nomor_isi_nota_dinas, name='bon_nomor_isi_nota_dinas' ),
+    path('surat_keluar/nota_dinas/filter_bon_nomor/', views.filter_bon_nomor, name='filter_bon_nomor' ),
+    path('surat_keluar/nota_dinas/filter_bon_nomor_isi_nota_dinas/<int:id_filter_bon_nomor_isi_nota_dinas>/', views.filter_bon_nomor_isi_nota_dinas, name='filter_bon_nomor_isi_nota_dinas' ),
 
  
     ############ NOTA DINAS -> Nomor Tersedia #####################################
-    path('surat_keluar/nomor_tersedia/', views.nomor_tersedia, name='nomor_tersedia' ),
-    path('surat_keluar/nomor_tersedia_tambah_nomor/', views.nomor_tersedia_tambah_nomor, name='nomor_tersedia_tambah_nomor' ),
-    path('surat_keluar/nomor_tersedia_bon_nomor/<int:id_nomor_tersedia_bon_nomor>/', views.nomor_tersedia_bon_nomor, name='nomor_tersedia_bon_nomor' ),
-    path('surat_keluar/no_tersedia_isi_nota_dinas/<int:id_no_tersedia_isi_nota_dinas>/', views.no_tersedia_isi_nota_dinas, name='no_tersedia_isi_nota_dinas' ),
+    path('surat_keluar/nota_dinas/nomor_tersedia/', views.nomor_tersedia, name='nomor_tersedia' ),
+    path('surat_keluar/nota_dinas/nomor_tersedia_tambah_nomor/', views.nomor_tersedia_tambah_nomor, name='nomor_tersedia_tambah_nomor' ),
+    path('surat_keluar/nota_dinas/nomor_tersedia_bon_nomor/<int:id_nomor_tersedia_bon_nomor>/', views.nomor_tersedia_bon_nomor, name='nomor_tersedia_bon_nomor' ),
+    path('surat_keluar/nota_dinas/no_tersedia_isi_nota_dinas/<int:id_no_tersedia_isi_nota_dinas>/', views.no_tersedia_isi_nota_dinas, name='no_tersedia_isi_nota_dinas' ),
 
 
 
