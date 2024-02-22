@@ -11,7 +11,7 @@
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_edit_olah_nota_dinas' %}">
+      <form method="POST" action="">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
@@ -29,12 +29,10 @@
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Urut</th>
-            <th class="text-center">Nomor Takah</th>
-            <th class="text-center">Kepada</th>
-            <th class="text-center">Perihal</th>
-            <th class="text-center">Keterangan</th>
+           
             <th class="text-center">File</th>
-            <th class="text-center">Edit</th>
+            <th class="text-center">Edit Bon Nomor</th>
+            <th class="text-center">Edit Nota Dinas</th>
             
           </tr>
         </thead>
@@ -44,10 +42,7 @@
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
               <td class="text-center">{{ data.no_urut }}</td>
-              <td>{{ data.no_takah | default_if_none:""  }}</td>
-              <td>{{ data.kepada | default_if_none:"" }}</td>
-              <td>{{ data.perihal | default_if_none:"" }}</td>
-              <td>{{ data.keterangan | default_if_none:"" }}</td>
+             
               <td class="text-center">
 
                 <div style="margin-left: -15px;">
@@ -59,6 +54,11 @@
                   <button type="button" class="btn btn-primary btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#edit_olah_nota_dinas{{ data.id }}"></button>
 
               </td> 
+              
+              <td class="text-center gap-2"> 
+                <button type="button" class="btn btn-primary btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#edit_olah_nota_dinas{{ data.id }}"></button>
+
+            </td> 
                
             </tr>
           {% endfor %}
@@ -68,7 +68,7 @@
   </div>
 
 
-  {% include 'surat_keluar/modal/nota_dinas/edit_olah_nota_dinas.html' %}  
+  {% comment %} {% include 'surat_keluar/modal/nota_dinas/edit_olah_nota_dinas.html' %}   {% endcomment %}
 
 
 

@@ -24,11 +24,11 @@ urlpatterns = [
     path('surat_keluar/nota_dinas/filter_nomor_tersedia_bon_nomor/<int:id_filter_nomor_tersedia_bon_nomor>/', views.filter_nomor_tersedia_bon_nomor, name='filter_nomor_tersedia_bon_nomor' ),
     path('surat_keluar/nota_dinas/filter_nomor_tersedia_isi_nota_dinas/<int:id_filter_nomor_tersedia_isi_nota_dinas>/', views.filter_nomor_tersedia_isi_nota_dinas, name='filter_nomor_tersedia_isi_nota_dinas' ),
 
+    ############ NOTA DINAS -> Olah Nota DInas #####################################     
+    path('surat_keluar/nota_dinas/olah_nota_dinas/', views.olah_nota_dinas, name='olah_nota_dinas' ),
 
 
 
-
-    # path('surat_keluar/filter_nomor_tersedia/', views.filter_nomor_tersedia, name='filter_nomor_tersedia' ),
     # path('surat_keluar/filter_nomor_tersedia_bon_nomor/<int:id_filter_nomor_tersedia_bon_nomor>/', views.filter_nomor_tersedia_bon_nomor, name='filter_nomor_tersedia_bon_nomor' ),
     # path('surat_keluar/filter_nomor_tersedia_isi_nota_dinas/<int:id_filter_nomor_tersedia_isi_nota_dinas>/', views.filter_nomor_tersedia_isi_nota_dinas, name='filter_nomor_tersedia_isi_nota_dinas' ),
 

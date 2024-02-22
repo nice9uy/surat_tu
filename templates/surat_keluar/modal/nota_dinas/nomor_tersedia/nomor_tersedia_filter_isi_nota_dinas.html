@@ -1,7 +1,7 @@
  
-{% for data in nomor_tersedia %}
+{% for data in filter_nomor_tersedia %}
 
-<div class="modal fade" id="button_nomor_tersedia_filter_isi_nota_dinas{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="button_filter_nomor_tersedia_isi_nota_dinas{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             
-            <form action="{% url 'nomor_tersedia_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+            <form action="{% url 'filter_nomor_tersedia_isi_nota_dinas' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
               {% csrf_token %}
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>

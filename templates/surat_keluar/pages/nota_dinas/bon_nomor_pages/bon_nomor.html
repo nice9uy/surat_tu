@@ -31,6 +31,7 @@
             <th class="text-center">Nomor Urut</th>
             <th class="text-center">Bagian</th>
             <th class="text-center">Catatan</th>
+            <th class="text-center">Edit Bon Nomor</th>
             <th class="text-center">Isi Nota Dinas</th>
             
           </tr>
@@ -43,6 +44,10 @@
               <td class="text-center">{{ data.no_urut }}</td>
               <td>{{ data.bagian | default_if_none:"" }}</td>
               <td>{{ data.catatan | default_if_none:"" }}</td>
+
+              <td class="text-center gap-2"> 
+                <button type="button" class="btn btn-danger btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_isi_nota_dinas{{ data.id }}"></button>
+               </td> 
     
               <td class="text-center gap-2"> 
                 <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_isi_nota_dinas{{ data.id }}"></button>

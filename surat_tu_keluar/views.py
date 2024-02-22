@@ -402,9 +402,20 @@ def filter_nomor_tersedia_isi_nota_dinas(request, id_filter_nomor_tersedia_isi_n
         bon_nomor_isi_nota_dinas_save.save()
         return redirect('filter_nomor_tersedia')
 
+# #####################    OLAH NOTA DINAS       ####################################################
 
 
+def olah_nota_dinas(request):
+    # tanggal_sekarang                             =  date.today()
+    # olah_nota_dinas                              =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact='') , tanggal = tanggal_sekarang )
+    olah_nota_dinas                              =  NotaDinas.objects.all()
 
+    context = {
+                'page_title'                     : 'Nota Dinas - Olah Nota Dinas', 
+                'olah_nota_dinas'                :  olah_nota_dinas,
+    #             'tanggal_sekarang'               :  tanggal_sekarang
+    }
+    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas_pages/olah_nota_dinas.html', context)
 
 
 
