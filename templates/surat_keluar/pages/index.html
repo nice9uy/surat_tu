@@ -6,43 +6,153 @@
 {% include 'surat_keluar/header/main_header.html' %}
 
 
-<div style="margin-top: 6rem;" class="wrapper text-center">
-	<div style="font-size: 2rem;" class="text-center mb-5">
+<div style="margin-top: 2rem;" class="wrapper text-center">
+	<div style="font-size: 2rem;" class="text-center mb-3">
 		PILIH SURAT KELUAR
 	</div>
 
 
 	<div class="accordion_wrap text-center">
-		<ul>
-			<li class="walk">
-				<div class="accordion_item">
-					<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">ND</div>
-				</div>
-				<div class="accordion_menu text-center">
-					<div class="inner_am">
-						<div style="font-size: 18px;" class="title text-center mt-3">NOTA DINAS</div>
-						<div class="text-center mt-3">
-							{% comment %} <button class="btn btn-primary">PILIH</button> {% endcomment %}
-							<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+
+		<div>
+			<ul>
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">ND</div>
+					</div>
+					<div class="accordion_menu text-center">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">NOTA DINAS</div>
+							<div class="text-center mt-3">
+								{% comment %} <button class="btn btn-primary">PILIH</button> {% endcomment %}
+								<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-			<li class="walk">
-				<div class="accordion_item">
-					<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">ND</div>
-				</div>
-				<div class="accordion_menu">
-					<div class="inner_am">
-						<div style="font-size: 18px;" class="title text-center mt-3">NOTA DINAS</div>
-						<div class="text-center mt-3">
-							<button class="btn btn-primary">PILIH</button>
+				</li>
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">B</div>
+					</div>
+					<div class="accordion_menu">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">BIASA</div>
+							<div class="text-center mt-3">
+								<button class="btn btn-primary">PILIH</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</li> 
+				</li> 
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">UND</div>
+					</div>
+					<div class="accordion_menu">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">UNDANGAN</div>
+							<div class="text-center mt-3">
+								<button class="btn btn-primary">PILIH</button>
+							</div>
+						</div>
+					</div>
+				</li> 
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">SP</div>
+					</div>
+					<div class="accordion_menu">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">SPRIN</div>
+							<div class="text-center mt-3">
+								<button class="btn btn-primary">PILIH</button>
+							</div>
+						</div>
+					</div>
+				</li> 
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">R</div>
+					</div>
+					<div class="accordion_menu">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">RAHASIA</div>
+							<div class="text-center mt-3">
+								<button class="btn btn-primary">PILIH</button>
+							</div>
+						</div>
+					</div>
+				</li> 
+				
+			</ul>
 			
-		</ul>
+		</div>
+	
+		{% comment %} Baris ke 2 {% endcomment %}
+
+		<div>
+			<ul>
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">B/SPENG</div>
+					</div>
+					<div class="accordion_menu text-center">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">B SPENG</div>
+							<div class="text-center mt-3">
+								<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+							</div>
+						</div>
+					</div>
+				</li>
+	
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">R/SPENG</div>
+					</div>
+					<div class="accordion_menu text-center">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">R SPENG</div>
+							<div class="text-center mt-3">
+								<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">SPPD</div>
+					</div>
+					<div class="accordion_menu text-center">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">SPPD</div>
+							<div class="text-center mt-3">
+								<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="walk">
+					<div class="accordion_item">
+						<div style="margin-top: 4rem; font-size: 26px; color: black;" class="text-center fw-bold">SJ</div>
+					</div>
+					<div class="accordion_menu text-center">
+						<div class="inner_am">
+							<div style="font-size: 18px;" class="title text-center mt-3">SURAT JALAN</div>
+							<div class="text-center mt-3">
+								<a class="btn btn-primary" href="{% url 'nota_dinas' %}">PILIH</a>
+							</div>
+						</div>
+					</div>
+				</li>
+	
+			</ul>
+
+		</div>
+
+    
+
 	</div>
 </div>
 

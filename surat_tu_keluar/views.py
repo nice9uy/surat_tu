@@ -160,7 +160,84 @@ def filter_bon_nomor_isi_nota_dinas(request, id_filter_bon_nomor_isi_nota_dinas)
         )
         
         bon_nomor_isi_nota_dinas_save.save()
+        return redirect('filter_bon_nomor')
+    
+
+
+@login_required(login_url="/accounts/login/")
+def bon_nomor_edit_bon_nomor(request, id_bon_nomor_edit_bon_nomor):
+    bon_nomor_edit_bon_nomor                     =  get_object_or_404(NotaDinas, pk = id_bon_nomor_edit_bon_nomor)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_bon_nomor_edit_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = bon_nomor_edit_bon_nomor.tanggal
+        get_no_urut                              = bon_nomor_edit_bon_nomor.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = bon_nomor_edit_bon_nomor.upload_file
+
+        bon_nomor_isi_nota_dinas_save    = NotaDinas(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        bon_nomor_isi_nota_dinas_save.save()
         return redirect('bon_nomor')
+    
+@login_required(login_url="/accounts/login/")
+def filter_bon_nomor_edit_bon_nomor(request, id_filter_bon_nomor_edit_bon_nomor):
+    filter_bon_nomor_edit_bon_nomor              =  get_object_or_404(NotaDinas, pk = id_filter_bon_nomor_edit_bon_nomor)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_filter_bon_nomor_edit_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = filter_bon_nomor_edit_bon_nomor.tanggal
+        get_no_urut                              = filter_bon_nomor_edit_bon_nomor.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = filter_bon_nomor_edit_bon_nomor.upload_file
+
+        filter_edit_bon_nomor_save    = NotaDinas(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        filter_edit_bon_nomor_save.save()
+        return redirect('filter_bon_nomor')
+    
     
     
 # #####################    Nomor Tersedia       ####################################################
@@ -401,19 +478,20 @@ def filter_nomor_tersedia_isi_nota_dinas(request, id_filter_nomor_tersedia_isi_n
         
         bon_nomor_isi_nota_dinas_save.save()
         return redirect('filter_nomor_tersedia')
+    
+
+
 
 # #####################    OLAH NOTA DINAS       ####################################################
 
 
 def olah_nota_dinas(request):
     # tanggal_sekarang                             =  date.today()
-    # olah_nota_dinas                              =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact='') , tanggal = tanggal_sekarang )
-    olah_nota_dinas                              =  NotaDinas.objects.all()
+    olah_nota_dinas                              =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
 
     context = {
                 'page_title'                     : 'Nota Dinas - Olah Nota Dinas', 
                 'olah_nota_dinas'                :  olah_nota_dinas,
-    #             'tanggal_sekarang'               :  tanggal_sekarang
     }
     return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas_pages/olah_nota_dinas.html', context)
 

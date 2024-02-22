@@ -3,7 +3,7 @@
 
 {% block bon_nomor %} 
 
-{% include 'surat_keluar/header/nota_dinas.html' %}
+{% include 'surat_keluar/header/olah_nota_dinas.html' %}
 
 
 <div class="container-fluid mt-3 text-white" style="">
@@ -46,7 +46,7 @@
               <td>{{ data.catatan | default_if_none:"" }}</td>
 
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-danger btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_bon_nomor_isi_nota_dinas{{ data.id }}"></button>
+                <button type="button" class="btn btn-danger btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_edit_bon_nomor{{ data.id }}"></button>
                </td> 
     
               <td class="text-center gap-2"> 
@@ -61,6 +61,7 @@
   </div>
 
 {% include 'surat_keluar/modal/nota_dinas/bon_nomor/bon_nomor_isi_nota_dinas.html' %} 
+{% include 'surat_keluar/modal/nota_dinas/bon_nomor/edit_bon_nomor.html' %} 
 
 
   <div class="container">
