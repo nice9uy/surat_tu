@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block filter_edit_nota_dinas %} 
+
+{% include 'surat_keluar/header/edit_nota_dinas.html' %}
+
+
+<div class="container-fluid mt-3 text-white" style="">
+    <h5 class="text-center">EDIT NOTA DINAS {{ tanggal_edit_nota_dinas | date:'l, d F Y' }}</h5>
+    
+    <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
+
+      <form method="POST" action="">
+        <div class="d-flex mb-2 ">   
+            {% csrf_token %}
+            <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
+            <button class="btn btn-primary btn-sm " type="submit">Cari</button>
+        </div>
+      </form>
+       
+      
+    </div>
+
+      <table id="tabel_edit_nota_dinas" class="table table-striped table-bordered text-white" style="width:100%;  ">
+        <thead>
+          <tr>
+ 
+            <th class="text-center">No</th>
+            <th class="text-center">Tanggal</th>
+            <th class="text-center">Nomor Urut</th>
+            <th class="text-center">Nomor Takah</th>
+            <th class="text-center">Kepada</th>
+            <th class="text-center">Perihal</th>
+            <th class="text-center">Keterangan</th>
+            <th class="text-center">File</th>
+            <th class="text-center">Edit Nota Dinas</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in filter_edit_nota_dinas %}
+            <tr>
+              <td class="text-center" >{{ forloop.counter }}</td>
+              <td class="text-center">{{ data.tanggal }}</td>
+              <td class="text-center">{{ data.no_urut }}</td>
+              <td>{{ data.no_takah | default_if_none:""  }}</td>
+              <td>{{ data.kepada | default_if_none:"" }}</td>
+              <td>{{ data.perihal | default_if_none:"" }}</td>
+              <td>{{ data.keterangan | default_if_none:"" }}</td>
+             
+              <td class="text-center">
+
+                <div style="margin-left: -15px;">
+                  <a class="btn btn-success btn-sm fa fa-file-pdf-o" aria-current="page" title="Files" target="_blank" href="/upload/{{ data.upload_file }}"></a>
+                </div>
+              </td>
+    
+             
+              
+              <td class="text-center gap-2"> 
+                <button type="button" class="btn btn-primary btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_filter_edit_isi_nota_dinas{{ data.id }}"></button>
+
+            </td> 
+               
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+  </div>
+
+
+{% comment %} {% include 'surat_keluar/modal/nota_dinas/edit_nota_dinas/edit_isi_nota_dinas.html' %}   {% endcomment %}
+{% include 'surat_keluar/modal/nota_dinas/edit_nota_dinas/filter_edit_nota_dinas.html' %} 
+
+
+  <div class="container">
+    <footer class="">
+      <p class="text-center text-muted">
+        &copy; 2023 - {% now 'Y' %} By Abdul Rachman <br>
+        Bag Datin - Setbaranahan Kemhan
+      </p>
+    </footer>
+  </div>
+
+
+{% endblock filter_edit_nota_dinas %} 
+
+
+
+
+

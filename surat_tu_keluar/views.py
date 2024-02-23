@@ -479,25 +479,45 @@ def filter_nomor_tersedia_isi_nota_dinas(request, id_filter_nomor_tersedia_isi_n
         bon_nomor_isi_nota_dinas_save.save()
         return redirect('filter_nomor_tersedia')
     
-
-
-
 # #####################    OLAH NOTA DINAS       ####################################################
 
-
-def olah_nota_dinas(request):
-    # tanggal_sekarang                             =  date.today()
-    olah_nota_dinas                              =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+def edit_nota_dinas(request):
+    edit_nota_dinas                              =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
 
     context = {
-                'page_title'                     : 'Nota Dinas - Olah Nota Dinas', 
-                'olah_nota_dinas'                :  olah_nota_dinas,
+                'page_title'                     : 'Nota Dinas - Edit Nota Dinas', 
+                'edit_nota_dinas'                :  edit_nota_dinas,
+
     }
-    return render (request , 'surat_keluar/pages/nota_dinas/olah_nota_dinas_pages/olah_nota_dinas.html', context)
+    return render (request , 'surat_keluar/pages/nota_dinas/edit_nota_dinas_pages/edit_nota_dinas.html', context)
 
 
+@login_required(login_url="/accounts/login/")
+def filter_edit_nota_dinas(request):
+    edit_filter_nota_dinas_all             =  NotaDinas.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+    # print(edit_filter_nota_dinas_all)
+    try:
+        if request.method == 'POST':
+            get_tgl_nota_dinas             =  request.POST.get('tanggal')
+            edit_filter_nota_dinas         =  NotaDinas.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact='') , tanggal = get_tgl_nota_dinas).values()
+            tanggal                        =  parse_date(get_tgl_nota_dinas)
 
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_edit_nota_dinas'       :  edit_filter_nota_dinas,
+            'tanggal_edit_nota_dinas'      :  tanggal
+        }
 
+        return render (request , 'surat_keluar/pages/nota_dinas/edit_nota_dinas_pages/filter_edit_nota_dinas.html', context)
+    except:
+        edit_filter                        = edit_filter_nota_dinas_all
+        context = {
+            'page_title'                   : 'Olah Nota Dinas',
+            'filter_edit_nota_dinas'       :  edit_filter,
+            'tanggal_edit_nota_dinas'      :  get_tgl_nota_dinas
+        }
+
+        return render (request , 'surat_keluar/pages/nota_dinas/edit_nota_dinas_pages/filter_edit_nota_dinas.html', context)
 
 
 
