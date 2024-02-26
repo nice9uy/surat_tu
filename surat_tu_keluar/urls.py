@@ -30,7 +30,8 @@ urlpatterns = [
     ############ NOTA DINAS -> Olah Nota DInas #####################################     
     path('surat_keluar/nota_dinas/edit_nota_dinas/', views.edit_nota_dinas, name='edit_nota_dinas' ),
     path('surat_keluar/nota_dinas/filter_edit_nota_dinas/', views.filter_edit_nota_dinas, name='filter_edit_nota_dinas' ),
-    
+    path('surat_keluar/nota_dinas/edit_nota_dinas_modal/<int:id_edit_nota_dinas_modal>/', views.edit_nota_dinas_modal, name='edit_nota_dinas_modal' ),
+    path('surat_keluar/nota_dinas/filter_edit_nota_dinas_modal/<int:id_filter_edit_nota_dinas_modal>/', views.filter_edit_nota_dinas_modal, name='filter_edit_nota_dinas_modal' ),
 
 
    
