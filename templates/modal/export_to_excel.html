@@ -1,0 +1,31 @@
+
+  <div class="modal fade" id="export_ke_excel" tabindex="-1" aria-labelledby="delete_kelompok" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete_kelompok">Export Ke Excel</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form action="{% url 'export_ke_excel' %}" method="POST">
+          {% csrf_token %}
+          <div class="text-center  modal-body">
+            <label class="mb-3 fw-bold form-label">FILTER PERIODE LAPORAN </label>
+
+            <div class="d-flex gap-2 ">
+              <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal_awal" / required>
+              <label style="margin-top: 10px;" class="fw-bold form-label">SAMPAI</label>
+              <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal_akhir" / required >
+
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Export Laporan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

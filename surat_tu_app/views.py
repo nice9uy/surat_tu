@@ -10,6 +10,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.dateparse import parse_date
 from django.http import JsonResponse
 import calendar
+import pandas as pd
 
 # from django.shortcuts import create_object
 
@@ -19,6 +20,41 @@ color_bar_x                      = [
      "#9F8170","#2E5894","#967117","#126180","#FFAA1D","#7BB661","#BD33A4","#5F9EA0","#006B3C",
      "#D70040","#ED9121","#703642","#ACE1AF","#1DACD6","#E68FAC","#80FF00","#E4D00A","#58427C"    
 ]
+
+@login_required(login_url="/accounts/login/")
+def export_ke_excel(request):
+    if request.method == 'POST':
+        tanggal_awal              = request.POST.get('tanggal_awal')
+        tanggal_akhir             = request.POST.get('tanggal_akhir')
+
+        awal                      = parse_date(tanggal_awal)
+        akhir                     = parse_date(tanggal_akhir)
+
+        data_filter               = pd.DataFrame(list(DbSurat.objects.filter(tgl_agenda__range=[awal, akhir]).values()))
+
+        tanggal                   = pd.to_datetime(data_filter['tgl_agenda']).dt.strftime("%d-%m-%Y")
+        data_1                    = pd.DataFrame(data_filter, columns =['no_agenda','jenis_surat'])  
+        tanggal_surat             = pd.to_datetime(data_filter['tgl_surat']).dt.strftime("%d-%m-%Y")
+        data_2                    = pd.DataFrame(data_filter, columns =['no_surat','surat_dari','perihal'])  
+
+        gabung_data               = pd.concat([tanggal, data_1, tanggal_surat , data_2], axis=1 )
+
+        df                        = pd.DataFrame(gabung_data)
+        df.rename(columns = {'tgl_agenda' :'TANGGAL AGENDA', 
+                             'no_agenda'  :'NOMOR AGENDA',
+                             'jenis_surat':'JENIS SURAT',
+                             'tgl_surat'  : 'TANGGAL SURAT',
+                             'no_surat'   : 'NOMOR SURAT',
+                             'surat_dari' : 'SURAT DARI',
+                             'perihal'    : 'PERIHAL'
+                             }, inplace = True) 
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="laporan_surat_masuk.xlsx"'                                        
+        df.to_excel(response , index=False) 
+        return response
+
+    return redirect('olah_surat')
 
 # @staff_member_required(login_url="/surat/")
 @login_required(login_url="/accounts/login/")

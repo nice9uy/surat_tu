@@ -18,8 +18,9 @@
             </div>
         </form>
         
-        <div  class="gap-3">
-          <button type="button" class="btn btn-success btn-sm"  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#tambah_surat">TAMBAH SURAT</button>
+        <div  class="gap-5">
+          <button type="button" class="btn btn-primary btn-sm gap-3 "  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#export_ke_excel">Export Ke Excel</button>
+          <button type="button" class="btn btn-success btn-sm "  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#tambah_surat">TAMBAH SURAT</button>
         </div>
 
       </div>
@@ -29,8 +30,8 @@
       <thead>
         <tr>
           <th class="text-center">No</th>
-          <th class="text-center">Nomor Urut</th>
           <th class="text-center">Klasifikasi</th>
+          <th class="text-center">Jenis Surat</th>
           <th class="text-center">Tgl Agenda</th>
           <th class="text-center">No Agenda</th>
           <th class="text-center">Tgl Surat</th>
@@ -48,8 +49,8 @@
         {% for data in data_surat %}
           <tr>
             <td class="text-center" >{{ forloop.counter }}</td>
-            <td >{{ data.jenis_surat }}</td>
             <td >{{ data.klasifikasi }}</td>
+            <td >{{ data.jenis_surat }}</td>
             <td>{{ data.tgl_agenda|date:'d M Y' }}</td>
             <td>{{ data.no_agenda }}</td>
             <td>{{ data.tgl_surat|date:'d M Y' }}</td>
@@ -91,12 +92,9 @@
   </div>
 
   {% include 'modal/disposisi/upload_disposisi.html' %}
-
   {% include 'modal/olah_surat.html' %}
-
   {% include 'modal/tambah_surat.html' %}
-
-
+  {% include 'modal/export_to_excel.html' %}
 
   <div class="container">
     <footer class="">
