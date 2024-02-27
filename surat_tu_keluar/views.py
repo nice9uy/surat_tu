@@ -5,6 +5,9 @@ from . models import NotaDinas
 from django.db.models import Q
 from datetime import datetime
 from django.utils.dateparse import parse_date
+import pandas as pd
+from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -625,7 +628,40 @@ def filter_edit_nota_dinas_modal(request, id_filter_edit_nota_dinas_modal):
         return render (request , 'surat_keluar/pages/nota_dinas/edit_nota_dinas_pages/filter_edit_nota_dinas.html')
 
 
+@login_required(login_url="/accounts/login/")
+def export_ke_excel_nota_dinas(request):
+    
+    if request.method == 'POST':
+        # hari_ini                  = date.today()
+        tanggal_awal              = request.POST.get('tanggal_awal')
+        tanggal_akhir             = request.POST.get('tanggal_akhir')
 
+        awal                      = parse_date(tanggal_awal)
+        akhir                     = parse_date(tanggal_akhir)
+
+        data_filter               = pd.DataFrame(list(NotaDinas.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''), tanggal__range=[awal, akhir]).values()))
+        tanggal                   = pd.to_datetime(data_filter['tanggal']).dt.strftime("%d-%m-%Y")
+        data_1                    = pd.DataFrame(data_filter, columns =['no_takah','kepada','perihal','keterangan'])  
+
+        gabung_data               = pd.concat([tanggal, data_1 ], axis=1 )
+
+        df                        = pd.DataFrame(gabung_data)
+        df.rename(columns         = {
+                                        'tanggal'      :'TANGGAL', 
+                                        'no_takah'    :'NOMOR TAKAH',
+                                        'kepada'       :'KEPADA',
+                                        'perihal'      :'PERIHAL',
+                                        'keterangan'   :'KETERANGAN',
+                                        
+                                    }, inplace = True) 
+
+        print(df)
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="laporan_nota_dinas.xlsx"'                                        
+        df.to_excel(response , index=False) 
+        return response 
+
+    return redirect('edit_nota_dinas')
 
 
 

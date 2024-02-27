@@ -23,7 +23,9 @@ color_bar_x                      = [
 
 @login_required(login_url="/accounts/login/")
 def export_ke_excel(request):
+    
     if request.method == 'POST':
+        hari_ini                  = date.today()
         tanggal_awal              = request.POST.get('tanggal_awal')
         tanggal_akhir             = request.POST.get('tanggal_akhir')
 
@@ -40,19 +42,21 @@ def export_ke_excel(request):
         gabung_data               = pd.concat([tanggal, data_1, tanggal_surat , data_2], axis=1 )
 
         df                        = pd.DataFrame(gabung_data)
-        df.rename(columns = {'tgl_agenda' :'TANGGAL AGENDA', 
-                             'no_agenda'  :'NOMOR AGENDA',
-                             'jenis_surat':'JENIS SURAT',
-                             'tgl_surat'  : 'TANGGAL SURAT',
-                             'no_surat'   : 'NOMOR SURAT',
-                             'surat_dari' : 'SURAT DARI',
-                             'perihal'    : 'PERIHAL'
-                             }, inplace = True) 
+        df.rename(columns         = {
+                                        'tgl_agenda' :'TANGGAL AGENDA', 
+                                        'no_agenda'  :'NOMOR AGENDA',
+                                        'jenis_surat':'JENIS SURAT',
+                                        'tgl_surat'  : 'TANGGAL SURAT',
+                                        'no_surat'   : 'NOMOR SURAT',
+                                        'surat_dari' : 'SURAT DARI',
+                                        'perihal'    : 'PERIHAL'
+
+                                    }, inplace = True) 
 
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="laporan_surat_masuk.xlsx"'                                        
         df.to_excel(response , index=False) 
-        return response
+        return response 
 
     return redirect('olah_surat')
 

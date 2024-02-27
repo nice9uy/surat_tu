@@ -33,6 +33,7 @@ urlpatterns = [
     path('surat_keluar/nota_dinas/edit_nota_dinas_modal/<int:id_edit_nota_dinas_modal>/', views.edit_nota_dinas_modal, name='edit_nota_dinas_modal' ),
     path('surat_keluar/nota_dinas/filter_edit_nota_dinas_modal/<int:id_filter_edit_nota_dinas_modal>/', views.filter_edit_nota_dinas_modal, name='filter_edit_nota_dinas_modal' ),
 
+    path('surat_masuk/nota_dinas/edit_nota_dinas_modal/export_ke_excel_nota_dinas/', views.export_ke_excel_nota_dinas, name='export_ke_excel_nota_dinas' ),
 
    
 ]
