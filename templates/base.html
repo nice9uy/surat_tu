@@ -35,7 +35,7 @@
 </head>
 <body style="font-family: Oswald, Helvetica, Arial, sans-serif!important; font-size: 14px;" class="text-light">
            
-            {% comment %} Surat Masuk {% endcomment %}
+            {% block error_404 %}{% endblock error_404 %}
 
             {% block index %}{% endblock index %} 
             {% block login %}{% endblock login %}  
@@ -71,14 +71,12 @@
             {% block filter_edit_nota_dinas %}{% endblock filter_edit_nota_dinas %}
 
 
+            {% comment %} Surat Biasa {% endcomment %}
+
+            {% block biasa %}{% endblock biasa %}
 
             
-            {% comment %} {% block olah_nota_dinas %}{% endblock olah_nota_dinas %}
-            {% block bon_nomor_filter %}{% endblock bon_nomor_filter %}
-
-            {% block filter_tanggal_no_tersedia %}{% endblock filter_tanggal_no_tersedia %}
-            {% block filter_tanggal_bon_nomor %}{% endblock filter_tanggal_bon_nomor %}
-            {% block filter_tanggal_olah_nota_dinas %}{% endblock filter_tanggal_olah_nota_dinas %} {% endcomment %}
+           
 
    
             <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

@@ -1,7 +1,7 @@
 from datetime import date
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from . models import NotaDinas
+from . models import NotaDinas, Biasa
 from django.db.models import Q
 from datetime import datetime
 from django.utils.dateparse import parse_date
@@ -654,8 +654,6 @@ def export_ke_excel_nota_dinas(request):
                                         'keterangan'   :'KETERANGAN',
                                         
                                     }, inplace = True) 
-
-        print(df)
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = 'attachment; filename="laporan_nota_dinas.xlsx"'                                        
         df.to_excel(response , index=False) 
@@ -664,7 +662,17 @@ def export_ke_excel_nota_dinas(request):
     return redirect('edit_nota_dinas')
 
 
+##################################  BIASA  ################################################################
 
+def biasa(request):
+    # surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+    surat_biasa                              =  Biasa.objects.all()
+
+    context = {
+        'page_title'    : 'Surat Biasa',
+        'data_surat'    :  surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/surat_biasa.html', context )
 
 
 

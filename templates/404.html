@@ -1,81 +1,132 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
+
+{% block error_404 %}
+
+
+<section class="d-flex align-items-center min-vh-100 py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6 order-md-2">
+                <div class="lc-block">
+                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_kcsr6fcp.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player>
+                </div><!-- /lc-block -->
+            </div><!-- /col -->
+            <div class="col-md-6 text-center text-md-start ">
+                <div class="lc-block mb-3">
+                    <div editable="rich">
+                        <h1 class="fw-bold h4">HALAMAN TIDAK DITEMUKAN!<br></h1>
+                    </div>
+                </div>
+                <div class="lc-block mb-3">
+                    <div editable="rich">
+                        <h1 class="display-1 fw-bold text-muted">Error 404</h1>
+
+                    </div>
+                </div><!-- /lc-block -->
+                <div class="lc-block mb-5">
+                    <div editable="rich">
+                        <p class="rfs-11 fw-light">Halaman mungkin tidak ada atau file tidak tersedia.</p>
+                    </div>
+                </div><!-- /lc-block -->
+                <div class="lc-block">
+                    <a class="btn  btn-primary" href="{% url 'home' %}" role="button">Kembali Ke Menu Utama</a>
+                </div><!-- /lc-block -->
+            </div><!-- /col -->
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+
+
+{% endblock error_404 %}
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-    <style>
-
-/*======================
+  <style>
+    /*======================
     404 page
 =======================*/
 
 
-.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
-}
+    .page_404 {
+      padding: 40px 0;
+      background: black;
+      background-color: black;
+      font-family: "Arvo", serif;
+    }
 
-.page_404  img{ width:100%;}
+    .page_404 img {
+      width: 100%;
+    }
 
-.four_zero_four_bg{
- 
-    background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
-    height: 400px;
-    background-position: center;
-    background-repeat: repeat-y;
- }
- 
- 
- .four_zero_four_bg h1{
- font-size:80px;
- }
- 
-  .four_zero_four_bg h3{
-			 font-size:80px;
-			 }
-			 
-			 .link_404{			 
-	color: #fff!important;
-    padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;}
-	.contant_box_404{ margin-top:-50px;}
+    .four_zero_four_bg {
+      background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+      height: 400px;
+      background-position: center;
+      background-repeat: repeat-y;
+    }
 
+    .four_zero_four_bg h1 {
+      font-size: 80px;
+    }
 
-    </style>
+    .four_zero_four_bg h3 {
+      font-size: 80px;
+    }
 
-<body>
+    .link_404 {
+      color: #fff !important;
+      padding: 10px 20px;
+      background: #39ac31;
+      margin: 20px 0;
+      display: inline-block;
+    }
+    .contant_box_404 {
+      margin-top: -50px;
+    }
+  </style>
 
+  <body>
     <section class="page_404">
-        <div class="container">
-            <div class="row">	
-            <div class="col-sm-12 ">
-            <div class="col-sm-10 col-sm-offset-1  text-center">
-            <div style="text-align: center;" class="four_zero_four_bg">
-                <h1 class="text-center ">404</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="col-sm-10 col-sm-offset-1 text-center">
+              <div style="text-align: center" class="four_zero_four_bg">
+                <h1 class="text-center">404</h1>
+              </div>
+
+              <div style="text-align: center" class="contant_box_404">
+                <h3 class="h2">
+                  Sepertinya 
+                </h3>
+
+                <p style="text-align: center">
+                  the page you are looking for not avaible!
+                </p>
+
+                <a
+                  type="button"
+                  href="{% url 'home'  %}"
+                  >KEMBALI</a
+                >
+              </div>
             </div>
-            
-            <div class="contant_box_404">
-            <h3  style="text-align: center;" class="h2">
-            Look like you're lost
-            </h3>
-            
-            <p style="text-align: center;"> the page you are looking for not avaible!</p>
-            
-            <a style="justify-content: center;" type="button"  href="{% url 'home'  %}">Go to Home</a>
+          </div>
         </div>
-            </div>
-            </div>
-            </div>
-        </div>
+      </div>
     </section>
-
-
-
-    
-</body>
-</html>
+  </body>
+</html> {% endcomment %}

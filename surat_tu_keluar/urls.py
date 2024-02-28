@@ -36,4 +36,11 @@ urlpatterns = [
     path('surat_masuk/nota_dinas/edit_nota_dinas_modal/export_ke_excel_nota_dinas/', views.export_ke_excel_nota_dinas, name='export_ke_excel_nota_dinas' ),
 
    
+   ############    BIASA #####################################################
+    path('surat_keluar/biasa/', views.biasa, name='biasa' ),
+
+
+
+
+
 ]
