@@ -1,0 +1,37 @@
+{% load static %}
+
+<div>
+  <nav class="navbar bg-body-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'surat_keluar'%}">
+        <img src="{% static 'img/kemhan_logo.png' %}" alt="KEMHAN Logo" width="45" height="45" />
+        <span>ARSIP TU SETBARANAHAN</span>
+      </a>
+
+      <ul class="nav nav-underline fw-bold ">
+
+        <li class="nav-item mt-1">
+            <a class="nav-link  fa fa-arrow-left " href="{% url 'biasa' %}"></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/biasa/bon_nomor/' %} active {% endif %}" href="{% url 'biasa_bon_nomor' %}">Bon Nomor</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/surat/surat_keluar/biasa/no_tersedia/' %} active {% endif %}" href="{% url 'biasa_no_tersedia' %}">Nomor Tersedia</a>
+        </li> 
+
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/nota_dinas/bon_nomor/' %} active {% endif %}" href="">Edit Surat Biasa</a>
+        </li> 
+
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+
+
+

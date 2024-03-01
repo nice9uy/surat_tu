@@ -15,11 +15,15 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {% if request.path == '/surat/surat_keluar/biasa/' %} active {% endif %}" href="{% url 'biasa' %}">Surat Biasa</a>
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/nota_dinas/' %} active {% endif %}" href="">Bon Nomor</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link {% if request.path == '/surat/surat_keluar/biasa/bon_nomor/' %} active {% endif %}" href="{% url 'biasa_bon_nomor' %}">Olah Surat Biasa</a>
+          <a class="nav-link {% if request.path == '/surat/surat_keluar/nota_dinas/bon_nomor/' %} active {% endif %}" href="">Nomor Tersedia</a>
+        </li> 
+
+        <li class="nav-item">
+            <a class="nav-link {% if request.path == '/surat/surat_keluar/nota_dinas/bon_nomor/' %} active {% endif %}" href="">Edit Bon Nomor</a>
         </li> 
 
       </ul>

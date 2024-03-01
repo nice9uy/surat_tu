@@ -57,7 +57,7 @@
             {% comment %} surat keluar {% endcomment %}
 
             {% block surat_keluar %}{% endblock surat_keluar %}
-           
+ 
             {% block nota_dinas %}{% endblock nota_dinas %}
             {% block filter_nota_dinas %}{% endblock filter_nota_dinas %}
              
@@ -74,8 +74,8 @@
             {% comment %} Surat Biasa {% endcomment %}
 
             {% block biasa %}{% endblock biasa %}
-
-            
+            {% block biasa_bon_nomor %}{% endblock biasa_bon_nomor %}
+            {% block biasa_no_tersedia %}{% endblock biasa_no_tersedia %}
            
 
    
@@ -122,6 +122,7 @@
 
 
             <script>
+                  {% comment %} Nota Dinas {% endcomment %}
                   new DataTable('#tabel_nota_dinas',{               
                   });
                   new DataTable('#tabel_bon_nomor',{
@@ -129,6 +130,16 @@
                   new DataTable('#tabel_nomor_tersedia',{
                   });
                   new DataTable('#tabel_edit_nota_dinas',{
+                  });
+                  
+                  {% comment %} Surat Biasa {% endcomment %}
+                  new DataTable('#tabel_surat_biasa',{
+                  });
+                  new DataTable('#tabel_surat_biasa_bon_nomor',{
+                  });
+                  new DataTable('#tabel_surat_biasa_nomor_tersedia',{
+                  });
+                  new DataTable('#tabel_surat_biasa_edit',{
                   });
                   
 

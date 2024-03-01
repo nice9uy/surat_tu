@@ -18,6 +18,7 @@ def surat_keluar(request):
     }
     return render (request , 'surat_keluar/pages/index.html', context )
 
+###############################################################################################
 #################### NOTA DINAS ############################################################
 
 @login_required(login_url="/accounts/login/")
@@ -661,9 +662,10 @@ def export_ke_excel_nota_dinas(request):
 
     return redirect('edit_nota_dinas')
 
-
+##########################################################################################################
 ##################################  BIASA  ################################################################
 
+@login_required(login_url="/accounts/login/")
 def biasa(request):
     # surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
     surat_biasa                              =  Biasa.objects.all()
@@ -674,15 +676,35 @@ def biasa(request):
     }
     return render (request , 'surat_keluar/pages/biasa/surat_biasa.html', context )
 
+@login_required(login_url="/accounts/login/")
+def biasa_bon_nomor(request):
+    surat_biasa                              =  Biasa.objects.all()
+
+    context = {
+        'page_title'    : 'Bon Nomor',
+        'data_surat'    :  surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
 
 
 
+def biasa_no_tersedia(request):
+    surat_biasa                              =  Biasa.objects.all()
+
+    context = {
+        'page_title'    : 'Bon Nomor',
+        'data_surat'    :  surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
 
-
-
-
-
+def biasa_edit_surat_biasa(request):
+    surat_biasa                              =  Biasa.objects.all()
+    context = {
+        'page_title'    : 'Bon Nomor',
+        'data_surat'    :  surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
 
 

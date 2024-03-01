@@ -38,6 +38,9 @@ urlpatterns = [
    
    ############    BIASA #####################################################
     path('surat_keluar/biasa/', views.biasa, name='biasa' ),
+    path('surat_keluar/biasa/bon_nomor/', views.biasa_bon_nomor, name='biasa_bon_nomor' ),
+    path('surat_keluar/biasa/no_tersedia/', views.biasa_no_tersedia, name='biasa_no_tersedia' ),
+    path('surat_keluar/biasa/edit_surat_biasa/', views.biasa_edit_surat_biasa, name='biasa_edit_surat_biasa' ),
 
 
 
