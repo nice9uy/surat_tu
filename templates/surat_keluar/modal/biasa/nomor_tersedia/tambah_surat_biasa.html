@@ -1,0 +1,17 @@
+
+<div class="modal fade" id="tambah_nomor_surat_biasa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Tambah Nomor Surat Biasa ?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form method="POST" action="{% url 'surat_biasa_nomor_tersedia_tambah_nomor' %}">
+        {% csrf_token %}
+          <button type="submit" class="btn btn-success col-12" data-bs-dismiss="modal">Tambah</button>
+      </form>
+      
+    </div>
+  </div>
+</div>

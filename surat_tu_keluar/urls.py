@@ -36,13 +36,20 @@ urlpatterns = [
     path('surat_masuk/nota_dinas/edit_nota_dinas_modal/export_ke_excel_nota_dinas/', views.export_ke_excel_nota_dinas, name='export_ke_excel_nota_dinas' ),
 
    
-   ############    BIASA #####################################################
+   ############################################################ BIASA #####################################################
     path('surat_keluar/biasa/', views.biasa, name='biasa' ),
+
+    ### Untuk Bon Nomor ####################
     path('surat_keluar/biasa/bon_nomor/', views.biasa_bon_nomor, name='biasa_bon_nomor' ),
+
+    ### Untuk No tersedia ##################
     path('surat_keluar/biasa/no_tersedia/', views.biasa_no_tersedia, name='biasa_no_tersedia' ),
+    path('surat_keluar/biasa/surat_biasa_nomor_tersedia_tambah_nomor/', views.surat_biasa_nomor_tersedia_tambah_nomor, name='surat_biasa_nomor_tersedia_tambah_nomor' ),
+
+    ### Untuk Edit Surat Biasa #############
     path('surat_keluar/biasa/edit_surat_biasa/', views.biasa_edit_surat_biasa, name='biasa_edit_surat_biasa' ),
 
-
+   
 
 
 

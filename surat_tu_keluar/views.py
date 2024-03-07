@@ -668,11 +668,12 @@ def export_ke_excel_nota_dinas(request):
 @login_required(login_url="/accounts/login/")
 def biasa(request):
     # surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
-    surat_biasa                              =  Biasa.objects.all()
+    # surat_biasa                              =  Biasa.objects.all()
+    surat_biasa                                =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
 
     context = {
-        'page_title'    : 'Surat Biasa',
-        'data_surat'    :  surat_biasa
+        'page_title'          : 'Surat Biasa',
+        'data_surat_biasa'    :  surat_biasa
     }
     return render (request , 'surat_keluar/pages/biasa/surat_biasa.html', context )
 
@@ -689,11 +690,14 @@ def biasa_bon_nomor(request):
 
 
 def biasa_no_tersedia(request):
-    surat_biasa                              =  Biasa.objects.all()
+    # surat_biasa                              =  Biasa.objects.all()
+    tanggal_sekarang                         =  date.today()
+    surat_biasa_nomor_tersedia               =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
+    # print(surat_biasa_nomor_tersedia)
 
     context = {
         'page_title'    : 'Bon Nomor',
-        'data_surat'    :  surat_biasa
+        'surat_biasa_nomor_tersedia'    :  surat_biasa_nomor_tersedia
     }
     return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
@@ -704,11 +708,47 @@ def biasa_edit_surat_biasa(request):
         'page_title'    : 'Bon Nomor',
         'data_surat'    :  surat_biasa
     }
-    return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
+    return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html', context )
 
+@login_required(login_url="/accounts/login/")
+def surat_biasa_nomor_tersedia_tambah_nomor(request):
 
+    try:
+        no_urut_surat_biasa              = list(Biasa.objects.all().values_list('no_urut').last())
+        data_surat_biasa                 = no_urut_surat_biasa[0]
 
+        get_no_akhir                     = int(data_surat_biasa) + 1
+    except:
+        get_no_akhir  = 1
+           
+    get_username                         =  request.user
+    get_hari_ini                         =  date.today()
+    get_no_urut                          =  get_no_akhir
+    get_no_takah                         =  ''
+    get_kepada                           =  ''
+    get_perihal                          =  ''
+    get_keterangan                       =  ''
+    get_catatan                          =  ''
+    get_bagian                           =  ''
+    get_upload_file                      =  ''
 
+    Surat_Biasa_instance    = Biasa(   
+
+        username                         = get_username,
+        tanggal                          = get_hari_ini,
+        no_urut                          = get_no_urut,
+        no_takah                         = get_no_takah,
+        kepada                           = get_kepada,
+        perihal                          = get_perihal,
+        keterangan                       = get_keterangan,
+        catatan                          = get_catatan,
+        bagian                           = get_bagian,
+        upload_file                      = get_upload_file
+                 
+    )
+
+    Surat_Biasa_instance.save()
+    return redirect('biasa_no_tersedia')
 
 
 
