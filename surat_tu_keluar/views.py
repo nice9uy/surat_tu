@@ -664,12 +664,11 @@ def export_ke_excel_nota_dinas(request):
 
 ##########################################################################################################
 ##################################  BIASA  ################################################################
+##########################################################################################################
 
 @login_required(login_url="/accounts/login/")
 def biasa(request):
-    # surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
-    # surat_biasa                              =  Biasa.objects.all()
-    surat_biasa                                =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+    surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
 
     context = {
         'page_title'          : 'Surat Biasa',
@@ -677,6 +676,8 @@ def biasa(request):
     }
     return render (request , 'surat_keluar/pages/biasa/surat_biasa.html', context )
 
+
+#### Untuk Bon Nomor            ########
 @login_required(login_url="/accounts/login/")
 def biasa_bon_nomor(request):
     surat_biasa                              =  Biasa.objects.all()
@@ -688,12 +689,11 @@ def biasa_bon_nomor(request):
     return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
 
 
-
+#### Untuk Biasa Nomor Tersedia   ########
+@login_required(login_url="/accounts/login/")
 def biasa_no_tersedia(request):
-    # surat_biasa                              =  Biasa.objects.all()
     tanggal_sekarang                         =  date.today()
     surat_biasa_nomor_tersedia               =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
-    # print(surat_biasa_nomor_tersedia)
 
     context = {
         'page_title'    : 'Bon Nomor',
@@ -701,14 +701,6 @@ def biasa_no_tersedia(request):
     }
     return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
-
-def biasa_edit_surat_biasa(request):
-    surat_biasa                              =  Biasa.objects.all()
-    context = {
-        'page_title'    : 'Bon Nomor',
-        'data_surat'    :  surat_biasa
-    }
-    return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html', context )
 
 @login_required(login_url="/accounts/login/")
 def surat_biasa_nomor_tersedia_tambah_nomor(request):
@@ -750,9 +742,15 @@ def surat_biasa_nomor_tersedia_tambah_nomor(request):
     Surat_Biasa_instance.save()
     return redirect('biasa_no_tersedia')
 
-
-
-
+#### Untuk Edit Surat Biasa      ########
+@login_required(login_url="/accounts/login/")
+def biasa_edit_surat_biasa(request):
+    surat_biasa                              =  Biasa.objects.all()
+    context = {
+        'page_title'    : 'Bon Nomor',
+        'data_surat'    :  surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html', context )
 
 
 

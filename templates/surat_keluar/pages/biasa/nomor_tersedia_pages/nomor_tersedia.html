@@ -51,11 +51,11 @@
               <td class="text-center">{{ data.no_urut }}</td>
 
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-danger btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_surat_biasa_nomor_tersedia{{ data.id }}"></button>
+                <button type="button" class="btn btn-danger btn-sm fa-solid fa-file-invoice"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_surat_biasa_nomor_tersedia_edit_bon{{ data.id }}"></button>
                </td> 
     
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_surat_biasa_nomor_tersedia{{ data.id }}"></button>
+                <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_surat_biasa_nomor_tersedia_isi_surat_biasa{{ data.id }}"></button>
                </td> 
   
             </tr>
@@ -65,7 +65,8 @@
 
   </div>
 
-{% include 'surat_keluar/modal/biasa/nomor_tersedia/tambah_surat_biasa.html' %} 
+{% include 'surat_keluar/modal/biasa/nomor_tersedia/tambah_surat_biasa.html' %}
+{% include 'surat_keluar/modal/biasa/nomor_tersedia/isi_surat_biasa.html' %}  
 {% include 'surat_keluar/modal/biasa/nomor_tersedia/edit_bon_nomor.html' %} 
 
 
