@@ -721,18 +721,19 @@ def filter_biasa_nomor_tersedia(request):
 
         context = {
                 'page_title'                     : 'Nota Dinas - Filter No Tersedia',
-                'filter_nomor_tersedia'          :  nomor_tersedia,
+                'filter_biasa_nomor_tersedia'    :  nomor_tersedia,
                 'tgl_nomor_tersedia'             :  tanggal 
             }
-        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
+        
+        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
     except:
         filter_no_tersedia_data                  = filter_surat_biasa_nomor_tersedia     
         context = {
                 'page_title'                     : 'Nota Dinas - Filter No Tersedia',
-                'filter_nomor_tersedia'          :  filter_no_tersedia_data ,
+                'filter_biasa_nomor_tersedia'    :  filter_no_tersedia_data ,
                 'tgl_nomor_tersedia'             :  tanggal_sekarang 
             }
-        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
+        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
 
 @login_required(login_url="/accounts/login/")
 def surat_biasa_nomor_tersedia_tambah_nomor(request):
