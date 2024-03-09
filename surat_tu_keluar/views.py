@@ -677,7 +677,7 @@ def biasa(request):
     return render (request , 'surat_keluar/pages/biasa/surat_biasa.html', context )
 
 
-#### Untuk Bon Nomor            ########
+##################   Surat Biasa Bon Nomor      ########
 @login_required(login_url="/accounts/login/")
 def biasa_bon_nomor(request):
     surat_biasa                              =  Biasa.objects.all()
@@ -689,18 +689,50 @@ def biasa_bon_nomor(request):
     return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
 
 
-#### Untuk Biasa Nomor Tersedia   ########
+
+
+
+
+
+
+#################   Surat Biasa Nomor Tersedia   ########
 @login_required(login_url="/accounts/login/")
 def biasa_no_tersedia(request):
     tanggal_sekarang                         =  date.today()
     surat_biasa_nomor_tersedia               =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
-
+    
     context = {
-        'page_title'    : 'Bon Nomor',
-        'surat_biasa_nomor_tersedia'    :  surat_biasa_nomor_tersedia
+        'page_title'                         : 'BIASA - No Tersedia',
+        'surat_biasa_nomor_tersedia'         :  surat_biasa_nomor_tersedia,
+        'tanggal_nomor_tersedia'             :  tanggal_sekarang
     }
     return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
+@login_required(login_url="/accounts/login/")
+def filter_biasa_nomor_tersedia(request):
+    tanggal_sekarang                             =  date.today()
+    filter_surat_biasa_nomor_tersedia            =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
+    
+    try:
+        if request.method == 'POST':
+            tanggal_sekarang_now                 =  request.POST.get('tanggal')
+            nomor_tersedia                       =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang_now)
+            tanggal                              =  parse_date(tanggal_sekarang_now)
+
+        context = {
+                'page_title'                     : 'Nota Dinas - Filter No Tersedia',
+                'filter_nomor_tersedia'          :  nomor_tersedia,
+                'tgl_nomor_tersedia'             :  tanggal 
+            }
+        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
+    except:
+        filter_no_tersedia_data                  = filter_surat_biasa_nomor_tersedia     
+        context = {
+                'page_title'                     : 'Nota Dinas - Filter No Tersedia',
+                'filter_nomor_tersedia'          :  filter_no_tersedia_data ,
+                'tgl_nomor_tersedia'             :  tanggal_sekarang 
+            }
+        return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
 
 @login_required(login_url="/accounts/login/")
 def surat_biasa_nomor_tersedia_tambah_nomor(request):

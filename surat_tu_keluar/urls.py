@@ -41,9 +41,11 @@ urlpatterns = [
 
     ### Untuk Bon Nomor ####################
     path('surat_keluar/biasa/bon_nomor/', views.biasa_bon_nomor, name='biasa_bon_nomor' ),
-
+    
     ### Untuk No tersedia ##################
     path('surat_keluar/biasa/no_tersedia/', views.biasa_no_tersedia, name='biasa_no_tersedia' ),
+    path('surat_keluar/biasa/filter_biasa_nomor_tersedia/', views.filter_biasa_nomor_tersedia, name='filter_biasa_nomor_tersedia' ),
+
     path('surat_keluar/biasa/surat_biasa_nomor_tersedia_tambah_nomor/', views.surat_biasa_nomor_tersedia_tambah_nomor, name='surat_biasa_nomor_tersedia_tambah_nomor' ),
 
     ### Untuk Edit Surat Biasa #############

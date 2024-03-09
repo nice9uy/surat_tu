@@ -34,7 +34,7 @@
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
             <th class="text-center">Nomor Urut</th>
-            <th class="text-center">Bon Nomor</th>
+            <th class="text-center">Isi Bon Nomor</th>
             <th class="text-center">Isi Nota Dinas</th>
             
           </tr>
@@ -42,6 +42,7 @@
         <tbody>
           {% for data in filter_nomor_tersedia %}
           <tr>
+
             <td class="text-center" >{{ forloop.counter }}</td>
             <td class="text-center">{{ data.tanggal }}</td>
             <td class="text-center">{{ data.no_urut }}</td>
@@ -52,10 +53,8 @@
 
             <td class="text-center gap-2"> 
               <button type="button" class="btn btn-success btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Isi Nota Dinas" data-bs-target="#button_filter_nomor_tersedia_isi_nota_dinas{{ data.id }}"></button>
-             </td> 
+            </td> 
           
-            
-
           </tr>
           {% endfor %}
         </tbody>

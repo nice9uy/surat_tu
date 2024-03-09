@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block biasa_no_tersedia %} 
+{% block filter_biasa_no_tersedia %} 
 
 {% include 'surat_keluar/header/biasa/olah_surat_biasa.html' %} 
 
@@ -11,7 +11,7 @@
     
     <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
 
-      <form method="POST" action="{% url 'filter_biasa_nomor_tersedia' %}">
+      <form method="POST" action="">
         <div class="d-flex mb-2 ">   
             {% csrf_token %}
             <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
@@ -80,7 +80,7 @@
   </div>
 
 
-{% endblock biasa_no_tersedia %} 
+{% endblock filter_biasa_no_tersedia %} 
 
 
 
