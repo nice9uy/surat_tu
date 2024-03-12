@@ -417,7 +417,7 @@ def olah_disposisi_edit(request , id_edit_disposisi):
         get_tgl_disposisi              = request.POST.get('tgl_disposisi')
         get_tgl_disposisi_kembali      = request.POST.get('tgl_disposisi_kembali')
         get_disposisi                  = request.POST.get('disposisi')
-        no_agenda                      = request.POST.get('no_agenda')
+        no_agenda                      = request.POST.get('no_agenda')  
         catatan                        = request.POST.get('catatan')
         files_upload_disposisi         = request.FILES.get('file_name')
 
@@ -471,7 +471,9 @@ def upload_disposisi(request):
         if request.method == 'POST':
 
             no_surat_data = request.POST.get('no_surat')
-            no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data )
+            no_surat_instance , created = DbSurat.objects.get_or_create(no_surat = no_surat_data ) 
+
+            print(no_surat_instance)
 
             get_tgl_disposisi         = hari_ini
             get_disposisi             = request.POST.get('disposisi')
@@ -492,6 +494,7 @@ def upload_disposisi(request):
             )
 
             disposisi_instance.save()
+
     except Exception as e:
        pass
 

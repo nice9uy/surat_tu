@@ -14,8 +14,8 @@
             
             <div style="margin-left: 3rem;" class="d-flex gap-3 text-center">
 
-                <div class="col-3">
-                    <label for="inputAddress" class="form-label">PILIH DISPOSISI</label>
+                <div class="col-11">
+                    <label for="inputAddress" class="form-label ">PILIH DISPOSISI</label>
                     <select class="form-select" aria-label="Default select example" id="klasifikasi" name="disposisi" required >
                         <option value=""></option>
                         <option value="KABARANAHAN">KABARANAHAN</option>
@@ -30,15 +30,15 @@
                 </div>  {% endcomment %}
 
 
-                <div class="col-3">
+                <div class="col-3" hidden >
                   <label for="inputAddress" class="form-label">NO SURAT</label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_surat" value="{{ data.no_surat}}" readonly required />
                 </div> 
 
-                <div class="col-5">
+                <div class="col-5" hidden>
                   <label for="inputAddress" class="form-label">NO AGENDA </label>
                   <input type="text" class="form-control" id="inputAddress" placeholder="" name="no_agenda" value="{{ data.no_agenda}}" readonly required />
-                </div> 
+                </div>  
 
 
             </div>
