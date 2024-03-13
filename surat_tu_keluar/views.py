@@ -680,12 +680,13 @@ def biasa(request):
 ##################   Surat Biasa Bon Nomor      ########
 @login_required(login_url="/accounts/login/")
 def biasa_bon_nomor(request):
-    surat_biasa                              =  Biasa.objects.all()
+    surat_biasa                              =  Biasa.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
 
     context = {
-        'page_title'    : 'Bon Nomor',
-        'data_surat'    :  surat_biasa
+        'page_title'                   : 'Bon Nomor',
+        'surat_biasa_isi_bon_nomor'    :  surat_biasa
     }
+
     return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
 
 
@@ -774,6 +775,49 @@ def surat_biasa_nomor_tersedia_tambah_nomor(request):
 
     Surat_Biasa_instance.save()
     return redirect('biasa_no_tersedia')
+
+######################
+@login_required(login_url="/accounts/login/")    
+def surat_biasa_nomor_tersedia_isi_bon_nomor(request, id_surat_biasa_nomor_tersedia_isi_bon_nomor):
+   
+    nomor_tersedia_isi_surat_biasa               =  get_object_or_404(Biasa, pk = id_surat_biasa_nomor_tersedia_isi_bon_nomor)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_surat_biasa_nomor_tersedia_isi_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = nomor_tersedia_isi_surat_biasa.tanggal
+        get_no_urut                              = nomor_tersedia_isi_surat_biasa.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = nomor_tersedia_isi_surat_biasa.upload_file
+
+
+        nomor_tersedia_isi_bon_nomor_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username, 
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        nomor_tersedia_isi_bon_nomor_save.save()    
+        return redirect('biasa_no_tersedia')
+
+
+
 
 #### Untuk Edit Surat Biasa      ########
 @login_required(login_url="/accounts/login/")

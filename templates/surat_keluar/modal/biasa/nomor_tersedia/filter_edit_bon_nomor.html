@@ -1,6 +1,6 @@
 
-{% for data in surat_biasa_nomor_tersedia %}
-  <div class="modal fade" id="button_surat_biasa_nomor_tersedia_edit_bon{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{% for data in filter_biasa_nomor_tersedia %}
+  <div class="modal fade" id="button_filter_biasa_nomor_tersedia_isi_bon_nomor{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
