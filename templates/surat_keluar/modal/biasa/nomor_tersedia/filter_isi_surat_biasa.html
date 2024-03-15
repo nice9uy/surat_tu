@@ -10,7 +10,7 @@
         </div>
         <div class="modal-body">
             
-            <form action="" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+            <form action="{% url 'filter_surat_biasa_nomor_tersedia_isi_surat_biasa' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
               {% csrf_token %}
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>

@@ -49,6 +49,10 @@ urlpatterns = [
 
     
     path('surat_keluar/biasa/surat_biasa_nomor_tersedia_isi_bon_nomor/<int:id_surat_biasa_nomor_tersedia_isi_bon_nomor>/', views.surat_biasa_nomor_tersedia_isi_bon_nomor, name='surat_biasa_nomor_tersedia_isi_bon_nomor' ),
+    path('surat_keluar/biasa/surat_biasa_nomor_tersedia_isi_surat_biasa/<int:id_surat_biasa_nomor_tersedia_isi_surat_biasa>/', views.surat_biasa_nomor_tersedia_isi_surat_biasa, name='surat_biasa_nomor_tersedia_isi_surat_biasa' ),
+
+    path('surat_keluar/biasa/filter_surat_biasa_nomor_tersedia_isi_bon_nomor/<int:id_filter_surat_biasa_nomor_tersedia_isi_bon_nomor>/', views.filter_surat_biasa_nomor_tersedia_isi_bon_nomor, name='filter_surat_biasa_nomor_tersedia_isi_bon_nomor' ),
+    path('surat_keluar/biasa/filter_surat_biasa_nomor_tersedia_isi_surat_biasa/<int:id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa>/', views.filter_surat_biasa_nomor_tersedia_isi_surat_biasa, name='filter_surat_biasa_nomor_tersedia_isi_surat_biasa' ),
 
 
     ### Untuk Edit Surat Biasa #############

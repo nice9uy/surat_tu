@@ -498,8 +498,8 @@ def edit_nota_dinas(request):
 
 @login_required(login_url="/accounts/login/")
 def edit_nota_dinas_modal(request, id_edit_nota_dinas_modal):
-    edit_nota_dinas_modal                        =  get_object_or_404(NotaDinas, pk = id_edit_nota_dinas_modal)
-    username                                     =  request.user
+    edit_nota_dinas_modal                           =  get_object_or_404(NotaDinas, pk = id_edit_nota_dinas_modal)
+    username                                        =  request.user
 
     try:
         if request.method == 'POST':
@@ -693,9 +693,6 @@ def biasa_bon_nomor(request):
 
 
 
-
-
-
 #################   Surat Biasa Nomor Tersedia   ########
 @login_required(login_url="/accounts/login/")
 def biasa_no_tersedia(request):
@@ -780,8 +777,8 @@ def surat_biasa_nomor_tersedia_tambah_nomor(request):
 @login_required(login_url="/accounts/login/")    
 def surat_biasa_nomor_tersedia_isi_bon_nomor(request, id_surat_biasa_nomor_tersedia_isi_bon_nomor):
    
-    nomor_tersedia_isi_surat_biasa               =  get_object_or_404(Biasa, pk = id_surat_biasa_nomor_tersedia_isi_bon_nomor)
-    username                                     =  request.user
+    nomor_tersedia_isi_surat_biasa               = get_object_or_404(Biasa, pk = id_surat_biasa_nomor_tersedia_isi_bon_nomor)
+    username                                     = request.user
 
     if request.method == 'POST':
 
@@ -815,7 +812,124 @@ def surat_biasa_nomor_tersedia_isi_bon_nomor(request, id_surat_biasa_nomor_terse
         
         nomor_tersedia_isi_bon_nomor_save.save()    
         return redirect('biasa_no_tersedia')
+    
+    
 
+@login_required(login_url="/accounts/login/")
+def surat_biasa_nomor_tersedia_isi_surat_biasa(request, id_surat_biasa_nomor_tersedia_isi_surat_biasa):
+    nomor_tersedia_isi_surat_biasa               =  get_object_or_404(Biasa, pk = id_surat_biasa_nomor_tersedia_isi_surat_biasa)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_surat_biasa_nomor_tersedia_isi_surat_biasa
+        get_username                             = str(username)
+        get_tanggal                              = nomor_tersedia_isi_surat_biasa.tanggal
+        get_no_urut                              = nomor_tersedia_isi_surat_biasa.no_urut
+        get_no_takah                             = request.POST.get('no_takah') 
+        get_kepada                               = request.POST.get('kepada')
+        get_perihal                              = request.POST.get('perihal') 
+        get_keterangan                           = request.POST.get('keterangan')
+        get_bagian                               = ""
+        get_catatan                              = ""
+        files_upload_isi_surat_biasa             = request.FILES.get('file_name')
+
+        nomor_tersedia_isi_surat_biasa_save = Biasa(
+
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_isi_surat_biasa
+
+        )
+        
+        nomor_tersedia_isi_surat_biasa_save.save()
+        return redirect('biasa_no_tersedia')
+
+
+@login_required(login_url="/accounts/login/")    
+def filter_surat_biasa_nomor_tersedia_isi_bon_nomor(request, id_filter_surat_biasa_nomor_tersedia_isi_bon_nomor):
+   
+    filter_nomor_tersedia_isi_surat_biasa        = get_object_or_404(Biasa, pk = id_filter_surat_biasa_nomor_tersedia_isi_bon_nomor)
+    username                                     = request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_filter_surat_biasa_nomor_tersedia_isi_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = filter_nomor_tersedia_isi_surat_biasa.tanggal
+        get_no_urut                              = filter_nomor_tersedia_isi_surat_biasa.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = filter_nomor_tersedia_isi_surat_biasa.upload_file
+
+
+        nomor_tersedia_isi_bon_nomor_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username, 
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        nomor_tersedia_isi_bon_nomor_save.save()    
+        return redirect('filter_biasa_nomor_tersedia')
+    
+@login_required(login_url="/accounts/login/")
+def filter_surat_biasa_nomor_tersedia_isi_surat_biasa(request, id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa):
+    filter_nomor_tersedia_isi_surat_biasa        =  get_object_or_404(Biasa, pk = id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa
+        get_username                             = str(username)
+        get_tanggal                              = filter_nomor_tersedia_isi_surat_biasa.tanggal
+        get_no_urut                              = filter_nomor_tersedia_isi_surat_biasa.no_urut
+        get_no_takah                             = request.POST.get('no_takah') 
+        get_kepada                               = request.POST.get('kepada')
+        get_perihal                              = request.POST.get('perihal') 
+        get_keterangan                           = request.POST.get('keterangan')
+        get_bagian                               = ""
+        get_catatan                              = ""
+        files_upload_isi_surat_biasa             = request.FILES.get('file_name')
+
+        filter_nomor_tersedia_isi_surat_biasa_save = Biasa(
+
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_isi_surat_biasa
+
+        )
+        
+        filter_nomor_tersedia_isi_surat_biasa_save.save()
+        return redirect('filter_biasa_nomor_tersedia')
 
 
 
