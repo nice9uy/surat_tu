@@ -10,7 +10,7 @@
   
           <div class="modal-body">
                 
-            <form action="" method="POST"  class="was-validated row g-3 text-center" >
+            <form action="{% url 'biasa_bon_nomor_edit_bon_nomor' data.id %}" method="POST"  class="was-validated row g-3 text-center" >
               {% csrf_token %}
                
                 <div class="col-12">

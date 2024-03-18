@@ -690,8 +690,87 @@ def biasa_bon_nomor(request):
     return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
 
 
+@login_required(login_url="/accounts/login/")
+def biasa_bon_nomor_edit_bon_nomor(request, id_biasa_bon_nomor_edit_bon_nomor):
+    biasa_bon_nomor_edit_bon_nomor               =  get_object_or_404(Biasa, pk = id_biasa_bon_nomor_edit_bon_nomor)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_biasa_bon_nomor_edit_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = biasa_bon_nomor_edit_bon_nomor.tanggal
+        get_no_urut                              = biasa_bon_nomor_edit_bon_nomor.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = biasa_bon_nomor_edit_bon_nomor.upload_file
+
+        biasa_bon_nomor_isi_nota_dinas_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        biasa_bon_nomor_isi_nota_dinas_save.save()
+        return redirect('biasa_bon_nomor')
 
 
+@login_required(login_url="/accounts/login/")
+def biasa_nomor_tersedia_isi_surat_biasa(request, id_biasa_nomor_tersedia_isi_surat_biasa):
+    biasa_bon_nomor_isi_surat_biasa              =  get_object_or_404(Biasa, pk = id_biasa_nomor_tersedia_isi_surat_biasa)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_biasa_nomor_tersedia_isi_surat_biasa
+        get_username                             = str(username)
+        get_tanggal                              = biasa_bon_nomor_isi_surat_biasa.tanggal
+        get_no_urut                              = biasa_bon_nomor_isi_surat_biasa.no_urut
+        get_no_takah                             = request.POST.get('no_takah') 
+        get_kepada                               = request.POST.get('kepada')
+        get_perihal                              = request.POST.get('perihal') 
+        get_keterangan                           = request.POST.get('keterangan')
+        get_bagian                               = ""
+        get_catatan                              = ""
+        files_upload_bon_nomor                   = request.FILES.get('file_name')
+
+        biasa_bon_nomor_isi_surat_biasa_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        biasa_bon_nomor_isi_surat_biasa_save.save()
+        return redirect('biasa_bon_nomor')
+
+
+
+
+
+
+ 
 
 #################   Surat Biasa Nomor Tersedia   ########
 @login_required(login_url="/accounts/login/")
@@ -711,7 +790,7 @@ def filter_biasa_nomor_tersedia(request):
     tanggal_sekarang                             =  date.today()
     filter_surat_biasa_nomor_tersedia            =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
     
-    try:
+    try: 
         if request.method == 'POST':
             tanggal_sekarang_now                 =  request.POST.get('tanggal')
             nomor_tersedia                       =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang_now)
