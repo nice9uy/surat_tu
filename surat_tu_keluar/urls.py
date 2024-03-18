@@ -44,7 +44,7 @@ urlpatterns = [
     path('surat_keluar/biasa/biasa_bon_nomor_edit_bon_nomor/<int:id_biasa_bon_nomor_edit_bon_nomor>/', views.biasa_bon_nomor_edit_bon_nomor, name='biasa_bon_nomor_edit_bon_nomor' ),
     path('surat_keluar/biasa/biasa_nomor_tersedia_isi_surat_biasa/<int:id_biasa_nomor_tersedia_isi_surat_biasa>/', views.biasa_nomor_tersedia_isi_surat_biasa, name='biasa_nomor_tersedia_isi_surat_biasa' ),
 
-
+    path('surat_keluar/biasa/filter_bon_nomor/', views.filter_bon_nomor_surat_biasa, name='filter_bon_nomor_surat_biasa' ),
 
     
     ### Untuk No tersedia ##################

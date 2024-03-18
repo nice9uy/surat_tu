@@ -683,8 +683,8 @@ def biasa_bon_nomor(request):
     surat_biasa                              =  Biasa.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
 
     context = {
-        'page_title'                   : 'Bon Nomor',
-        'surat_biasa_isi_bon_nomor'    :  surat_biasa
+        'page_title'                         : 'Bon Nomor',
+        'surat_biasa_isi_bon_nomor'          :  surat_biasa
     }
 
     return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/bon_nomor.html', context )
@@ -764,6 +764,42 @@ def biasa_nomor_tersedia_isi_surat_biasa(request, id_biasa_nomor_tersedia_isi_su
         
         biasa_bon_nomor_isi_surat_biasa_save.save()
         return redirect('biasa_bon_nomor')
+
+
+@login_required(login_url="/accounts/login/")
+def filter_bon_nomor_surat_biasa(request):
+    tanggal_sekarang                       =  date.today()
+    filter_bon_nomor_surat_biasa_all       =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+
+    print(filter_bon_nomor_surat_biasa_all)
+
+    try:
+        if request.method == 'POST':
+            get_tgl_surat_biasa            =  request.POST.get('tanggal')
+            filter_bon_nomor_surat_biasa   =  Biasa.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact='') , tanggal = get_tgl_surat_biasa).values()
+            tanggal                        =  parse_date(get_tgl_surat_biasa)
+
+        context = {
+            'page_title'                          : 'Bon Nomor - Filter Surat Biasa',
+            'filter_bon_nomor_surat_biasa'        :  filter_bon_nomor_surat_biasa,
+            'tanggal_filter_bon_nomor_surat_biasa':  tanggal
+        }
+
+        return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/filter_edit_bon_nomor.html', context)
+    except:
+        edit_filter                        = filter_bon_nomor_surat_biasa_all
+        context = {
+            'page_title'                          : 'Bon Nomor - Filter Surat Biasa',
+            'filter_bon_nomor_surat_biasa'        :  edit_filter,
+            'tanggal_filter_bon_nomor_surat_biasa':  tanggal_sekarang
+        }
+
+        return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/filter_bon_nomor.html', context)
+
+
+
+
+
 
 
 
