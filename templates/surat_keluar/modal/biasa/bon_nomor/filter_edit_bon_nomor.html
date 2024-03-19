@@ -1,6 +1,6 @@
 
-{% for data in bon_nomor %}
-  <div class="modal fade" id="button_edit_bon_nomor{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{% for data in filter_bon_nomor_surat_biasa %}
+  <div class="modal fade" id="button_filter_surat_biasa_edit_bon_nomor{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -10,7 +10,7 @@
   
           <div class="modal-body">
                 
-            <form action="{% url 'bon_nomor_edit_bon_nomor' data.id %}" method="POST"  class="was-validated row g-3 text-center" >
+            <form action="" method="POST"  class="was-validated row g-3 text-center" >
               {% csrf_token %}
                
                 <div class="col-12">

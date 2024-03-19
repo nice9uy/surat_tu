@@ -14,7 +14,7 @@
               {% csrf_token %}
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
-                  <input type="text" class="form-control" name="no_takah" placeholder="Nomor Urut : {{ data.no_urut  }}" value="{{ data.no_takah }}"  required >
+                  <input type="text" class="form-control" name="no_takah" value="B/{{ data.no_urut }}/"  required >
                 </div>
                 <div class="col-md-6">
                   <label for="inputPassword4" class="form-label">KEPADA</label>
