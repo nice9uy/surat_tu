@@ -45,23 +45,26 @@ urlpatterns = [
     path('surat_keluar/biasa/biasa_nomor_tersedia_isi_surat_biasa/<int:id_biasa_nomor_tersedia_isi_surat_biasa>/', views.biasa_nomor_tersedia_isi_surat_biasa, name='biasa_nomor_tersedia_isi_surat_biasa' ),
 
     path('surat_keluar/biasa/filter_bon_nomor/', views.filter_bon_nomor_surat_biasa, name='filter_bon_nomor_surat_biasa' ),
+    path('surat_keluar/biasa/filter_surat_biasa_bon_nomor_edit_bon_nomor/<int:id_filter_surat_biasa_bon_nomor_edit_bon_nomor>/', views.filter_surat_biasa_bon_nomor_edit_bon_nomor, name='filter_surat_biasa_bon_nomor_edit_bon_nomor' ),
+    path('surat_keluar/biasa/filter_surat_biasa_nomor_tersedia_isi_surat_biasa/<int:id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa>/', views.filter_surat_biasa_nomor_tersedia_isi_surat_biasa, name='filter_surat_biasa_nomor_tersedia_isi_surat_biasa' ),
 
-    
     ### Untuk No tersedia ##################
-    path('surat_keluar/biasa/no_tersedia/', views.biasa_no_tersedia, name='biasa_no_tersedia' ),
-    path('surat_keluar/biasa/filter_biasa_nomor_tersedia/', views.filter_biasa_nomor_tersedia, name='filter_biasa_nomor_tersedia' ),
-    path('surat_keluar/biasa/surat_biasa_nomor_tersedia_tambah_nomor/', views.surat_biasa_nomor_tersedia_tambah_nomor, name='surat_biasa_nomor_tersedia_tambah_nomor' ),
-
     
+    path('surat_keluar/biasa/no_tersedia/', views.biasa_no_tersedia, name='biasa_no_tersedia' ),
     path('surat_keluar/biasa/surat_biasa_nomor_tersedia_isi_bon_nomor/<int:id_surat_biasa_nomor_tersedia_isi_bon_nomor>/', views.surat_biasa_nomor_tersedia_isi_bon_nomor, name='surat_biasa_nomor_tersedia_isi_bon_nomor' ),
     path('surat_keluar/biasa/surat_biasa_nomor_tersedia_isi_surat_biasa/<int:id_surat_biasa_nomor_tersedia_isi_surat_biasa>/', views.surat_biasa_nomor_tersedia_isi_surat_biasa, name='surat_biasa_nomor_tersedia_isi_surat_biasa' ),
-
+    
+    path('surat_keluar/biasa/filter_biasa_nomor_tersedia/', views.filter_biasa_nomor_tersedia, name='filter_biasa_nomor_tersedia' ),
     path('surat_keluar/biasa/filter_surat_biasa_nomor_tersedia_isi_bon_nomor/<int:id_filter_surat_biasa_nomor_tersedia_isi_bon_nomor>/', views.filter_surat_biasa_nomor_tersedia_isi_bon_nomor, name='filter_surat_biasa_nomor_tersedia_isi_bon_nomor' ),
     path('surat_keluar/biasa/filter_surat_biasa_nomor_tersedia_isi_surat_biasa/<int:id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa>/', views.filter_surat_biasa_nomor_tersedia_isi_surat_biasa, name='filter_surat_biasa_nomor_tersedia_isi_surat_biasa' ),
 
+    path('surat_keluar/biasa/surat_biasa_nomor_tersedia_tambah_nomor/', views.surat_biasa_nomor_tersedia_tambah_nomor, name='surat_biasa_nomor_tersedia_tambah_nomor' ),
 
     ### Untuk Edit Surat Biasa #############
     path('surat_keluar/biasa/edit_surat_biasa/', views.biasa_edit_surat_biasa, name='biasa_edit_surat_biasa' ),
+    path('surat_keluar/biasa/edit_surat_biasa_edit_surat/<int:id_edit_surat_biasa_edit_surat>/', views.edit_surat_biasa_edit_surat, name='edit_surat_biasa_edit_surat' ),
+
+    path('surat_keluar/biasa/filter_edit_surat_biasa/', views.filter_edit_surat_biasa, name='filter_edit_surat_biasa' ),
 
    
 

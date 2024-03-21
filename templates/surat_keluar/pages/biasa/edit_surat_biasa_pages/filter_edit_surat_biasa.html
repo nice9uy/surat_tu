@@ -1,32 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block edit_surat_biasa %} 
+{% block filter_edit_nota_dinas %} 
 
 {% include 'surat_keluar/header/biasa/olah_surat_biasa.html' %} 
 
 
 <div class="container-fluid mt-3 text-white" style="">
-    <h5 class="text-center">EDIT SURAT BIASA  {{ tanggal_edit_nota_dinas | date:'l, d F Y' }}</h5>
-    
+    <h5 class="text-center">EDIT SURAT BIASA {{ tanggal_edit_nota_dinas | date:'l, d F Y' }}</h5>
 
-      <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
-        <form method="POST" action="{% url 'filter_edit_surat_biasa' %}">
-          <div class="d-flex mb-2 ">   
-              {% csrf_token %}
-              <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
-              <button class="btn btn-primary btn-sm " type="submit">Cari</button>
+
+    <div style="margin-top: -2.5rem; justify-content: space-between; " class="d-flex">
+      <form method="POST" action="{% url 'filter_edit_nota_dinas' %}">
+        <div class="d-flex mb-2 ">   
+            {% csrf_token %}
+            <input type="date" class="form-select form-select-sm" placeholder="First name" aria-label="First name" name="tanggal" />
+            <button class="btn btn-primary btn-sm " type="submit">Cari</button>
           </div>
-        </form>
-        
-        <div  class="gap-5">
-          <button type="button" class="btn btn-primary btn-sm gap-3 "  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_export_ke_excel_nota_dinas">Export Ke Excel</button>
-        </div>
-
+      </form>
+      
+      <div  class="gap-5">
+        <button type="button" class="btn btn-primary btn-sm gap-3 "  data-bs-toggle="modal" data-placement="bottom" title="UPDATE" data-bs-target="#button_export_ke_excel_nota_dinas">Export Ke Excel</button>
       </div>
 
+    </div>
 
-    <div>
 
       <table id="tabel_surat_biasa" class="table table-striped table-bordered text-white" style="width:100%;  ">
         <thead>
@@ -40,12 +38,12 @@
             <th class="text-center">Perihal</th>
             <th class="text-center">Keterangan</th>
             <th class="text-center">File</th>
-            <th class="text-center">Edit Surat Biasa</th>
+            <th class="text-center">Edit Nota Dinas</th>
             
           </tr>
         </thead>
         <tbody>
-          {% for data in edit_surat_biasa %}
+          {% for data in filter_edit_surat_biasa %}
             <tr>
               <td class="text-center" >{{ forloop.counter }}</td>
               <td class="text-center">{{ data.tanggal }}</td>
@@ -65,7 +63,7 @@
              
               
               <td class="text-center gap-2"> 
-                <button type="button" class="btn btn-primary btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_edit_surat_biasa_edit_surat{{ data.id }}"></button>
+                <button type="button" class="btn btn-primary btn-sm fas fa-edit"  data-bs-toggle="modal" data-placement="bottom" title="Edit" data-bs-target="#button_filter_edit_isi_nota_dinas{{ data.id }}"></button>
 
             </td> 
                
@@ -74,12 +72,12 @@
         </tbody>
       </table>
 
-    </div>
-</div>
+  </div>
 
 
-{% include 'surat_keluar/modal/biasa/edit_surat_biasa/edit_surat_biasa.html' %}  
-{% comment %} {% include 'surat_keluar/modal/nota_dinas/export_to_excel.html' %}   {% endcomment %}
+{% comment %} {% include 'surat_keluar/modal/nota_dinas/edit_nota_dinas/edit_isi_nota_dinas.html' %}   {% endcomment %}
+{% include 'surat_keluar/modal/nota_dinas/edit_nota_dinas/filter_edit_nota_dinas.html' %} 
+{% include 'surat_keluar/modal/nota_dinas/export_to_excel.html' %}  
 
 
   <div class="container">
@@ -92,7 +90,7 @@
   </div>
 
 
-{% endblock edit_surat_biasa %} 
+{% endblock filter_edit_nota_dinas %} 
 
 
 

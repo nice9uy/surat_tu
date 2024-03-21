@@ -795,31 +795,98 @@ def filter_bon_nomor_surat_biasa(request):
         }
 
         return render (request , 'surat_keluar/pages/biasa/bon_nomor_pages/filter_bon_nomor.html', context)
+    
+
+@login_required(login_url="/accounts/login/")
+def filter_surat_biasa_bon_nomor_edit_bon_nomor(request, id_filter_surat_biasa_bon_nomor_edit_bon_nomor):
+    filter_surat_biasa_bon_nomor_edit_bon_nomor        =  get_object_or_404(Biasa, pk = id_filter_surat_biasa_bon_nomor_edit_bon_nomor)
+    username                                     =  request.user
+
+    if request.method == 'POST':
+
+        get_id                                   = id_filter_surat_biasa_bon_nomor_edit_bon_nomor
+        get_username                             = str(username)
+        get_tanggal                              = filter_surat_biasa_bon_nomor_edit_bon_nomor.tanggal
+        get_no_urut                              = filter_surat_biasa_bon_nomor_edit_bon_nomor.no_urut
+        get_no_takah                             = ""
+        get_kepada                               = ""
+        get_perihal                              = ""
+        get_keterangan                           = ""
+        get_bagian                               = request.POST.get('bagian')
+        get_catatan                              = request.POST.get('catatan')
+        files_upload_bon_nomor                   = filter_surat_biasa_bon_nomor_edit_bon_nomor.upload_file
+
+        filter_surat_biasa_bon_nomor_edit_bon_nomor_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
+
+        )
+        
+        filter_surat_biasa_bon_nomor_edit_bon_nomor_save.save()
+        return redirect('filter_bon_nomor_surat_biasa')
 
 
+@login_required(login_url="/accounts/login/")
+def filter_surat_biasa_nomor_tersedia_isi_surat_biasa(request, id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa):
+    filter_surat_biasa_nomor_tersedia_isi_surat_biasa  =  get_object_or_404(Biasa, pk = id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa)
+    username                                           =  request.user
 
+    if request.method == 'POST':
 
+        get_id                                   = id_filter_surat_biasa_nomor_tersedia_isi_surat_biasa
+        get_username                             = str(username)
+        get_tanggal                              = filter_surat_biasa_nomor_tersedia_isi_surat_biasa.tanggal
+        get_no_urut                              = filter_surat_biasa_nomor_tersedia_isi_surat_biasa.no_urut
+        get_no_takah                             = request.POST.get('no_takah') 
+        get_kepada                               = request.POST.get('kepada')
+        get_perihal                              = request.POST.get('perihal') 
+        get_keterangan                           = request.POST.get('keterangan')
+        get_bagian                               = ""
+        get_catatan                              = ""
+        files_upload_bon_nomor                   = request.FILES.get('file_name')
 
+        filter_surat_biasa_nomor_tersedia_isi_surat_biasa_save    = Biasa(
+            id                                   = get_id,
+            username                             = get_username,
+            tanggal                              = get_tanggal,
+            no_urut                              = get_no_urut,
+            no_takah                             = get_no_takah,
+            kepada                               = get_kepada,
+            perihal                              = get_perihal,
+            keterangan                           = get_keterangan,
+            bagian                               = get_bagian,
+            catatan                              = get_catatan,
+            upload_file                          = files_upload_bon_nomor
 
+        )
+        
+        filter_surat_biasa_nomor_tersedia_isi_surat_biasa_save.save()
+        return redirect('filter_bon_nomor_surat_biasa')
 
-
-
-
-
- 
 
 #################   Surat Biasa Nomor Tersedia   ########
+    
 @login_required(login_url="/accounts/login/")
 def biasa_no_tersedia(request):
     tanggal_sekarang                         =  date.today()
     surat_biasa_nomor_tersedia               =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
     
     context = {
-        'page_title'                         : 'BIASA - No Tersedia',
+        'page_title'                         : 'Biasa - No Tersedia',
         'surat_biasa_nomor_tersedia'         :  surat_biasa_nomor_tersedia,
         'tanggal_nomor_tersedia'             :  tanggal_sekarang
     }
     return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/nomor_tersedia.html', context )
+
 
 @login_required(login_url="/accounts/login/")
 def filter_biasa_nomor_tersedia(request):
@@ -833,7 +900,7 @@ def filter_biasa_nomor_tersedia(request):
             tanggal                              =  parse_date(tanggal_sekarang_now)
 
         context = {
-                'page_title'                     : 'Nota Dinas - Filter No Tersedia',
+                'page_title'                     : 'Biasa - Filter No Tersedia',
                 'filter_biasa_nomor_tersedia'    :  nomor_tersedia,
                 'tgl_nomor_tersedia'             :  tanggal 
             }
@@ -842,11 +909,12 @@ def filter_biasa_nomor_tersedia(request):
     except:
         filter_no_tersedia_data                  = filter_surat_biasa_nomor_tersedia     
         context = {
-                'page_title'                     : 'Nota Dinas - Filter No Tersedia',
+                'page_title'                     : 'Biasa - Filter No Tersedia',
                 'filter_biasa_nomor_tersedia'    :  filter_no_tersedia_data ,
                 'tgl_nomor_tersedia'             :  tanggal_sekarang 
             }
         return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
+    
 
 @login_required(login_url="/accounts/login/")
 def surat_biasa_nomor_tersedia_tambah_nomor(request):
@@ -1049,15 +1117,102 @@ def filter_surat_biasa_nomor_tersedia_isi_surat_biasa(request, id_filter_surat_b
 
 
 #### Untuk Edit Surat Biasa      ########
+    
 @login_required(login_url="/accounts/login/")
 def biasa_edit_surat_biasa(request):
-    surat_biasa                              =  Biasa.objects.all()
+    edit_surat_biasa                              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
     context = {
-        'page_title'    : 'Bon Nomor',
-        'data_surat'    :  surat_biasa
+        'page_title'          : 'Biasa - Edit Surat Biasa',
+        'edit_surat_biasa'    :  edit_surat_biasa
     }
     return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html', context )
 
 
+@login_required(login_url="/accounts/login/")
+def edit_surat_biasa_edit_surat(request, id_edit_surat_biasa_edit_surat):
+    edit_surat_biasa_edit_surat                      =  get_object_or_404(Biasa, pk = id_edit_surat_biasa_edit_surat)
+    username                                         =  request.user
 
-  
+    try:
+        if request.method == 'POST':
+            get_id                                   = id_edit_surat_biasa_edit_surat
+            get_username                             = str(username)
+            get_tanggal                              = edit_surat_biasa_edit_surat.tanggal
+            get_no_urut                              = edit_surat_biasa_edit_surat.no_urut
+            get_no_takah                             = request.POST.get('no_takah') 
+            get_kepada                               = request.POST.get('kepada')
+            get_perihal                              = request.POST.get('perihal') 
+            get_keterangan                           = request.POST.get('keterangan')
+            get_bagian                               = ""
+            get_catatan                              = ""
+            files_upload_edit_surat_biasa            = request.FILES.get('file_name')
+
+            file_data_surat_biasa                    = edit_surat_biasa_edit_surat.upload_file.name
+
+            if  files_upload_edit_surat_biasa == None:
+                data_files_upload  = file_data_surat_biasa
+
+            else:
+                data_files_upload = files_upload_edit_surat_biasa
+                edit_surat_biasa_edit_surat.upload_file.delete()
+
+            edit_nomor_nota_dinas = Biasa(
+
+                id                                   = get_id,
+                username                             = get_username,
+                tanggal                              = get_tanggal,
+                no_urut                              = get_no_urut,
+                no_takah                             = get_no_takah,
+                kepada                               = get_kepada,
+                perihal                              = get_perihal,
+                keterangan                           = get_keterangan,
+                bagian                               = get_bagian,
+                catatan                              = get_catatan,
+                upload_file                          = data_files_upload
+                
+                )
+            
+            edit_nomor_nota_dinas.save()
+            return redirect('biasa_edit_surat_biasa')
+        
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html')
+    except:
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html')
+
+
+@login_required(login_url="/accounts/login/")
+def filter_edit_surat_biasa(request):
+    filter_edit_surat_biasa                           =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
+    context = {
+        'page_title'                 : 'Biasa - Filter Edit Surat Biasa',
+        'filter_edit_surat_biasa'    :  filter_edit_surat_biasa
+    }
+    return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html', context )
+
+
+# @login_required(login_url="/accounts/login/")
+# def filter_biasa_nomor_tersedia(request):
+#     tanggal_sekarang                             =  date.today()
+#     filter_surat_biasa_nomor_tersedia            =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
+    
+#     try: 
+#         if request.method == 'POST':
+#             tanggal_sekarang_now                 =  request.POST.get('tanggal')
+#             nomor_tersedia                       =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang_now)
+#             tanggal                              =  parse_date(tanggal_sekarang_now)
+
+#         context = {
+#                 'page_title'                     : 'Biasa - Filter No Tersedia',
+#                 'filter_biasa_nomor_tersedia'    :  nomor_tersedia,
+#                 'tgl_nomor_tersedia'             :  tanggal 
+#             }
+        
+#         return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
+#     except:
+#         filter_no_tersedia_data                  = filter_surat_biasa_nomor_tersedia     
+#         context = {
+#                 'page_title'                     : 'Biasa - Filter No Tersedia',
+#                 'filter_biasa_nomor_tersedia'    :  filter_no_tersedia_data ,
+#                 'tgl_nomor_tersedia'             :  tanggal_sekarang 
+#             }
+#         return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )

@@ -1,37 +1,37 @@
-  
-{% for data in filter_bon_nomor_surat_biasa %}
+ 
+{% for data in edit_surat_biasa %}
 
-<div class="modal fade" id="button_filter_surat_biasa_isi_surat_biasa{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="button_edit_surat_biasa_edit_surat{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">ISI SURAT BIASA</h1>
+            <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">EDIT SURAT BIASA</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-             
-            <form action="{% url 'filter_surat_biasa_nomor_tersedia_isi_surat_biasa' data.id %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
+            
+            <form action="{% url 'edit_surat_biasa_edit_surat' data.id  %}" method="POST" enctype="multipart/form-data" class="was-validated row g-3 text-center" >
               {% csrf_token %}
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
-                  <input type="text" class="form-control" name="no_takah" value="B/{{ data.no_urut  | default_if_none:""  }}/"  required >
+                  <input type="text" class="form-control" name="no_takah" value="{{ data.no_takah }}"  required >
                 </div>
                 <div class="col-md-6">
                   <label for="inputPassword4" class="form-label">KEPADA</label>
-                  <input type="text" class="form-control" name="kepada" value="{{ data.kepada  | default_if_none:""  }}" required >
+                  <input type="text" class="form-control" name="kepada" value="{{ data.kepada }}" required >
                 </div>
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">PERIHAL</label>
-                  <input type="text" class="form-control" name="perihal" value="{{ data.perihal  | default_if_none:""  }}" required >
+                  <input type="text" class="form-control" name="perihal" value="{{ data.perihal }}" required >
                 </div>
                 <div class="col-12">
                   <label for="inputAddress2" class="form-label">KETERANGAN</label>
-                  <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan  | default_if_none:""  }}" required >
+                  <input type="text" class="form-control" name="keterangan" value="{{ data.keterangan }}" required >
                 </div>
 
                 <div class="mb-3 mt-3">
                   <label for="formFile" class="form-label">UPLOAD FILES</label>
-                  <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name" /  required>
+                  <input class="form-control" type="file" accept=".pdf" id="file_input" name="file_name" /  >
                 </div>
             
 
