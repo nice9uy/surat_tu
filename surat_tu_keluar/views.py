@@ -631,36 +631,79 @@ def filter_edit_nota_dinas_modal(request, id_filter_edit_nota_dinas_modal):
 
 @login_required(login_url="/accounts/login/")
 def export_ke_excel_nota_dinas(request):
+
+    try:
     
-    if request.method == 'POST':
-        # hari_ini                  = date.today()
-        tanggal_awal              = request.POST.get('tanggal_awal')
-        tanggal_akhir             = request.POST.get('tanggal_akhir')
+        if request.method == 'POST':
+            # hari_ini                  = date.today()
+            tanggal_awal              = request.POST.get('tanggal_awal')
+            tanggal_akhir             = request.POST.get('tanggal_akhir')
 
-        awal                      = parse_date(tanggal_awal)
-        akhir                     = parse_date(tanggal_akhir)
+            awal                      = parse_date(tanggal_awal)
+            akhir                     = parse_date(tanggal_akhir)
 
-        data_filter               = pd.DataFrame(list(NotaDinas.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''), tanggal__range=[awal, akhir]).values()))
-        tanggal                   = pd.to_datetime(data_filter['tanggal']).dt.strftime("%d-%m-%Y")
-        data_1                    = pd.DataFrame(data_filter, columns =['no_takah','kepada','perihal','keterangan'])  
+            data_filter               = pd.DataFrame(list(NotaDinas.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''), tanggal__range=[awal, akhir]).values()))
+            tanggal                   = pd.to_datetime(data_filter['tanggal']).dt.strftime("%d-%m-%Y")
+            data_1                    = pd.DataFrame(data_filter, columns =['no_takah','kepada','perihal','keterangan'])  
 
-        gabung_data               = pd.concat([tanggal, data_1 ], axis=1 )
+            gabung_data               = pd.concat([tanggal, data_1 ], axis=1 )
 
-        df                        = pd.DataFrame(gabung_data)
-        df.rename(columns         = {
-                                        'tanggal'      :'TANGGAL', 
-                                        'no_takah'    :'NOMOR TAKAH',
-                                        'kepada'       :'KEPADA',
-                                        'perihal'      :'PERIHAL',
-                                        'keterangan'   :'KETERANGAN',
-                                        
-                                    }, inplace = True) 
-        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="laporan_nota_dinas.xlsx"'                                        
-        df.to_excel(response , index=False) 
-        return response 
+            df                        = pd.DataFrame(gabung_data)
+            df.rename(columns         = {
+                                            'tanggal'      :'TANGGAL', 
+                                            'no_takah'    :'NOMOR TAKAH',
+                                            'kepada'       :'KEPADA',
+                                            'perihal'      :'PERIHAL',
+                                            'keterangan'   :'KETERANGAN',
+                                            
+                                        }, inplace = True) 
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = 'attachment; filename="laporan_nota_dinas.xlsx"'                                        
+            df.to_excel(response , index=False) 
+            return response 
 
-    return redirect('edit_nota_dinas')
+        return redirect('edit_nota_dinas')
+    except:
+        return redirect('edit_nota_dinas')
+
+
+
+@login_required(login_url="/accounts/login/")
+def filter_export_ke_excel_nota_dinas(request):
+
+    try:
+    
+        if request.method == 'POST':
+            # hari_ini                  = date.today()
+            tanggal_awal              = request.POST.get('tanggal_awal')
+            tanggal_akhir             = request.POST.get('tanggal_akhir')
+
+            awal                      = parse_date(tanggal_awal)
+            akhir                     = parse_date(tanggal_akhir)
+
+            data_filter               = pd.DataFrame(list(NotaDinas.objects.filter( ~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''), tanggal__range=[awal, akhir]).values()))
+            tanggal                   = pd.to_datetime(data_filter['tanggal']).dt.strftime("%d-%m-%Y")
+            data_1                    = pd.DataFrame(data_filter, columns =['no_takah','kepada','perihal','keterangan'])  
+
+            gabung_data               = pd.concat([tanggal, data_1 ], axis=1 )
+
+            df                        = pd.DataFrame(gabung_data)
+            df.rename(columns         = {
+                                            'tanggal'      :'TANGGAL', 
+                                            'no_takah'    :'NOMOR TAKAH',
+                                            'kepada'       :'KEPADA',
+                                            'perihal'      :'PERIHAL',
+                                            'keterangan'   :'KETERANGAN',
+                                            
+                                        }, inplace = True) 
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = 'attachment; filename="laporan_nota_dinas.xlsx"'                                        
+            df.to_excel(response , index=False) 
+            return response 
+
+        return redirect('filter_edit_nota_dinas')
+    except:
+        return redirect('filter_edit_nota_dinas')
 
 ##########################################################################################################
 ##################################  BIASA  ################################################################
@@ -1180,39 +1223,88 @@ def edit_surat_biasa_edit_surat(request, id_edit_surat_biasa_edit_surat):
         return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/edit_surat_biasa.html')
 
 
+
 @login_required(login_url="/accounts/login/")
 def filter_edit_surat_biasa(request):
-    filter_edit_surat_biasa                           =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact=''))
-    context = {
-        'page_title'                 : 'Biasa - Filter Edit Surat Biasa',
-        'filter_edit_surat_biasa'    :  filter_edit_surat_biasa
-    }
-    return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html', context )
-
-
-# @login_required(login_url="/accounts/login/")
-# def filter_biasa_nomor_tersedia(request):
-#     tanggal_sekarang                             =  date.today()
-#     filter_surat_biasa_nomor_tersedia            =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang)
+    tanggal_sekarang                             =  date.today()
+    filter_edit_surat_biasa                      =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact='')) 
     
-#     try: 
-#         if request.method == 'POST':
-#             tanggal_sekarang_now                 =  request.POST.get('tanggal')
-#             nomor_tersedia                       =  Biasa.objects.filter(Q(no_takah__isnull=False) &  Q(no_takah__exact='' ) , Q(bagian__isnull=False) &  Q(bagian__exact='' ) , tanggal = tanggal_sekarang_now)
-#             tanggal                              =  parse_date(tanggal_sekarang_now)
+    try: 
+        if request.method == 'POST':
+            tanggal_sekarang_now                 =  request.POST.get('tanggal')
+            edit_surat_biasa_filter              =  Biasa.objects.filter(~Q(no_takah__isnull=True) & ~Q(no_takah__exact='') , tanggal = tanggal_sekarang_now)
+            tanggal                              =  parse_date(tanggal_sekarang_now)
 
-#         context = {
-#                 'page_title'                     : 'Biasa - Filter No Tersedia',
-#                 'filter_biasa_nomor_tersedia'    :  nomor_tersedia,
-#                 'tgl_nomor_tersedia'             :  tanggal 
-#             }
+        context = {
+                'page_title'                     : 'Biasa - Filter Surat Biasa',
+                'edit_surat_biasa_filter'        :  edit_surat_biasa_filter,
+                'tgl_edit_surat_biasa'           :  tanggal 
+            }
         
-#         return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
-#     except:
-#         filter_no_tersedia_data                  = filter_surat_biasa_nomor_tersedia     
-#         context = {
-#                 'page_title'                     : 'Biasa - Filter No Tersedia',
-#                 'filter_biasa_nomor_tersedia'    :  filter_no_tersedia_data ,
-#                 'tgl_nomor_tersedia'             :  tanggal_sekarang 
-#             }
-#         return render (request , 'surat_keluar/pages/biasa/nomor_tersedia_pages/filter_nomor_tersedia.html', context )
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html', context )
+    
+    except:
+
+        filter_edit_surat_biasa_data             = filter_edit_surat_biasa     
+        
+        context = {
+
+                'page_title'                     :  'Biasa - Filter Surat Biasa',
+                'edit_surat_biasa_filter'        :  filter_edit_surat_biasa_data ,
+                'tgl_edit_surat_biasa'           :  tanggal_sekarang 
+
+            }
+        
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html', context )
+    
+
+@login_required(login_url="/accounts/login/")
+def filter_edit_surat_biasa_edit_surat(request, id_filter_edit_surat_biasa_edit_surat):
+    filter_edit_surat_biasa_edit_surat               =  get_object_or_404(Biasa, pk = id_filter_edit_surat_biasa_edit_surat)
+    username                                         =  request.user
+
+    try:
+        if request.method == 'POST':
+            get_id                                   = id_filter_edit_surat_biasa_edit_surat
+            get_username                             = str(username)
+            get_tanggal                              = filter_edit_surat_biasa_edit_surat.tanggal
+            get_no_urut                              = filter_edit_surat_biasa_edit_surat.no_urut
+            get_no_takah                             = request.POST.get('no_takah') 
+            get_kepada                               = request.POST.get('kepada')
+            get_perihal                              = request.POST.get('perihal') 
+            get_keterangan                           = request.POST.get('keterangan')
+            get_bagian                               = ""
+            get_catatan                              = ""
+            files_upload_filter_edit_surat_biasa     = request.FILES.get('file_name')
+
+            file_data_surat_biasa                    = filter_edit_surat_biasa_edit_surat.upload_file.name
+
+            if  files_upload_filter_edit_surat_biasa == None:
+                data_files_upload  = file_data_surat_biasa
+
+            else:
+                data_files_upload = files_upload_filter_edit_surat_biasa
+                filter_edit_surat_biasa_edit_surat.upload_file.delete()
+
+            filter_edit_nomor_nota_dinas = Biasa(
+
+                id                                   = get_id,
+                username                             = get_username,
+                tanggal                              = get_tanggal,
+                no_urut                              = get_no_urut,
+                no_takah                             = get_no_takah,
+                kepada                               = get_kepada,
+                perihal                              = get_perihal,
+                keterangan                           = get_keterangan,
+                bagian                               = get_bagian,
+                catatan                              = get_catatan,
+                upload_file                          = data_files_upload
+                
+                )
+            
+            filter_edit_nomor_nota_dinas.save()
+            return redirect('filter_edit_surat_biasa')
+        
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html')
+    except:
+        return render (request , 'surat_keluar/pages/biasa/edit_surat_biasa_pages/filter_edit_surat_biasa.html')

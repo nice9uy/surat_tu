@@ -34,6 +34,7 @@ urlpatterns = [
     path('surat_keluar/nota_dinas/filter_edit_nota_dinas_modal/<int:id_filter_edit_nota_dinas_modal>/', views.filter_edit_nota_dinas_modal, name='filter_edit_nota_dinas_modal' ),
 
     path('surat_masuk/nota_dinas/edit_nota_dinas_modal/export_ke_excel_nota_dinas/', views.export_ke_excel_nota_dinas, name='export_ke_excel_nota_dinas' ),
+    path('surat_masuk/nota_dinas/edit_nota_dinas_modal/filter_export_ke_excel_nota_dinas/', views.filter_export_ke_excel_nota_dinas, name='filter_export_ke_excel_nota_dinas' ),
 
    
    ############################################################ BIASA #####################################################
@@ -65,6 +66,7 @@ urlpatterns = [
     path('surat_keluar/biasa/edit_surat_biasa_edit_surat/<int:id_edit_surat_biasa_edit_surat>/', views.edit_surat_biasa_edit_surat, name='edit_surat_biasa_edit_surat' ),
 
     path('surat_keluar/biasa/filter_edit_surat_biasa/', views.filter_edit_surat_biasa, name='filter_edit_surat_biasa' ),
+    path('surat_keluar/biasa/filter_edit_surat_biasa_edit_surat/<int:id_filter_edit_surat_biasa_edit_surat>/', views.filter_edit_surat_biasa_edit_surat, name='filter_edit_surat_biasa_edit_surat' ),
 
    
 
