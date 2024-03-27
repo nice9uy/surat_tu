@@ -5,13 +5,13 @@ from .models import NotaDinas
 from .models import Biasa
 
 class ListNotaDinas(admin.ModelAdmin):
-    list_display = ('id', 'username','tanggal','no_urut',
+    list_display = ('id', 'username','tanggal','no_urut','no_urut_temp',
                     'no_takah','kepada','perihal','keterangan',
                     'catatan','bagian','upload_file'
                     )
 
 class ListSuratBiasa(admin.ModelAdmin):
-    list_display = ('id', 'username','tanggal','no_urut',
+    list_display = ('id', 'username','tanggal','no_urut','no_urut_temp',
                     'no_takah','kepada','perihal','keterangan',
                     'catatan','bagian','upload_file'
                     )

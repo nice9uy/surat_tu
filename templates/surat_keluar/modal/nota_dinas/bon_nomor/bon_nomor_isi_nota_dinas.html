@@ -14,7 +14,7 @@
                   {% csrf_token %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
-                      <input type="text" class="form-control" name="no_takah" value="B/ND/{{ data.no_urut  | default_if_none:""  }}/{{ data.tanggal | date:"Y" }}"  required >
+                      <input type="text" class="form-control" name="no_takah" value="{{ data.no_urut_temp }}"  required >
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">KEPADA</label>

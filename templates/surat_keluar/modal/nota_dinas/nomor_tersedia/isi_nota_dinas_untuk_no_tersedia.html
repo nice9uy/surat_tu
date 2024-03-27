@@ -1,4 +1,4 @@
- 
+  
 {% for data in nomor_tersedia %}
 
     <div class="modal fade" id="button_isi_nota_dinas_nomor_tersedia{{data.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -14,7 +14,7 @@
                   {% csrf_token %}
                     <div class="col-md-6">
                       <label for="inputEmail4" class="form-label">NOMOR TAKAH</label>
-                      <input type="text" class="form-control" name="no_takah" placeholder="Nomor Urut : {{ data.no_urut  }}" value="{{ data.no_takah }}"  required >
+                      <input type="text" class="form-control" name="no_takah" value="{{ data.no_urut_temp }}"  required >
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">KEPADA</label>

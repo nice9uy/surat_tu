@@ -62,6 +62,8 @@ def filter_nota_dinas(request):
 def bon_nomor(request):
     bon_nomor                                =  NotaDinas.objects.filter(~Q(bagian__isnull=True) & ~Q(bagian__exact=''))
 
+    print(list(bon_nomor))
+
     context = {
         'page_title'                        : 'Nota Dinas - Bon Nomor',
         'bon_nomor'                         :  bon_nomor 
@@ -179,6 +181,7 @@ def bon_nomor_edit_bon_nomor(request, id_bon_nomor_edit_bon_nomor):
         get_username                             = str(username)
         get_tanggal                              = bon_nomor_edit_bon_nomor.tanggal
         get_no_urut                              = bon_nomor_edit_bon_nomor.no_urut
+        get_no_urut_temp                         = bon_nomor_edit_bon_nomor.no_urut_temp
         get_no_takah                             = ""
         get_kepada                               = ""
         get_perihal                              = ""
@@ -192,6 +195,7 @@ def bon_nomor_edit_bon_nomor(request, id_bon_nomor_edit_bon_nomor):
             username                             = get_username,
             tanggal                              = get_tanggal,
             no_urut                              = get_no_urut,
+            no_urut_temp                         = get_no_urut_temp,
             no_takah                             = get_no_takah,
             kepada                               = get_kepada,
             perihal                              = get_perihal,
@@ -260,7 +264,7 @@ def nomor_tersedia(request):
 
 
 @login_required(login_url="/accounts/login/")
-def nomor_tersedia_tambah_nomor(request):
+def nomor_tersedia_tambah_nomor(request): 
 
     try:
         no_urut_nota_dinas               = list(NotaDinas.objects.all().values_list('no_urut').last())
@@ -269,10 +273,40 @@ def nomor_tersedia_tambah_nomor(request):
         get_no_akhir                     = int(nota_dinas_data) + 1
     except:
         get_no_akhir  = 1
+
+    bulan_ini  = date.today().month
+    tahun_ini  = date.today().year
+
+    if bulan_ini == 1:
+            bulan = 'I'
+    elif bulan_ini == 2:
+            bulan = 'II'
+    elif bulan_ini == 3:
+            bulan = 'III'
+    elif bulan_ini == 4:
+            bulan = 'IV'
+    elif bulan_ini == 5:
+            bulan = 'V'
+    elif bulan_ini == 6:
+            bulan = 'VI'
+    elif bulan_ini == 7:
+            bulan = 'VII'
+    elif bulan_ini == 8:
+            bulan = 'VIII'
+    elif bulan_ini == 9:
+            bulan = 'IX'
+    elif bulan_ini == 10:
+            bulan = 'X'
+    elif bulan_ini == 11:
+            bulan = 'XI'
+    else:
+            bulan = 'XII'
+
            
     get_username                         =  request.user
     get_hari_ini                         =  date.today()
     get_no_urut                          =  get_no_akhir
+    get_no_urut_temp                     =  f"B/ND/{get_no_akhir}/{bulan}/{tahun_ini}/..."
     get_no_takah                         =  ''
     get_kepada                           =  ''
     get_perihal                          =  ''
@@ -286,6 +320,7 @@ def nomor_tersedia_tambah_nomor(request):
         username                         = get_username,
         tanggal                          = get_hari_ini,
         no_urut                          = get_no_urut,
+        no_urut_temp                     = get_no_urut_temp,
         no_takah                         = get_no_takah,
         kepada                           = get_kepada,
         perihal                          = get_perihal,
@@ -312,6 +347,7 @@ def nomor_tersedia_bon_nomor(request, id_nomor_tersedia_bon_nomor):
         get_username                             = str(username)
         get_tanggal                              = nomor_tersedia_isi_nota_dinas.tanggal
         get_no_urut                              = nomor_tersedia_isi_nota_dinas.no_urut
+        get_no_urut_temp                         = nomor_tersedia_isi_nota_dinas.no_urut_temp
         get_no_takah                             = ""
         get_kepada                               = ""
         get_perihal                              = ""
@@ -326,6 +362,7 @@ def nomor_tersedia_bon_nomor(request, id_nomor_tersedia_bon_nomor):
             username                             = get_username,
             tanggal                              = get_tanggal,
             no_urut                              = get_no_urut,
+            no_urut_temp                         = get_no_urut_temp,
             no_takah                             = get_no_takah,
             kepada                               = get_kepada,
             perihal                              = get_perihal,
@@ -417,6 +454,7 @@ def filter_nomor_tersedia_bon_nomor(request, id_filter_nomor_tersedia_bon_nomor)
         get_username                             = str(username)
         get_tanggal                              = nomor_tersedia_isi_nota_dinas.tanggal
         get_no_urut                              = nomor_tersedia_isi_nota_dinas.no_urut
+        get_no_urut_temp                         = nomor_tersedia_isi_nota_dinas.no_urut_temp
         get_no_takah                             = ""
         get_kepada                               = ""
         get_perihal                              = ""
@@ -431,6 +469,7 @@ def filter_nomor_tersedia_bon_nomor(request, id_filter_nomor_tersedia_bon_nomor)
             username                             = get_username,
             tanggal                              = get_tanggal,
             no_urut                              = get_no_urut,
+            no_urut_temp                         = get_no_urut_temp,
             no_takah                             = get_no_takah,
             kepada                               = get_kepada,
             perihal                              = get_perihal,
@@ -969,10 +1008,40 @@ def surat_biasa_nomor_tersedia_tambah_nomor(request):
         get_no_akhir                     = int(data_surat_biasa) + 1
     except:
         get_no_akhir  = 1
+
+    bulan_ini  = date.today().month
+    tahun_ini  = date.today().year
+
+    if bulan_ini == 1:
+            bulan = 'I'
+    elif bulan_ini == 2:
+            bulan = 'II'
+    elif bulan_ini == 3:
+            bulan = 'III'
+    elif bulan_ini == 4:
+            bulan = 'IV'
+    elif bulan_ini == 5:
+            bulan = 'V'
+    elif bulan_ini == 6:
+            bulan = 'VI'
+    elif bulan_ini == 7:
+            bulan = 'VII'
+    elif bulan_ini == 8:
+            bulan = 'VIII'
+    elif bulan_ini == 9:
+            bulan = 'IX'
+    elif bulan_ini == 10:
+            bulan = 'X'
+    elif bulan_ini == 11:
+            bulan = 'XI'
+    else:
+            bulan = 'XII'
+
            
     get_username                         =  request.user
     get_hari_ini                         =  date.today()
     get_no_urut                          =  get_no_akhir
+    get_no_urut_temp                     =  f"B/ND/{get_no_akhir}/{bulan}/{tahun_ini}/..."
     get_no_takah                         =  ''
     get_kepada                           =  ''
     get_perihal                          =  ''
@@ -986,6 +1055,7 @@ def surat_biasa_nomor_tersedia_tambah_nomor(request):
         username                         = get_username,
         tanggal                          = get_hari_ini,
         no_urut                          = get_no_urut,
+        no_urut_temp                     = get_no_urut_temp,
         no_takah                         = get_no_takah,
         kepada                           = get_kepada,
         perihal                          = get_perihal,
